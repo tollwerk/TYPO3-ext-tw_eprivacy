@@ -46,7 +46,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
- * ePrivacy Middleware
+ * ePrivacy Outgoing Middleware
  *
  * @package    Tollwerk\TwEprivacy
  * @subpackage Tollwerk\TwEprivacy\Middleware

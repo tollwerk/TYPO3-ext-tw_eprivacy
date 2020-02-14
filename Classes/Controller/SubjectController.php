@@ -75,6 +75,7 @@ class SubjectController extends ActionController
      */
     public function listAction(int $update = 0, array $subjects = [])
     {
+        debug($_COOKIE);
         $consent = $this->consentRepository->get();
 
         // Process updates
@@ -85,7 +86,7 @@ class SubjectController extends ActionController
                         function(Subject $subject) {
                             return $subject->getIdentifier();
                         },
-                        $this->subjectRepository->findAll()->toArray()
+                        $this->subjectRepository->findByPublic(true)->toArray()
                     );
                     break;
                 case self::UPDATE_DENY:
@@ -108,7 +109,7 @@ class SubjectController extends ActionController
         $subjectsByType = [];
 
         /** @var Subject $subject */
-        foreach ($this->subjectRepository->findAll() as $subject) {
+        foreach ($this->subjectRepository->findByPublic(true) as $subject) {
             $type   = $subject->getType();
             $typeId = $type->getUid();
             if (empty($types[$typeId])) {

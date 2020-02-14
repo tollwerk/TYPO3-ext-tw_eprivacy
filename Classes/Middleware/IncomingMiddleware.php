@@ -3,7 +3,9 @@
 /**
  * data
  *
- * @subpackage ${NAMESPACE}
+ * @category   Tollwerk
+ * @package    Tollwerk\TwEprivacy
+ * @subpackage Tollwerk\TwEprivacy\Middleware
  * @author     Joschi Kuphal <joschi@tollwerk.de> / @jkphl
  * @copyright  Copyright © 2020 Joschi Kuphal <joschi@tollwerk.de> / @jkphl
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
@@ -32,19 +34,29 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-return [
-    'frontend' => [
-        'eprivacy/shield-outgoing' => [
-            'target' => \Tollwerk\TwEprivacy\Middleware\OutgoingMiddleware::class,
-            'after' => [
-                'typo3/cms-frontend/output-compression',
-            ],
-        ],
-        'eprivacy/shield-incoming' => [
-            'target' => \Tollwerk\TwEprivacy\Middleware\IncomingMiddleware::class,
-            'before' => [
-                'typo3/cms-frontend/timetracker',
-            ],
-        ],
-    ]
-];
+namespace Tollwerk\TwEprivacy\Middleware;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+
+/**
+ * ePrivacy Incoming Middleware
+ *
+ * @package    Tollwerk\TwEprivacy
+ * @subpackage Tollwerk\TwEprivacy\Middleware
+ */
+class IncomingMiddleware implements MiddlewareInterface
+{
+    /**
+     * @inheritDoc
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        $response = $handler->handle($request);
+        debug($_COOKIE);
+
+        return $response;
+    }
+}

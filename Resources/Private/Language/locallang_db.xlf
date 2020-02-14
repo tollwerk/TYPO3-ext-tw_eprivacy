@@ -60,6 +60,12 @@
 			<trans-unit id="tx_tweprivacy_domain_model_subject.lifetime">
 				<source>Lifetime (seconds)</source>
 			</trans-unit>
+			<trans-unit id="tx_tweprivacy_domain_model_subject.public">
+				<source>Public</source>
+			</trans-unit>
+			<trans-unit id="tx_tweprivacy_domain_model_subject.session">
+				<source>Expires with session</source>
+			</trans-unit>
 			<trans-unit id="tx_tw_eprivacy_eprivacy.name">
 				<source>ePrivacy Consent Manager</source>
 			</trans-unit>

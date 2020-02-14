@@ -62,6 +62,20 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $lifetime = 0;
 
     /**
+     * Public
+     *
+     * @var bool
+     */
+    protected $public = true;
+
+    /**
+     * Expires with the session
+     *
+     * @var bool
+     */
+    protected $session = false;
+
+    /**
      * Type
      *
      * @var \Tollwerk\TwEprivacy\Domain\Model\Type
@@ -218,5 +232,45 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setLifetime(int $lifetime): void
     {
         $this->lifetime = $lifetime;
+    }
+
+    /**
+     * Return whether the subject is public
+     *
+     * @return bool Is public
+     */
+    public function isPublic(): bool
+    {
+        return $this->public;
+    }
+
+    /**
+     * Set whether the subject is public
+     *
+     * @param bool $public Is public
+     */
+    public function setPublic(bool $public): void
+    {
+        $this->public = $public;
+    }
+
+    /**
+     * Return whether the subject expires with the session
+     *
+     * @return bool Expires with the session
+     */
+    public function isSession(): bool
+    {
+        return $this->session;
+    }
+
+    /**
+     * Set whether the subject expires with the session
+     *
+     * @param bool $session Expires with the session
+     */
+    public function setSession(bool $session): void
+    {
+        $this->session = $session;
     }
 }

@@ -35,12 +35,21 @@ class SubjectRepository extends Repository
     /**
      * Return all subjects that are consented to by default
      *
+     * @param bool $public Return only public ones
+     *
      * @return QueryResultInterface Default subjects
      */
-    public function findDefaultSubjects(): QueryResultInterface
+    public function findDefaultSubjects(bool $public = true): QueryResultInterface
     {
-        $query = $this->createQuery();
-        $query->matching($query->equals('type.needsConsent', 0));
+        $query       = $this->createQuery();
+        $constraints = [$query->equals('type.needsConsent', 0)];
+
+        // If only public subjects should be returned
+        if ($public) {
+            $constraints[] = $query->equals('public', true);
+        }
+
+        $query->matching($query->logicalAnd($constraints));
 
         return $query->execute();
     }
