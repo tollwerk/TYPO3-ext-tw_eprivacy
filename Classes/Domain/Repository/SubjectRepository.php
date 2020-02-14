@@ -13,6 +13,7 @@
 
 namespace Tollwerk\TwEprivacy\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -40,6 +41,22 @@ class SubjectRepository extends Repository
     {
         $query = $this->createQuery();
         $query->matching($query->equals('type.needsConsent', 0));
+
+        return $query->execute();
+    }
+
+    /**
+     * Find subjects by identifier
+     *
+     * @param array $subjectIdentifiers Subject identifiers
+     *
+     * @return QueryResultInterface Subjects
+     * @throws InvalidQueryException
+     */
+    public function findBySubjectIdentifiers(array $subjectIdentifiers): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $query->matching($query->in('identifier', $subjectIdentifiers));
 
         return $query->execute();
     }

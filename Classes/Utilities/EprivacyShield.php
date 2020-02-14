@@ -35,7 +35,9 @@
 namespace Tollwerk\TwEprivacy\Utilities;
 
 use Exception;
+use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
+use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
@@ -52,15 +54,37 @@ class EprivacyShield implements SingletonInterface
      * @var ConsentRepository
      */
     protected $consentRepository;
+    /**
+     * Subject repository
+     *
+     * @var SubjectRepository
+     */
+    protected $subjectRepository;
+    /**
+     * Subject name cache
+     *
+     * @var array
+     */
+    protected static $subjectNames = null;
 
     /**
-     * Inject the subject repository
+     * Inject the consent repository
      *
      * @param ConsentRepository $consentRepository
      */
     public function injectConsentRepository(ConsentRepository $consentRepository): void
     {
         $this->consentRepository = $consentRepository;
+    }
+
+    /**
+     * Inject the subject repository
+     *
+     * @param SubjectRepository $subjectRepository
+     */
+    public function injectSubjectRepository(SubjectRepository $subjectRepository): void
+    {
+        $this->subjectRepository = $subjectRepository;
     }
 
     /**
@@ -71,10 +95,35 @@ class EprivacyShield implements SingletonInterface
      * @return bool Subject identifier is allowed
      * @throws Exception
      */
-    public function isAllowed(string $subjectIdentifier): bool
+    public function isAllowedIdentifier(string $subjectIdentifier): bool
     {
         $consent = $this->consentRepository->get();
 
         return $consent->allowsSubject($subjectIdentifier);
+    }
+
+    /**
+     * Return whether a particular subject name is allowed
+     *
+     * @param string $subjectName Subject name
+     *
+     * @return bool Subject identifier is allowed
+     * @throws Exception
+     */
+    public function isAllowedName(string $subjectName): bool
+    {
+        if (self::$subjectNames === null) {
+            self::$subjectNames = [];
+            $consent            = $this->consentRepository->get();
+            $subjectIdentifiers = $consent->getSubjects();
+            if (count($subjectIdentifiers)) {
+                /** @var Subject $subject */
+                foreach ($this->subjectRepository->findBySubjectIdentifiers($subjectIdentifiers) as $subject) {
+                    self::$subjectNames[] = $subject->getName();
+                }
+            }
+        }
+
+        return in_array($subjectName, self::$subjectNames);
     }
 }

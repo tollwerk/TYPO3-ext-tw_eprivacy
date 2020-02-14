@@ -134,6 +134,6 @@ class SubjectController extends ActionController
             'consent'  => $consent,
         ]);
 
-//        print_r(headers_list());
+        setcookie('test', 'value', time() + 86400, '/');
     }
 }

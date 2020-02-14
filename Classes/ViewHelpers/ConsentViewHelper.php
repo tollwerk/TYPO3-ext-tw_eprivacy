@@ -1,7 +1,7 @@
 <?php
 
 /**
- * data
+ * ePrivacy
  *
  * @category   Tollwerk
  * @package    Tollwerk\TwEprivacy
@@ -67,7 +67,7 @@ class ConsentViewHelper extends AbstractConditionViewHelper
 
         // Run through all required subject identifiers
         foreach ((array)$arguments['identifier'] as $identifier) {
-            if (!$eprivacyShield->isAllowed($identifier)) {
+            if (!$eprivacyShield->isAllowedIdentifier($identifier)) {
                 return false;
             }
         }
