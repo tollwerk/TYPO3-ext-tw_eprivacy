@@ -121,4 +121,16 @@ class Consent extends AbstractEntity
 
         return json_encode($values);
     }
+
+    /**
+     * Return whether a particular subject identifier is allowed
+     *
+     * @param string $subject Subject identifier
+     *
+     * @return bool Subject is allowed
+     */
+    public function allowsSubject(string $subject): bool
+    {
+        return strlen($subject) && in_array($subject, $this->subjects);
+    }
 }

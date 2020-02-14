@@ -43,5 +43,7 @@ call_user_func(
             ['source' => 'EXT:tw_eprivacy/Resources/Public/Icons/subject.svg']
         );
 
+        // Register Fluid namespace
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['eprivacy'] = ['Tollwerk\\TwEprivacy\\ViewHelpers'];
     }
 );

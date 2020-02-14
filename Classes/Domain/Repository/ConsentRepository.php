@@ -85,6 +85,7 @@ class ConsentRepository implements SingletonInterface
                 }
             }
 
+            // If there are no subjects enabled by cookie: Register the default subjects
             if (!count(self::$consent->getSubjects())) {
                 $objectManager     = GeneralUtility::makeInstance(ObjectManager::class);
                 $subjectRepository = $objectManager->get(SubjectRepository::class);
@@ -93,12 +94,11 @@ class ConsentRepository implements SingletonInterface
                         function(Subject $subject) {
                             return $subject->getIdentifier();
                         },
-                        $subjectRepository->findAll()->toArray()
+                        $subjectRepository->findDefaultSubjects()->toArray()
                     )
                 );
             }
         }
-
 
         return self::$consent;
     }
