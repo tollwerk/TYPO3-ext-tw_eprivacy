@@ -41,6 +41,13 @@ class Type extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description = '';
 
     /**
+     * Sorting
+     *
+     * @var int
+     */
+    protected $sorting = 0;
+
+    /**
      * Returns the title
      *
      * @return string $title
@@ -102,5 +109,25 @@ class Type extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * Return the sorting position
+     *
+     * @return int Sorting position
+     */
+    public function getSorting(): int
+    {
+        return $this->sorting;
+    }
+
+    /**
+     * Set the sorting position
+     *
+     * @param int $sorting Sorting position
+     */
+    public function setSorting(int $sorting): void
+    {
+        $this->sorting = $sorting;
     }
 }

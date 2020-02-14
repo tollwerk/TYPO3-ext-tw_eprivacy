@@ -11,21 +11,22 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'tollwerk ePrivacy Consent Manager',
-    'description' => 'ePrivacy Consent Manager',
-    'category' => 'plugin',
-    'author' => 'Joschi Kuphal',
-    'author_email' => 'joschi@tollwerk.de',
-    'state' => 'alpha',
-    'uploadfolder' => 0,
-    'createDirs' => '',
+    'title'            => 'tollwerk ePrivacy Consent Manager',
+    'description'      => 'ePrivacy Consent Manager',
+    'category'         => 'plugin',
+    'author'           => 'Joschi Kuphal',
+    'author_email'     => 'joschi@tollwerk.de',
+    'state'            => 'alpha',
+    'uploadfolder'     => 0,
+    'createDirs'       => '',
     'clearCacheOnLoad' => 0,
-    'version' => '1.0.0',
-    'constraints' => [
-        'depends' => [
-            'typo3' => '10.0.0-10.4.99',
+    'version'          => '1.0.0',
+    'constraints'      => [
+        'depends'   => [
+            'typo3'   => '10.0.0-10.4.99',
+            'tw_base' => '3.0.0-',
         ],
         'conflicts' => [],
-        'suggests' => [],
+        'suggests'  => [],
     ],
 ];

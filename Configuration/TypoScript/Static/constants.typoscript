@@ -1,4 +1,5 @@
-
+# customsubcategory=common=LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:common
+# customsubcategory=cookie=LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:cookie
 plugin.tx_tweprivacy_eprivacy {
     view {
         # cat=plugin.tx_tweprivacy_eprivacy/file; type=string; label=Path to template root (FE)
@@ -9,7 +10,20 @@ plugin.tx_tweprivacy_eprivacy {
         layoutRootPath = EXT:tw_eprivacy/Resources/Private/Layouts/
     }
     persistence {
-        # cat=plugin.tx_tweprivacy_eprivacy//a; type=string; label=Default storage PID
+        # cat=plugin.tx_tweprivacy_eprivacy/common/a; type=string; label=Default storage PID
         storagePid =
+    }
+
+    settings {
+        # cat=plugin.tx_tweprivacy_eprivacy/cookie/a; type=int+; label=LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:cookie.lifetime
+        lifetime = 2629800
+        # cat=plugin.tx_tweprivacy_eprivacy/cookie/b; type=string; label=LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:cookie.path
+        path = /
+        # cat=plugin.tx_tweprivacy_eprivacy/cookie/c; type=string; label=LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:cookie.domain
+        domain =
+        # cat=plugin.tx_tweprivacy_eprivacy/cookie/d; type=boolean; label=LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:cookie.secure
+        secure = 1
+        # cat=plugin.tx_tweprivacy_eprivacy/cookie/e; type=boolean; label=LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:cookie.httponly
+        httponly = 1
     }
 }

@@ -13,26 +13,41 @@
 
 namespace Tollwerk\TwEprivacy\Controller;
 
+use Tollwerk\TwEprivacy\Domain\Model\Subject;
+use Tollwerk\TwEprivacy\Domain\Model\Type;
+use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
 use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
+use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Object\Exception;
 
 /**
  * SubjectController
  */
 class SubjectController extends ActionController
 {
+    // Update actions
+    const UPDATE_UPDATE = 1;
+    const UPDATE_ACCEPT = 2;
+    const UPDATE_DENY = 3;
 
     /**
-     * subjectRepository
+     * Subject Repository
      *
      * @var SubjectRepository
      */
     protected $subjectRepository = null;
+    /**
+     * Consent repository
+     *
+     * @var ConsentRepository
+     */
+    protected $consentRepository = null;
 
     /**
-     * Inject the subject repositorz
+     * Inject the subject repository
      *
-     * @param SubjectRepository $subjectRepository
+     * @param SubjectRepository $subjectRepository Subject repository
      */
     public function injectSubjectRepository(SubjectRepository $subjectRepository): void
     {
@@ -40,13 +55,85 @@ class SubjectController extends ActionController
     }
 
     /**
-     * action list
+     * Inject the consent repository
      *
-     * @return void
+     * @param ConsentRepository $consentRepository Consent repository
      */
-    public function listAction()
+    public function injectConsentRepository(ConsentRepository $consentRepository): void
     {
-        $subjects = $this->subjectRepository->findAll();
-        $this->view->assign('subjects', $subjects);
+        $this->consentRepository = $consentRepository;
+    }
+
+    /**
+     * List action
+     *
+     * @param int $update     Update consent state
+     * @param array $subjecst Subjects with consent
+     *
+     * @throws Exception
+     * @throws InvalidConfigurationTypeException
+     */
+    public function listAction(int $update = 0, array $subjects = [])
+    {
+        $consent = $this->consentRepository->get();
+
+        // Process updates
+        if ($update) {
+            switch ($update) {
+                case self::UPDATE_ACCEPT:
+                    $subjects = array_map(
+                        function(Subject $subject) {
+                            return $subject->getIdentifier();
+                        },
+                        $this->subjectRepository->findAll()->toArray()
+                    );
+                    break;
+                case self::UPDATE_DENY:
+                    $subjects = [];
+                case self::UPDATE_UPDATE:
+                    $defaultSubjectIdentifiers = array_map(
+                        function(Subject $subject) {
+                            return $subject->getIdentifier();
+                        },
+                        $this->subjectRepository->findDefaultSubjects()->toArray()
+                    );
+                    $subjects                  = array_unique(array_merge($subjects, $defaultSubjectIdentifiers));
+                    break;
+            }
+            $consent->setSubjects($subjects);
+            $this->consentRepository->update($consent);
+        }
+
+        $types          = [];
+        $subjectsByType = [];
+
+        /** @var Subject $subject */
+        foreach ($this->subjectRepository->findAll() as $subject) {
+            $type   = $subject->getType();
+            $typeId = $type->getUid();
+            if (empty($types[$typeId])) {
+                $types[$typeId]          = $type;
+                $subjectsByType[$typeId] = [];
+            }
+            $subjectsByType[$typeId][] = $subject;
+        }
+
+        // Sort the type list
+        uasort($types, function(Type $a, Type $b) {
+            return ($a->getSorting() > $b->getSorting()) ? 1 : -1;
+        });
+
+        // Sort the subjects by type list
+        uksort($subjectsByType, function(int $a, int $b) use ($types) {
+            return ($types[$a]->getSorting() > $types[$b]->getSorting()) ? 1 : -1;
+        });
+
+        $this->view->assignMultiple([
+            'subjects' => $subjectsByType,
+            'types'    => $types,
+            'consent'  => $consent,
+        ]);
+
+//        print_r(headers_list());
     }
 }

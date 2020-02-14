@@ -1,0 +1,66 @@
+<f:comment><!--
+
+    ePrivacy Consent Manager
+
+    @param array[] subjects			Subjects by type
+    @param Type[] types				Subject types
+    @param Consent consent          Current user's consent status
+
+--></f:comment>
+<html xmlns:f="https://xsd.helhum.io/ns/typo3/cms-fluid/master/ViewHelpers"
+      xmlns:base="http://typo3.org/ns/Tollwerk/TwBase/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+    <f:form action="list" controller="Subject" object="{consent}" class="Eprivacy">
+        <ol class="Eprivacy__tabs">
+            <f:for each="{types}" as="type">
+                <li class="Eprivacy__tab">
+                    <a href="#eprivacy-{type.uid}">{type.title}</a>
+                </li>
+            </f:for>
+        </ol>
+        <f:for each="{subjects}" as="subjectsByType">
+            <fieldset class="Eprivacy__tab-panel" id="eprivacy-{subjectsByType.0.type.uid}">
+                <legend>
+                    <base:heading content="{types.{subjectsByType.0.type.uid}.title}"/>
+                </legend>
+                <ol class="Eprivacy__subjects">
+                    <f:for each="{subjectsByType}" as="subject">
+                        <li class="Eprivacy__subject">
+                            <f:if condition="{subjectsByType.0.type.needsConsent}">
+                                <f:then>
+                                    <f:form.checkbox name="subjects" property="subjects" value="{subject.identifier}"
+                                                     id="eprivacy-{subject.identifier}" multiple="1"/>
+                                </f:then>
+                                <f:else>
+                                    <f:form.checkbox name="subjects" property="subjects" value="{subject.identifier}"
+                                                     checked="1" disabled="1"
+                                                     id="eprivacy-{subject.identifier}" multiple="1"/>
+                                </f:else>
+                            </f:if>
+                            <label class="Eprivacy__subject-label" for="eprivacy-{subject.identifier}">
+                                <base:heading content="{subject.title}" id="Eprivacy__subject-title">
+                                    <p class="Eprivacy__subject-name">{subject.name}</p>
+                                    <f:format.html>{subject.description}</f:format.html>
+                                </base:heading>
+                            </label>
+                        </li>
+                    </f:for>
+                </ol>
+            </fieldset>
+        </f:for>
+        <div class="Eprivacy__controls">
+            <f:form.button type="submit" name="update" value="1" class="Eprivacy__controls Eprivacy__controls--update">
+                <f:translate key="eprivacy.update.update"/>
+            </f:form.button>
+            <f:form.button type="submit" name="update" value="2" class="Eprivacy__controls Eprivacy__controls--accept">
+                <f:translate key="eprivacy.update.accept"/>
+            </f:form.button>
+            <f:form.button type="submit" name="update" value="3" class="Eprivacy__controls Eprivacy__controls--deny">
+                <f:translate key="eprivacy.update.deny"/>
+            </f:form.button>
+            <f:form.button type="reset" class="Eprivacy__controls Eprivacy__controls--reset">
+                <f:translate key="eprivacy.update.reset"/>
+            </f:form.button>
+        </div>
+    </f:form>
+</html>

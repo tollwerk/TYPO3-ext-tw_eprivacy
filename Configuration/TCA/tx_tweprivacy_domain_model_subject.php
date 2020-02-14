@@ -61,6 +61,11 @@ return [
                 'foreign_table_where' => 'AND {#tx_tweprivacy_domain_model_subject}.{#pid}=###CURRENT_PID### AND {#tx_tweprivacy_domain_model_subject}.{#sys_language_uid} IN (-1,0)',
             ],
         ],
+        'sorting'  => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
         'l10n_diffsource'  => [
             'config' => [
                 'type' => 'passthrough',

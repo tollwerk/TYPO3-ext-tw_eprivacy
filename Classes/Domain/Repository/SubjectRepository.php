@@ -13,8 +13,8 @@
 
 namespace Tollwerk\TwEprivacy\Domain\Repository;
 
-use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
@@ -32,12 +32,15 @@ class SubjectRepository extends Repository
     ];
 
     /**
-     * Object initialization
+     * Return all subjects that are consented to by default
+     *
+     * @return QueryResultInterface Default subjects
      */
-    public function initializeObject()
+    public function findDefaultSubjects(): QueryResultInterface
     {
-        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
-        $querySettings->setRespectStoragePage(false);
-        $this->setDefaultQuerySettings($querySettings);
+        $query = $this->createQuery();
+        $query->matching($query->equals('type.needsConsent', 0));
+
+        return $query->execute();
     }
 }
