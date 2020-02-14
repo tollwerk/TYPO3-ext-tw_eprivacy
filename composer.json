@@ -1,0 +1,24 @@
+{
+    "name": "tollwerk/tw-eprivacy",
+    "type": "typo3-cms-extension",
+    "description": "ePrivacy Consent Manager",
+    "authors": [
+        {
+            "name": "Joschi Kuphal",
+            "role": "Developer"
+        }
+    ],
+    "version": "1.0.0",
+    "require": {
+        "typo3/cms-core": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tollwerk\\TwEprivacy\\": "Classes"
+        }
+    },
+    "replace": {
+        "tw_eprivacy": "self.version",
+        "typo3-ter/tw-eprivacy": "self.version"
+    }
+}

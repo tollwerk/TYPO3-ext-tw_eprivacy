@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2020-02-14T09:08:30Z"
+          product-name="tw_eprivacy">
+        <header/>
+        <body>
+            <trans-unit id="title.description">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="identifier.description">
+                <source>Unique Identifier</source>
+            </trans-unit>
+            <trans-unit id="description.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="type.description">
+                <source>Type</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

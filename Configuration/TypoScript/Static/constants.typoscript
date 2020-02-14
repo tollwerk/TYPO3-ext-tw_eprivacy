@@ -1,0 +1,15 @@
+
+plugin.tx_tweprivacy_eprivacy {
+    view {
+        # cat=plugin.tx_tweprivacy_eprivacy/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:tw_eprivacy/Resources/Private/Templates/
+        # cat=plugin.tx_tweprivacy_eprivacy/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:tw_eprivacy/Resources/Private/Partials/
+        # cat=plugin.tx_tweprivacy_eprivacy/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:tw_eprivacy/Resources/Private/Layouts/
+    }
+    persistence {
+        # cat=plugin.tx_tweprivacy_eprivacy//a; type=string; label=Default storage PID
+        storagePid =
+    }
+}

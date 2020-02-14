@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2020-02-14T09:08:30Z" product-name="tw_eprivacy">
+		<header/>
+		<body>
+			<trans-unit id="tx_tweprivacy_domain_model_type">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="tx_tweprivacy_domain_model_type.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_tweprivacy_domain_model_subject">
+				<source>Subject</source>
+			</trans-unit>
+			<trans-unit id="tx_tweprivacy_domain_model_subject.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_tweprivacy_domain_model_subject.identifier">
+				<source>Identifier</source>
+			</trans-unit>
+			<trans-unit id="tx_tweprivacy_domain_model_subject.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_tweprivacy_domain_model_subject.type">
+				<source>Type</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
