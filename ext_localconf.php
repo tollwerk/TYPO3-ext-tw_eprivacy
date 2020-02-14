@@ -40,7 +40,7 @@ call_user_func(
         $iconRegistry->registerIcon(
             'tw_eprivacy-plugin-eprivacy',
             \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            ['source' => 'EXT:tw_eprivacy/Resources/Public/Icons/user_plugin_eprivacy.svg']
+            ['source' => 'EXT:tw_eprivacy/Resources/Public/Icons/subject.svg']
         );
 
     }

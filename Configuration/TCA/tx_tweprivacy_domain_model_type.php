@@ -19,10 +19,10 @@ return [
         'iconfile'                 => 'EXT:tw_eprivacy/Resources/Public/Icons/type.svg'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, needs_consent',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, needs_consent',
     ],
     'types'     => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, needs_consent'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, needs_consent'],
     ],
     'columns'   => [
         'sys_language_uid' => [
@@ -110,6 +110,23 @@ return [
                 'eval' => 'trim,required'
             ],
         ],
+        'description' => [
+            'exclude' => true,
+            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.description',
+            'config'  => [
+                'type'                  => 'text',
+                'enableRichtext'        => true,
+                'richtextConfiguration' => 'default',
+                'fieldControl'          => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                    ],
+                ],
+                'cols'                  => 40,
+                'rows'                  => 15,
+                'eval'                  => 'trim,required',
+            ],
 
+        ],
     ],
 ];

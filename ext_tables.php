@@ -7,7 +7,8 @@ call_user_func(
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
             'Tollwerk.TwEprivacy',
             'Eprivacy',
-            'ePrivacy'
+            'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tw_eprivacy_eprivacy.name',
+            'tw_eprivacy-plugin-eprivacy'
         );
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(

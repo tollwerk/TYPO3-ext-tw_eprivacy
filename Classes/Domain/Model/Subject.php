@@ -23,7 +23,6 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Title
      *
      * @var string
-     * @validate NotEmpty
      */
     protected $title = '';
 
@@ -31,7 +30,6 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Public Name
      *
      * @var string
-     * @validate NotEmpty
      */
     protected $name = '';
 
@@ -39,7 +37,6 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Unique Identifier
      *
      * @var string
-     * @validate NotEmpty
      */
     protected $identifier = '';
 
@@ -47,7 +44,6 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Description
      *
      * @var string
-     * @validate NotEmpty
      */
     protected $description = '';
 

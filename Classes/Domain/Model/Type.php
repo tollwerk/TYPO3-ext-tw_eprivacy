@@ -23,16 +23,22 @@ class Type extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Title
      *
      * @var string
-     * @validate NotEmpty
      */
     protected $title = '';
-    
+
     /**
      * Needs Consent
      *
      * @var bool
      */
     protected $needsConsent = true;
+
+    /**
+     * Description
+     *
+     * @var string
+     */
+    protected $description = '';
 
     /**
      * Returns the title
@@ -74,5 +80,27 @@ class Type extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setNeedsConsent(bool $needsConsent): void
     {
         $this->needsConsent = $needsConsent;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Sets the description
+     *
+     * @param string $description
+     *
+     * @return void
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }
