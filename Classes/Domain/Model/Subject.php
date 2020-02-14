@@ -41,11 +41,25 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $identifier = '';
 
     /**
-     * Description
+     * Provider
      *
      * @var string
      */
-    protected $description = '';
+    protected $provider = '';
+
+    /**
+     * Purpose
+     *
+     * @var string
+     */
+    protected $purpose = '';
+
+    /**
+     * Lifetime (seconds)
+     *
+     * @var int
+     */
+    protected $lifetime = 0;
 
     /**
      * Type
@@ -121,25 +135,47 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the description
+     * Returns the provider
      *
-     * @return string $description
+     * @return string $provider
      */
-    public function getDescription()
+    public function getProvider()
     {
-        return $this->description;
+        return $this->provider;
     }
 
     /**
-     * Sets the description
+     * Sets the provider
      *
-     * @param string $description
+     * @param string $provider
      *
      * @return void
      */
-    public function setDescription($description)
+    public function setProvider($provider)
     {
-        $this->description = $description;
+        $this->provider = $provider;
+    }
+
+    /**
+     * Returns the purpose
+     *
+     * @return string $purpose
+     */
+    public function getPurpose()
+    {
+        return $this->purpose;
+    }
+
+    /**
+     * Sets the purpose
+     *
+     * @param string $purpose
+     *
+     * @return void
+     */
+    public function setPurpose($purpose)
+    {
+        $this->purpose = $purpose;
     }
 
     /**
@@ -162,5 +198,25 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setType(\Tollwerk\TwEprivacy\Domain\Model\Type $type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * Return the lifetime in seconds
+     *
+     * @return int Lifetime
+     */
+    public function getLifetime(): int
+    {
+        return $this->lifetime;
+    }
+
+    /**
+     * Set the lifetime in seconds
+     *
+     * @param int $lifetime Lifetime
+     */
+    public function setLifetime(int $lifetime): void
+    {
+        $this->lifetime = $lifetime;
     }
 }

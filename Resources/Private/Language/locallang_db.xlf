@@ -48,11 +48,17 @@
 			<trans-unit id="tx_tweprivacy_domain_model_subject.identifier">
 				<source>Identifier</source>
 			</trans-unit>
-			<trans-unit id="tx_tweprivacy_domain_model_subject.description">
-				<source>Description</source>
+			<trans-unit id="tx_tweprivacy_domain_model_subject.provider">
+				<source>Provider</source>
+			</trans-unit>
+			<trans-unit id="tx_tweprivacy_domain_model_subject.purpose">
+				<source>Purpose</source>
 			</trans-unit>
 			<trans-unit id="tx_tweprivacy_domain_model_subject.type">
 				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="tx_tweprivacy_domain_model_subject.lifetime">
+				<source>Lifetime (seconds)</source>
 			</trans-unit>
 			<trans-unit id="tx_tw_eprivacy_eprivacy.name">
 				<source>ePrivacy Consent Manager</source>

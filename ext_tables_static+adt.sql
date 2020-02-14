@@ -89,7 +89,7 @@ CREATE TABLE `tx_tweprivacy_domain_model_subject` (
   `t3ver_move_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `identifier` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `description` text COLLATE utf8mb4_unicode_ci,
+  `purpose` text COLLATE utf8mb4_unicode_ci,
   `type` int(10) unsigned DEFAULT '1',
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`uid`),
@@ -104,7 +104,7 @@ CREATE TABLE `tx_tweprivacy_domain_model_subject` (
 
 LOCK TABLES `tx_tweprivacy_domain_model_subject` WRITE;
 /*!40000 ALTER TABLE `tx_tweprivacy_domain_model_subject` DISABLE KEYS */;
-INSERT INTO `tx_tweprivacy_domain_model_subject` VALUES (1,1,1581670129,1581669674,1,0,0,256,0,0,NULL,_binary 'a:7:{s:16:\"sys_language_uid\";N;s:6:\"hidden\";N;s:5:\"title\";N;s:4:\"type\";N;s:4:\"name\";N;s:10:\"identifier\";N;s:11:\"description\";N;}',0,0,0,0,0,0,0,'ePrivacy Consent','eprivacy.consent','<p>Used to store the selection of ePrivacy subjects (e.g. cookies) the user has given their consent to.</p>',1,'eprivacy_consent');
+INSERT INTO `tx_tweprivacy_domain_model_subject` VALUES (1,1,1581670129,1581669674,1,0,0,256,0,0,NULL,_binary 'a:7:{s:16:\"sys_language_uid\";N;s:6:\"hidden\";N;s:5:\"title\";N;s:4:\"type\";N;s:4:\"name\";N;s:10:\"identifier\";N;s:11:\"purpose\";N;}',0,0,0,0,0,0,0,'ePrivacy Consent','eprivacy.consent','<p>Used to store the selection of ePrivacy subjects (e.g. cookies) the user has given their consent to.</p>',1,'eprivacy_consent');
 /*!40000 ALTER TABLE `tx_tweprivacy_domain_model_subject` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

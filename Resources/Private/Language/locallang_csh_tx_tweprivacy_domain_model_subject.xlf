@@ -10,8 +10,8 @@
             <trans-unit id="identifier.description">
                 <source>Unique Identifier</source>
             </trans-unit>
-            <trans-unit id="description.description">
-                <source>Description</source>
+            <trans-unit id="purpose.description">
+                <source>Purpose</source>
             </trans-unit>
             <trans-unit id="type.description">
                 <source>Type</source>

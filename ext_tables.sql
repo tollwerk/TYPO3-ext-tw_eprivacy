@@ -16,6 +16,8 @@ CREATE TABLE tx_tweprivacy_domain_model_subject
     title       varchar(255)     DEFAULT '' NOT NULL,
     name        varchar(255)     DEFAULT '' NOT NULL,
     identifier  varchar(255)     DEFAULT '' NOT NULL,
-    description text,
+    provider    varchar(255)     DEFAULT '' NOT NULL,
+    purpose text,
     type        int(11) unsigned DEFAULT '1',
+    lifetime    int(11) unsigned DEFAULT '0',
 );

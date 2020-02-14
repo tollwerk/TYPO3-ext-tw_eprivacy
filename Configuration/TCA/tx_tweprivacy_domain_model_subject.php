@@ -15,18 +15,19 @@ return [
         'enablecolumns'            => [
             'disabled' => 'hidden',
         ],
-        'searchFields'             => 'title,identifier,description',
+        'searchFields'             => 'title,identifier,purpose',
         'iconfile'                 => 'EXT:tw_eprivacy/Resources/Public/Icons/subject.svg'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, name, identifier, description, type',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, name, identifier, purpose, type',
     ],
     'types'     => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, --palette--;;titletype, --palette--;;nameidentifier, description'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, --palette--;;titletype, --palette--;;nameidentifier, --palette--;;providerlifetime, purpose'],
     ],
     'palettes'  => [
-        'titletype' => ['showitem' => 'title, type'],
-        'nameidentifier' => ['showitem' => 'name, identifier'],
+        'titletype'        => ['showitem' => 'title, type'],
+        'nameidentifier'   => ['showitem' => 'name, identifier'],
+        'providerlifetime' => ['showitem' => 'provider, lifetime'],
     ],
     'columns'   => [
         'sys_language_uid' => [
@@ -61,7 +62,7 @@ return [
                 'foreign_table_where' => 'AND {#tx_tweprivacy_domain_model_subject}.{#pid}=###CURRENT_PID### AND {#tx_tweprivacy_domain_model_subject}.{#sys_language_uid} IN (-1,0)',
             ],
         ],
-        'sorting'  => [
+        'sorting'          => [
             'config' => [
                 'type' => 'passthrough',
             ],
@@ -122,9 +123,18 @@ return [
                 'eval' => 'trim,required,unique'
             ],
         ],
-        'description' => [
+        'provider'    => [
             'exclude' => true,
-            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.description',
+            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.provider',
+            'config'  => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim,required'
+            ],
+        ],
+        'purpose' => [
+            'exclude' => true,
+            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.purpose',
             'config'  => [
                 'type'                  => 'text',
                 'enableRichtext'        => true,
@@ -151,6 +161,14 @@ return [
                 'maxitems'      => 1,
             ],
         ],
-
+        'lifetime'    => [
+            'exclude' => true,
+            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.lifetime',
+            'config'  => [
+                'type' => 'input',
+                'size' => 5,
+                'eval' => 'int+,required'
+            ],
+        ],
     ],
 ];
