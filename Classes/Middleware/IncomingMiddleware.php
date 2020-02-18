@@ -36,10 +36,13 @@
 
 namespace Tollwerk\TwEprivacy\Middleware;
 
+use Doctrine\DBAL\FetchMode;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * ePrivacy Incoming Middleware
@@ -55,7 +58,18 @@ class IncomingMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $handler->handle($request);
-        debug($_COOKIE);
+
+        // If there are cookies
+        if (count($_COOKIE)) {
+            $allowedSubjectNames = GeneralUtility::makeInstance(ConnectionPool::class)
+                                                 ->getConnectionForTable('tx_tweprivacy_domain_model_subject')
+                                                 ->select(
+                                                     ['name'],
+                                                     'tx_tweprivacy_domain_model_subject',
+                                                     ['hidden' => 0, 'deleted' => 0]
+                                                 )->fetchAll(FetchMode::COLUMN);
+//            print_r($allowedSubjectNames);
+        }
 
         return $response;
     }

@@ -25,7 +25,8 @@
                 </legend>
                 <ol class="Eprivacy__subjects">
                     <f:for each="{subjectsByType}" as="subject">
-                        <f:render section="Subject" arguments="{subject: subject, subjectsByType: subjectsByType, types: types}"/>
+                        <f:render section="Subject"
+                                  arguments="{subject: subject, subjectsByType: subjectsByType, types: types}"/>
                     </f:for>
                 </ol>
             </fieldset>
@@ -69,14 +70,31 @@
             <label class="Eprivacy__subject-label" for="eprivacy-{subject.identifier}">
                 <base:heading content="{subject.title}" id="Eprivacy__subject-title">
                     <dl>
-                        <dt class="Eprivacy__subject-name-label"><f:translate key="eprivacy.subject.name"/></dt>
+                        <dt class="Eprivacy__subject-name-label">
+                            <f:translate key="eprivacy.subject.name"/>
+                        </dt>
                         <dd class="Eprivacy__subject-name">{subject.name}</dd>
-                        <dt class="Eprivacy__subject-provider-label"><f:translate key="eprivacy.subject.provider"/></dt>
+                        <dt class="Eprivacy__subject-provider-label">
+                            <f:translate key="eprivacy.subject.provider"/>
+                        </dt>
                         <dd class="Eprivacy__subject-provider">{subject.provider}</dd>
-                        <dt class="Eprivacy__subject-lifetime-label"><f:translate key="eprivacy.subject.lifetime"/></dt>
-                        <dd class="Eprivacy__subject-lifetime">{subject.lifetime}</dd>
-                        <dt class="Eprivacy__subject-purpose-label"><f:translate key="eprivacy.subject.purpose"/></dt>
-                        <dd class="Eprivacy__subject-purpose"><f:format.html>{subject.purpose}</f:format.html></dd>
+                        <dt class="Eprivacy__subject-lifetime-label">
+                            <f:translate key="eprivacy.subject.lifetime"/>
+                        </dt>
+                        <dd class="Eprivacy__subject-lifetime">
+                            <f:if condition="{subject.session}">
+                                <f:then>
+                                    <f:translate key="eprivacy.subject.lifetime.session"/>
+                                </f:then>
+                                <f:else>{subject.lifetime}</f:else>
+                            </f:if>
+                        </dd>
+                        <dt class="Eprivacy__subject-purpose-label">
+                            <f:translate key="eprivacy.subject.purpose"/>
+                        </dt>
+                        <dd class="Eprivacy__subject-purpose">
+                            <f:format.html>{subject.purpose}</f:format.html>
+                        </dd>
                     </dl>
                 </base:heading>
             </label>

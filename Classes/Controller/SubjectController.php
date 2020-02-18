@@ -75,7 +75,7 @@ class SubjectController extends ActionController
      */
     public function listAction(int $update = 0, array $subjects = [])
     {
-        debug($_COOKIE);
+//        print_r($_COOKIE);
         $consent = $this->consentRepository->get();
 
         // Process updates
@@ -135,6 +135,6 @@ class SubjectController extends ActionController
             'consent'  => $consent,
         ]);
 
-        setcookie('test', 'value', time() + 86400, '/');
+//        setcookie('test', 'value', time() + 86400, '/');
     }
 }

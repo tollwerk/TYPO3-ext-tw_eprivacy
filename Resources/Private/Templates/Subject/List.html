@@ -12,10 +12,12 @@
       data-namespace-typo3-fluid="true">
     <f:render partial="Elements/Consent/Manager" arguments="{_all}"/>
 
+    <f:comment>
     <eprivacy:consent identifier="{0: 'eprivacy.consent', 1: 'google.analytics.ga'}">
         <f:then>Google Analytics is allowed</f:then>
         <f:else>Google Analytics is not allowed</f:else>
     </eprivacy:consent>
 
     <button type="button" onclick="var date=new Date();date.setTime(date.getTime() + 24*60*60*1000);document.cookie='test=valid; expires='+date.toUTCString()+'; path=/';window.location.reload(true);">Set cookie &amp; reload</button>
+    </f:comment>
 </html>
