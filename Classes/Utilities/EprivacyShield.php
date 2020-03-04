@@ -126,4 +126,12 @@ class EprivacyShield implements SingletonInterface
 
         return in_array($subjectName, self::$subjectNames);
     }
+
+    /**
+     * Reset the cached subject names
+     */
+    public static function reset(): void
+    {
+        self::$subjectNames = null;
+    }
 }

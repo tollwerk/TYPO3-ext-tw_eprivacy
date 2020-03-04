@@ -13,6 +13,7 @@
 
 namespace Tollwerk\TwEprivacy\Controller;
 
+use FluidTYPO3\Flux\Form\Field\DateTime;
 use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Domain\Model\Type;
 use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
@@ -133,6 +134,7 @@ class SubjectController extends ActionController
             'subjects' => $subjectsByType,
             'types'    => $types,
             'consent'  => $consent,
+            'now'      => new \DateTime()
         ]);
 
 //        setcookie('test', 'value', time() + 86400, '/');

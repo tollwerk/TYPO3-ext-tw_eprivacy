@@ -4,7 +4,7 @@
 		<header/>
 		<body>
 			<trans-unit id="eprivacy.subject.name">
-				<source>Name</source>
+				<source>Cookie-Name</source>
 			</trans-unit>
 			<trans-unit id="eprivacy.subject.provider">
 				<source>Provider</source>
@@ -15,6 +15,9 @@
 			<trans-unit id="eprivacy.subject.lifetime">
 				<source>Lifetime</source>
 			</trans-unit>
+			<trans-unit id="eprivacy.subject.lifetime.expires">
+                <source>Expires on</source>
+            </trans-unit>
 			<trans-unit id="eprivacy.subject.lifetime.session">
 				<source>Session</source>
 			</trans-unit>
@@ -28,7 +31,7 @@
 				<source>Accept all</source>
 			</trans-unit>
 			<trans-unit id="eprivacy.update.deny">
-				<source>Deny all</source>
+				<source>Accept necessary only</source>
 			</trans-unit>
 			<trans-unit id="eprivacy.update.reset">
 				<source>Reset</source>

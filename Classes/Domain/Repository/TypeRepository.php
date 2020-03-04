@@ -30,4 +30,14 @@ class TypeRepository extends Repository
     protected $defaultOrderings = [
         'sorting' => QueryInterface::ORDER_ASCENDING
     ];
+
+    /**
+     * Make queries storage PID independent
+     */
+    public function initializeObject()
+    {
+        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $querySettings->setRespectStoragePage(false);
+        $this->setDefaultQuerySettings($querySettings);
+    }
 }

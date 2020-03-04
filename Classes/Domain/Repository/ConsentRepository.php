@@ -39,6 +39,7 @@ namespace Tollwerk\TwEprivacy\Domain\Repository;
 use DateTimeImmutable;
 use Tollwerk\TwEprivacy\Domain\Model\Consent;
 use Tollwerk\TwEprivacy\Domain\Model\Subject;
+use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
@@ -79,7 +80,7 @@ class ConsentRepository implements SingletonInterface
             self::$consent = new Consent();
             if (!empty($_COOKIE[self::COOKIE_NAME])) {
                 $value = (array)@json_decode($_COOKIE[self::COOKIE_NAME]);
-                if (is_object($value) && !empty($value['consent']) && is_array($value['consent'])) {
+                if (!empty($value) && !empty($value['consent']) && is_array($value['consent'])) {
                     self::$consent->setSubjects($value['consent']);
                     self::$consent->setLastmod(new DateTimeImmutable($value['lastmod'] ?? 'now'));
                 }
@@ -106,13 +107,19 @@ class ConsentRepository implements SingletonInterface
     /**
      * Set the current users consent state
      *
-     * @param Consent $consent Constent
+     * @param Consent $consent Consent
+     *
+     * @return bool Success
      *
      * @throws InvalidConfigurationTypeException
      * @throws Exception
      */
-    public function update(Consent $consent): void
+    public function update(Consent $consent): bool
     {
+        // Reset the ePrivacy shield
+        EprivacyShield::reset();
+
+        self::$consent        = $consent;
         $objectManager        = GeneralUtility::makeInstance(ObjectManager::class);
         $configurationManager = $objectManager->get(ConfigurationManager::class);
         $settings             = $configurationManager->getConfiguration(
@@ -123,7 +130,7 @@ class ConsentRepository implements SingletonInterface
         $lifetime             = intval($cookieSettings['lifetime'] ?? 2629800);
 
         // Set the consent cookie
-        setcookie(
+        return setcookie(
             self::COOKIE_NAME,
             strval($consent),
             time() + $lifetime,
