@@ -13,7 +13,6 @@
 
 namespace Tollwerk\TwEprivacy\Controller;
 
-use FluidTYPO3\Flux\Form\Field\DateTime;
 use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Domain\Model\Type;
 use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
@@ -88,7 +87,7 @@ class SubjectController extends ActionController
                             return $subject->getIdentifier();
                         },
                         $this->subjectRepository->findByPublic(true)->toArray()
-                    );
+                    );;
                     break;
                 case self::UPDATE_DENY:
                     $subjects = [];

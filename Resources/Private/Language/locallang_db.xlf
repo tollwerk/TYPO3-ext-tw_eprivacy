@@ -64,6 +64,15 @@
             <trans-unit id="tx_tweprivacy_domain_model_subject.type">
                 <source>Type</source>
             </trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.mode">
+                <source>Mode</source>
+            </trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.mode.cookie">
+                <source>Cookie</source>
+            </trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.mode.switch">
+                <source>Switch</source>
+            </trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.lifetime">
                 <source>Lifetime (seconds)</source>
             </trans-unit>

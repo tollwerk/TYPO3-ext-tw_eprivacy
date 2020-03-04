@@ -130,7 +130,7 @@ class ConsentRepository implements SingletonInterface
         $lifetime             = intval($cookieSettings['lifetime'] ?? 2629800);
 
         // Set the consent cookie
-        return setcookie(
+        $consentSuccess = setcookie(
             self::COOKIE_NAME,
             strval($consent),
             time() + $lifetime,
@@ -139,5 +139,30 @@ class ConsentRepository implements SingletonInterface
             boolval($cookieSettings['secure'] ?? true),
             boolval($cookieSettings['httponly'] ?? true)
         );
+
+        // If the consent could be updated: Kill all unmatched cookies
+        if ($consentSuccess) {
+            $allSubjects = array_map(
+                function(Subject $subject) {
+                    return $subject->getIdentifier();
+                },
+                $objectManager->get(SubjectRepository::class)->findByPublic(true)->toArray()
+            );
+            foreach (array_diff($allSubjects, $consent->getSubjects()) as $denySubject) {
+                if (!setcookie(
+                    $denySubject,
+                    '',
+                    1,
+                    trim($cookieSettings['path'] ?? '/'),
+                    trim($cookieSettings['domain'] ?? ''),
+                    boolval($cookieSettings['secure'] ?? true),
+                    boolval($cookieSettings['httponly'] ?? true)
+                )) {
+                    return false;
+                }
+            }
+        }
+
+        return $consentSuccess;
     }
 }

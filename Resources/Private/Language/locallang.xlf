@@ -15,14 +15,8 @@
 			<trans-unit id="eprivacy.subject.lifetime">
 				<source>Lifetime</source>
 			</trans-unit>
-			<trans-unit id="eprivacy.subject.lifetime.expires">
-                <source>Expires on</source>
-            </trans-unit>
 			<trans-unit id="eprivacy.subject.lifetime.session">
 				<source>Session</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.subject.lifetime.format">
-				<source>Y/d/m</source>
 			</trans-unit>
 			<trans-unit id="eprivacy.update.update">
 				<source>Update settings</source>

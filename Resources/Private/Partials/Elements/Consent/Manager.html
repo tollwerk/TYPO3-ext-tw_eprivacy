@@ -77,18 +77,22 @@
                         <dt class="Eprivacy__subject-provider-label">
                             <f:translate key="eprivacy.subject.provider"/>
                         </dt>
-                        <dd class="Eprivacy__subject-provider">{subject.provider}</dd>
-                        <dt class="Eprivacy__subject-lifetime-label">
-                            <f:translate key="eprivacy.subject.lifetime"/>
-                        </dt>
-                        <dd class="Eprivacy__subject-lifetime">
-                            <f:if condition="{subject.session}">
-                                <f:then>
-                                    <f:translate key="eprivacy.subject.lifetime.session"/>
-                                </f:then>
-                                <f:else>{subject.lifetime}</f:else>
-                            </f:if>
-                        </dd>
+                        <f:if condition="{subject.mode}">
+                            <f:else>
+                                <dd class="Eprivacy__subject-provider">{subject.provider}</dd>
+                                <dt class="Eprivacy__subject-lifetime-label">
+                                    <f:translate key="eprivacy.subject.lifetime"/>
+                                </dt>
+                                <dd class="Eprivacy__subject-lifetime">
+                                    <f:if condition="{subject.session}">
+                                        <f:then>
+                                            <f:translate key="eprivacy.subject.lifetime.session"/>
+                                        </f:then>
+                                        <f:else>{subject.lifetime}</f:else>
+                                    </f:if>
+                                </dd>
+                            </f:else>
+                        </f:if>
                         <dt class="Eprivacy__subject-purpose-label">
                             <f:translate key="eprivacy.subject.purpose"/>
                         </dt>

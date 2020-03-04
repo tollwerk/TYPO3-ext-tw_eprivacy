@@ -3,6 +3,7 @@ return [
     'ctrl'      => [
         'title'                    => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject',
         'label'                    => 'title',
+        'type'                     => 'mode',
         'tstamp'                   => 'tstamp',
         'crdate'                   => 'crdate',
         'cruser_id'                => 'cruser_id',
@@ -22,12 +23,14 @@ return [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, public, title, name, provider, identifier, purpose, type, session',
     ],
     'types'     => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, --palette--;;nameidentifier, purpose'],
+        '0' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, --palette--;;nameidentifier, --palette--;;lifetime, purpose'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, purpose'],
     ],
     'palettes'  => [
-        'hiddenpublic'   => ['showitem' => 'hidden, public, session'],
-        'titletype'      => ['showitem' => 'title, type, lifetime'],
+        'hiddenpublic'   => ['showitem' => 'hidden, public'],
+        'titletype'      => ['showitem' => 'title, mode, type'],
         'nameidentifier' => ['showitem' => 'provider, name, identifier'],
+        'lifetime'       => ['showitem' => 'lifetime, session'],
     ],
     'columns'   => [
         'sys_language_uid' => [
@@ -161,45 +164,65 @@ return [
                 'maxitems'      => 1,
             ],
         ],
+        'mode'       => [
+            'exclude' => true,
+            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode',
+            'config'  => [
+                'type'       => 'select',
+                'renderType' => 'selectSingle',
+                'items'      => [
+                    [
+                        'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.cookie',
+                        0
+                    ],
+                    [
+                        'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.switch',
+                        1
+                    ],
+                ],
+                'minitems'   => 0,
+                'maxitems'   => 1,
+            ],
+        ],
         'lifetime'   => [
             'exclude' => true,
             'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.lifetime',
             'config'  => [
-                'type' => 'input',
-                'size' => 5,
-                'eval' => 'int,required',
+                'type'    => 'input',
+                'size'    => 5,
+                'eval'    => 'int,required',
                 'default' => '0'
             ],
         ],
         'public'     => [
-    'exclude' => true,
-    'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.public',
-    'config'  => [
-        'type'       => 'check',
-        'renderType' => 'checkboxToggle',
-        'items'      => [
-            [
-                0 => '',
-                1 => '',
-            ]
+            'exclude' => true,
+            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.public',
+            'config'  => [
+                'type'       => 'check',
+                'renderType' => 'checkboxToggle',
+                'items'      => [
+                    [
+                        0 => '',
+                        1 => '',
+                    ]
+                ],
+                'default'    => 1,
+            ],
         ],
-        'default'    => 1,
-    ],
-],
-        'session'     => [
-    'exclude' => true,
-    'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.session',
-    'config'  => [
-        'type'       => 'check',
-        'renderType' => 'checkboxToggle',
-        'items'      => [
-            [
-                0 => '',
-                1 => '',
-            ]
+        'session'    => [
+            'exclude' => true,
+            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.session',
+            'config'  => [
+                'type'       => 'check',
+                'renderType' => 'checkboxToggle',
+                'items'      => [
+                    [
+                        0 => '',
+                        1 => '',
+                    ]
+                ],
+                'default'    => 0,
+            ],
         ],
-        'default'    => 0,
-    ],
-],
     ],
 ];

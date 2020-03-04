@@ -83,6 +83,17 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $type = null;
 
     /**
+     * Mode
+     *
+     * @var int
+     */
+    protected $mode = null;
+
+    // Modes
+    const MODE_COOKIE = 0;
+    const MODE_SWITCH = 1;
+
+    /**
      * Returns the title
      *
      * @return string $title
@@ -272,5 +283,25 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setSession(bool $session): void
     {
         $this->session = $session;
+    }
+
+    /**
+     * Return the mode
+     *
+     * @return int Mode
+     */
+    public function getMode(): int
+    {
+        return $this->mode;
+    }
+
+    /**
+     * Set the mode
+     *
+     * @param int $mode Mode
+     */
+    public function setMode(int $mode): void
+    {
+        $this->mode = $mode;
     }
 }
