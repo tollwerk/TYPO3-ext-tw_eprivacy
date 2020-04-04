@@ -125,7 +125,7 @@ return [
             'config'    => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required,unique'
+                'eval' => 'trim,required'
             ],
         ],
         'provider'   => [
@@ -196,7 +196,7 @@ return [
                 'type'                => 'select',
                 'renderType'          => 'selectSingle',
                 'foreign_table'       => 'tx_tweprivacy_domain_model_subject',
-                'foreign_table_where' => 'AND tx_tweprivacy_domain_model_subject.mode = '.\Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET.' ORDER BY tx_tweprivacy_domain_model_subject.name',
+                'foreign_table_where' => 'AND {#tx_tweprivacy_domain_model_subject}.{#pid}=###CURRENT_PID### AND {#tx_tweprivacy_domain_model_subject}.{#sys_language_uid} IN (-1,0) AND tx_tweprivacy_domain_model_subject.mode = '.\Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET.' ORDER BY tx_tweprivacy_domain_model_subject.name',
                 'items'               => [['---', 0]],
                 'minitems'            => 1,
                 'maxitems'            => 1,

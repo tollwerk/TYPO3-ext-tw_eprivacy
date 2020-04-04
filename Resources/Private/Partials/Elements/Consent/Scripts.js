@@ -20,6 +20,4 @@
             input.addEventListener('change', e => toggleSet(e, set));
         }
     });
-
-    console.log(sets);
 })(typeof global !== 'undefined' ? global : window, document);

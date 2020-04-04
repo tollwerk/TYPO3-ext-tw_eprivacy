@@ -15,7 +15,7 @@ CREATE TABLE tx_tweprivacy_domain_model_subject
 (
     title      varchar(255)         DEFAULT '' NOT NULL,
     name       varchar(255)         DEFAULT '' NOT NULL,
-    identifier varchar(255)         DEFAULT '' NOT NULL,
+    identifier varchar(64)         DEFAULT '' NOT NULL,
     provider   varchar(255)         DEFAULT '' NOT NULL,
     purpose    text,
     type       int(11) unsigned     DEFAULT '1',
@@ -24,4 +24,6 @@ CREATE TABLE tx_tweprivacy_domain_model_subject
     lifetime   int(11) unsigned     DEFAULT '0',
     public     tinyint(4) unsigned  DEFAULT '1',
     session    tinyint(4) unsigned  DEFAULT '0',
+
+    UNIQUE idlang (identifier, sys_language_uid),
 );

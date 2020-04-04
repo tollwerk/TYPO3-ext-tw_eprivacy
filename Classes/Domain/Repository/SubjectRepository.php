@@ -14,7 +14,6 @@
 namespace Tollwerk\TwEprivacy\Domain\Repository;
 
 use Tollwerk\TwEprivacy\Domain\Model\Subject;
-use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -40,10 +39,10 @@ class SubjectRepository extends Repository
      */
     public function initializeObject()
     {
-        $currentLanguageUid = $this->objectManager->get(Context::class)->getPropertyFromAspect('language', 'id');
-        $querySettings      = $this->objectManager->get(Typo3QuerySettings::class);
+//        $currentLanguageUid = $this->objectManager->get(Context::class)->getPropertyFromAspect('language', 'id');
+        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
         $querySettings->setRespectStoragePage(false);
-        $querySettings->setLanguageUid($currentLanguageUid);
+//        $querySettings->setLanguageUid($currentLanguageUid);
         $this->setDefaultQuerySettings($querySettings);
     }
 
@@ -113,7 +112,7 @@ class SubjectRepository extends Repository
     public function findByParentSet(Subject $parentSet): QueryResultInterface
     {
         $query = $this->createQuery();
-        $query->matching($query->equals('parentSet', $parentSet))
+        $query->matching($query->equals('parentSet', $parentSet->getUid()))
               ->setOrderings(['sorting' => QueryInterface::ORDER_ASCENDING]);
 
         return $query->execute();
