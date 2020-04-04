@@ -20,6 +20,7 @@ CREATE TABLE tx_tweprivacy_domain_model_subject
     purpose    text,
     type       int(11) unsigned     DEFAULT '1',
     mode       tinyint(11) unsigned DEFAULT '0',
+    parent_set int(11) unsigned     DEFAULT '0',
     lifetime   int(11) unsigned     DEFAULT '0',
     public     tinyint(4) unsigned  DEFAULT '1',
     session    tinyint(4) unsigned  DEFAULT '0',

@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2020-02-14T09:08:30Z" product-name="tw_eprivacy">
+        <header/>
+        <body>
+            <trans-unit id="common" approved="yes">
+                <source>Common Settings</source> <target state="translated">Common Settings</target></trans-unit>
+            <trans-unit id="common.imprint" approved="yes">
+                <source>Imprint Page (ID)</source>
+            <target state="translated">Imprint Page (ID)</target></trans-unit>
+            <trans-unit id="common.privacy" approved="yes">
+                <source>Privacy Policy Page (ID)</source>
+            <target state="translated">Privacy Policy Page (ID)</target></trans-unit>
+            <trans-unit id="cookie" approved="yes">
+                <source>Consent Cookie</source>
+            <target state="translated">Consent Cookie</target></trans-unit>
+            <trans-unit id="cookie.lifetime" approved="yes">
+                <source>Consent Lifetime (seconds)</source>
+            <target state="translated">Consent Lifetime (seconds)</target></trans-unit>
+            <trans-unit id="cookie.path" approved="yes">
+                <source>Cookie Path</source>
+            <target state="translated">Cookie Path</target></trans-unit>
+            <trans-unit id="cookie.domain" approved="yes">
+                <source>Cookie Domain</source>
+            <target state="translated">Cookie Domain</target></trans-unit>
+            <trans-unit id="cookie.secure" approved="yes">
+                <source>Secure Cookie</source>
+            <target state="translated">Secure Cookie</target></trans-unit>
+            <trans-unit id="cookie.httponly" approved="yes">
+                <source>HTTP-Only Cookie</source>
+            <target state="translated">HTTP-Only Cookie</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_type" approved="yes">
+                <source>ePrivacy Subject Type</source>
+            <target state="translated">ePrivacy Subject Type</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_type.title" approved="yes">
+                <source>Title</source>
+            <target state="translated">Title</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_type.description" approved="yes">
+                <source>Description</source>
+            <target state="translated">Description</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_type.needs_consent" approved="yes">
+                <source>Needs Consent</source>
+            <target state="translated">Needs Consent</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject" approved="yes">
+                <source>ePrivacy Subject</source>
+            <target state="translated">ePrivacy Subject</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.title" approved="yes">
+                <source>Title</source>
+            <target state="translated">Title</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.name" approved="yes">
+                <source>Public Name</source>
+            <target state="translated">Public Name</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.identifier" approved="yes">
+                <source>Identifier</source>
+            <target state="translated">Identifier</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.provider" approved="yes">
+                <source>Provider</source>
+            <target state="translated">Provider</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.purpose" approved="yes">
+                <source>Purpose</source>
+            <target state="translated">Purpose</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.type" approved="yes">
+                <source>Type</source>
+            <target state="translated">Type</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.mode" approved="yes">
+                <source>Mode</source>
+            <target state="translated">Mode</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.mode.cookie" approved="yes">
+                <source>Cookie</source>
+            <target state="translated">Cookie</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.mode.set" approved="yes">
+                <source>Set</source>
+            <target state="translated">Set</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.parent_set" approved="yes">
+                <source>Belongs to set</source>
+            <target state="translated">Belongs to set</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.lifetime" approved="yes">
+                <source>Lifetime (seconds)</source>
+            <target state="translated">Lifetime (seconds)</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.public" approved="yes">
+                <source>Public</source>
+            <target state="translated">Public</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.session" approved="yes">
+                <source>Expires with session</source>
+            <target state="translated">Expires with session</target></trans-unit>
+            <trans-unit id="tx_tw_eprivacy_eprivacy.name" approved="yes">
+                <source>ePrivacy Consent Manager</source>
+            <target state="translated">ePrivacy Consent Manager</target></trans-unit>
+            <trans-unit id="tx_tw_eprivacy_eprivacy.description" approved="yes">
+                <source>Form listing registered ePrivacy subjects including a way to give or withdraw consent to each of
+                    them.
+                </source>
+            <target state="translated">Form listing registered ePrivacy subjects including a way to give or withdraw consent to each of them.</target></trans-unit>
+        </body>
+    </file>
+</xliff>

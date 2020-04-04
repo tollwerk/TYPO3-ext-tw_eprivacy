@@ -73,14 +73,21 @@ class ConsentConditionProvider implements ExpressionFunctionProviderInterface
             'ePrivacy',
             function() {
             },
-            function($arguments, $subject) {
-                if (empty($subject)) {
+            function($arguments, ...$subjects) {
+                if (empty($subjects)) {
                     return false;
                 }
 
-                $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+                $objectManager  = GeneralUtility::makeInstance(ObjectManager::class);
+                $ePrivacyShield = $objectManager->get(EprivacyShield::class);
 
-                return $objectManager->get(EprivacyShield::class)->isAllowedIdentifier($subject);
+                foreach ($subjects as $subject) {
+                    if (!$ePrivacyShield->isAllowedIdentifier($subject)) {
+                        return false;
+                    }
+                }
+
+                return true;
             }
         );
     }

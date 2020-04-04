@@ -39,6 +39,8 @@ use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
 use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
 use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * ePrivacy Shield
@@ -48,6 +50,12 @@ use TYPO3\CMS\Core\SingletonInterface;
  */
 class EprivacyShield implements SingletonInterface
 {
+    /**
+     * Subject name cache
+     *
+     * @var array
+     */
+    protected static $subjectNames = null;
     /**
      * Consent repository
      *
@@ -60,31 +68,13 @@ class EprivacyShield implements SingletonInterface
      * @var SubjectRepository
      */
     protected $subjectRepository;
-    /**
-     * Subject name cache
-     *
-     * @var array
-     */
-    protected static $subjectNames = null;
 
     /**
-     * Inject the consent repository
-     *
-     * @param ConsentRepository $consentRepository
+     * Reset the cached subject names
      */
-    public function injectConsentRepository(ConsentRepository $consentRepository): void
+    public static function reset(): void
     {
-        $this->consentRepository = $consentRepository;
-    }
-
-    /**
-     * Inject the subject repository
-     *
-     * @param SubjectRepository $subjectRepository
-     */
-    public function injectSubjectRepository(SubjectRepository $subjectRepository): void
-    {
-        $this->subjectRepository = $subjectRepository;
+        self::$subjectNames = null;
     }
 
     /**
@@ -97,7 +87,7 @@ class EprivacyShield implements SingletonInterface
      */
     public function isAllowedIdentifier(string $subjectIdentifier): bool
     {
-        $consent = $this->consentRepository->get();
+        $consent = $this->getConsentRepository()->get();
 
         return $consent->allowsSubject($subjectIdentifier);
     }
@@ -114,11 +104,11 @@ class EprivacyShield implements SingletonInterface
     {
         if (self::$subjectNames === null) {
             self::$subjectNames = [];
-            $consent            = $this->consentRepository->get();
+            $consent            = $this->getConsentRepository()->get();
             $subjectIdentifiers = $consent->getSubjects();
             if (count($subjectIdentifiers)) {
                 /** @var Subject $subject */
-                foreach ($this->subjectRepository->findBySubjectIdentifiers($subjectIdentifiers) as $subject) {
+                foreach ($this->getSubjectRepository()->findBySubjectIdentifiers($subjectIdentifiers) as $subject) {
                     self::$subjectNames[] = $subject->getName();
                 }
             }
@@ -128,10 +118,34 @@ class EprivacyShield implements SingletonInterface
     }
 
     /**
-     * Reset the cached subject names
+     * Instantiate and return the consent repository
+     *
+     * @return ConsentRepository Consent Repository
+     * @throws \TYPO3\CMS\Extbase\Object\Exception
      */
-    public static function reset(): void
+    protected function getConsentRepository(): ConsentRepository
     {
-        self::$subjectNames = null;
+        if ($this->consentRepository === null) {
+            $this->consentRepository = GeneralUtility::makeInstance(ObjectManager::class)
+                                                     ->get(ConsentRepository::class);
+        }
+
+        return $this->consentRepository;
+    }
+
+    /**
+     * Instantiate and return the subject repository
+     *
+     * @return SubjectRepository Subject Repository
+     * @throws \TYPO3\CMS\Extbase\Object\Exception
+     */
+    protected function getSubjectRepository(): SubjectRepository
+    {
+        if ($this->subjectRepository === null) {
+            $this->subjectRepository = GeneralUtility::makeInstance(ObjectManager::class)
+                                                     ->get(SubjectRepository::class);
+        }
+
+        return $this->subjectRepository;
     }
 }

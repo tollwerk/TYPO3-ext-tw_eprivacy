@@ -28,8 +28,8 @@ return [
     ],
     'palettes'  => [
         'hiddenpublic'   => ['showitem' => 'hidden, public'],
-        'titletype'      => ['showitem' => 'title, mode, type'],
-        'nameidentifier' => ['showitem' => 'provider, name, identifier'],
+        'titletype'      => ['showitem' => 'title, mode, type, identifier'],
+        'nameidentifier' => ['showitem' => 'provider, name, parent_set'],
         'lifetime'       => ['showitem' => 'lifetime, session'],
     ],
     'columns'   => [
@@ -84,9 +84,9 @@ return [
             ],
         ],
         'hidden'           => [
-            'exclude' => true,
-            'label'   => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible',
-            'config'  => [
+            'exclude'   => true,
+            'label'     => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible',
+            'config'    => [
                 'type'       => 'check',
                 'renderType' => 'checkboxToggle',
                 'items'      => [
@@ -109,18 +109,20 @@ return [
             ],
         ],
         'name'       => [
-            'exclude' => true,
-            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.name',
-            'config'  => [
+            'exclude'   => true,
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.name',
+            'config'    => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
             ],
         ],
         'identifier' => [
-            'exclude' => true,
-            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.identifier',
-            'config'  => [
+            'exclude'   => true,
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.identifier',
+            'config'    => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required,unique'
@@ -154,9 +156,10 @@ return [
 
         ],
         'type'       => [
-            'exclude' => true,
-            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.type',
-            'config'  => [
+            'exclude'   => true,
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.type',
+            'config'    => [
                 'type'          => 'select',
                 'renderType'    => 'selectSingle',
                 'foreign_table' => 'tx_tweprivacy_domain_model_type',
@@ -165,29 +168,45 @@ return [
             ],
         ],
         'mode'       => [
-            'exclude' => true,
-            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode',
-            'config'  => [
+            'exclude'   => true,
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode',
+            'config'    => [
                 'type'       => 'select',
                 'renderType' => 'selectSingle',
                 'items'      => [
                     [
                         'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.cookie',
-                        0
+                        \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_COOKIE,
                     ],
                     [
-                        'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.switch',
-                        1
+                        'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.set',
+                        \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET,
                     ],
                 ],
-                'minitems'   => 0,
+                'minitems'   => 1,
                 'maxitems'   => 1,
             ],
         ],
+        'parent_set' => [
+            'exclude'   => true,
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.parent_set',
+            'config'    => [
+                'type'                => 'select',
+                'renderType'          => 'selectSingle',
+                'foreign_table'       => 'tx_tweprivacy_domain_model_subject',
+                'foreign_table_where' => 'AND tx_tweprivacy_domain_model_subject.mode = '.\Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET.' ORDER BY tx_tweprivacy_domain_model_subject.name',
+                'items'               => [['---', 0]],
+                'minitems'            => 1,
+                'maxitems'            => 1,
+            ],
+        ],
         'lifetime'   => [
-            'exclude' => true,
-            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.lifetime',
-            'config'  => [
+            'exclude'   => true,
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.lifetime',
+            'config'    => [
                 'type'    => 'input',
                 'size'    => 5,
                 'eval'    => 'int,required',
@@ -195,9 +214,10 @@ return [
             ],
         ],
         'public'     => [
-            'exclude' => true,
-            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.public',
-            'config'  => [
+            'exclude'   => true,
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.public',
+            'config'    => [
                 'type'       => 'check',
                 'renderType' => 'checkboxToggle',
                 'items'      => [
@@ -210,9 +230,10 @@ return [
             ],
         ],
         'session'    => [
-            'exclude' => true,
-            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.session',
-            'config'  => [
+            'exclude'   => true,
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.session',
+            'config'    => [
                 'type'       => 'check',
                 'renderType' => 'checkboxToggle',
                 'items'      => [

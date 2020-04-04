@@ -70,7 +70,7 @@ return [
                 'max'  => 255,
             ],
         ],
-        'sorting'  => [
+        'sorting'          => [
             'config' => [
                 'type' => 'passthrough',
             ],
@@ -90,10 +90,11 @@ return [
                 ],
             ],
         ],
-        'needs_consent'     => [
-            'exclude' => true,
-            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.needs_consent',
-            'config'  => [
+        'needs_consent'    => [
+            'exclude'   => true,
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.needs_consent',
+            'config'    => [
                 'type'       => 'check',
                 'renderType' => 'checkboxToggle',
                 'items'      => [
@@ -105,8 +106,7 @@ return [
                 'default'    => 1,
             ],
         ],
-
-        'title' => [
+        'title'            => [
             'exclude' => true,
             'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.title',
             'config'  => [
@@ -115,7 +115,7 @@ return [
                 'eval' => 'trim,required'
             ],
         ],
-        'description' => [
+        'description'      => [
             'exclude' => true,
             'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.description',
             'config'  => [

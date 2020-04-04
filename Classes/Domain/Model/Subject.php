@@ -3,6 +3,10 @@
 namespace Tollwerk\TwEprivacy\Domain\Model;
 
 
+use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+
 /***
  *
  * This file is part of the "Tollwerk E-Privacy" Extension for TYPO3 CMS.
@@ -83,15 +87,22 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $type = null;
 
     /**
+     * Parent Set
+     *
+     * @var \Tollwerk\TwEprivacy\Domain\Model\Subject
+     */
+    protected $parentSet = null;
+
+    /**
      * Mode
      *
      * @var int
      */
-    protected $mode = null;
+    protected $mode = self::MODE_COOKIE;
 
     // Modes
     const MODE_COOKIE = 0;
-    const MODE_SWITCH = 1;
+    const MODE_SET = 1;
 
     /**
      * Returns the title
@@ -303,5 +314,35 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setMode(int $mode): void
     {
         $this->mode = $mode;
+    }
+
+    /**
+     * Return the parent set
+     *
+     * @return Subject Parent set
+     */
+    public function getParentSet(): ?Subject
+    {
+        return $this->parentSet;
+    }
+
+    /**
+     * Set the parent set
+     *
+     * @param Subject $parentSet Parent set
+     */
+    public function setParentSet(Subject $parentSet): void
+    {
+        $this->parentSet = $parentSet;
+    }
+
+    /**
+     * Return all set members
+     *
+     * @return QueryResultInterface Set members
+     */
+    public function getSetMembers(): QueryResultInterface
+    {
+        return GeneralUtility::makeInstance(SubjectRepository::class)->findByParentSet($this);
     }
 }

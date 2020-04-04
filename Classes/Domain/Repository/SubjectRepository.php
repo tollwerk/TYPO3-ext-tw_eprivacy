@@ -13,6 +13,8 @@
 
 namespace Tollwerk\TwEprivacy\Domain\Repository;
 
+use Tollwerk\TwEprivacy\Domain\Model\Subject;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -38,8 +40,10 @@ class SubjectRepository extends Repository
      */
     public function initializeObject()
     {
-        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $currentLanguageUid = $this->objectManager->get(Context::class)->getPropertyFromAspect('language', 'id');
+        $querySettings      = $this->objectManager->get(Typo3QuerySettings::class);
         $querySettings->setRespectStoragePage(false);
+        $querySettings->setLanguageUid($currentLanguageUid);
         $this->setDefaultQuerySettings($querySettings);
     }
 
@@ -77,6 +81,40 @@ class SubjectRepository extends Repository
     {
         $query = $this->createQuery();
         $query->matching($query->in('identifier', $subjectIdentifiers));
+
+        return $query->execute();
+    }
+
+    /**
+     * Protected find public top level subjects
+     *
+     * @return QueryResultInterface Public top level subjects
+     */
+    public function findByPublicTopLevel(): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $query->matching(
+            $query->logicalAnd(
+                $query->equals('public', true),
+                $query->equals('parentSet', 0)
+            )
+        );
+
+        return $query->execute();
+    }
+
+    /**
+     * Find subjects by parent set
+     *
+     * @param Subject $parentSet Parent set
+     *
+     * @return QueryResultInterface Subjects
+     */
+    public function findByParentSet(Subject $parentSet): QueryResultInterface
+    {
+        $query = $this->createQuery();
+        $query->matching($query->equals('parentSet', $parentSet))
+              ->setOrderings(['sorting' => QueryInterface::ORDER_ASCENDING]);
 
         return $query->execute();
     }

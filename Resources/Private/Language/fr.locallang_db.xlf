@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version='1.0' encoding='utf-8'?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2020-02-14T09:08:30Z"
-          product-name="tw_eprivacy">
+    <file source-language="en" datatype="plaintext" original="messages" date="2020-02-14T09:08:30Z" product-name="tw_eprivacy">
         <header/>
         <body>
             <trans-unit id="common">
-                <source>Common Settings</source>
-            </trans-unit>
+                <source>Common Settings</source> <target></target></trans-unit>
             <trans-unit id="common.imprint">
                 <source>Imprint Page (ID)</source>
             </trans-unit>

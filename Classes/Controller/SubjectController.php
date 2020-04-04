@@ -87,7 +87,7 @@ class SubjectController extends ActionController
                             return $subject->getIdentifier();
                         },
                         $this->subjectRepository->findByPublic(true)->toArray()
-                    );;
+                    );
                     break;
                 case self::UPDATE_DENY:
                     $subjects = [];
@@ -109,7 +109,7 @@ class SubjectController extends ActionController
         $subjectsByType = [];
 
         /** @var Subject $subject */
-        foreach ($this->subjectRepository->findByPublic(true) as $subject) {
+        foreach ($this->subjectRepository->findByPublicTopLevel() as $subject) {
             $type   = $subject->getType();
             $typeId = $type->getUid();
             if (empty($types[$typeId])) {

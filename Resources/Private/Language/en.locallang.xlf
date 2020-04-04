@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2020-02-14T09:08:30Z" product-name="tw_eprivacy" target-language="en">
+		<header/>
+		<body>
+			<trans-unit id="eprivacy.subject.name" approved="yes">
+				<source>Cookie Name</source> <target state="translated">Cookie Name</target></trans-unit>
+			<trans-unit id="eprivacy.subject.provider" approved="yes">
+				<source>Provider</source> <target state="translated">Provider</target></trans-unit>
+			<trans-unit id="eprivacy.subject.purpose" approved="yes">
+				<source>Purpose</source> <target state="translated">Purpose</target></trans-unit>
+			<trans-unit id="eprivacy.subject.lifetime" approved="yes">
+				<source>Lifetime</source> <target state="translated">Lifetime</target></trans-unit>
+			<trans-unit id="eprivacy.subject.lifetime.session" approved="yes">
+				<source>Session</source> <target state="translated">Session</target></trans-unit>
+			<trans-unit id="eprivacy.update.update" approved="yes">
+				<source>Update settings</source> <target state="translated">Update settings</target></trans-unit>
+			<trans-unit id="eprivacy.update.accept" approved="yes">
+				<source>Accept all</source> <target state="translated">Accept all</target></trans-unit>
+			<trans-unit id="eprivacy.update.deny" approved="yes">
+				<source>Accept necessary only</source> <target state="translated">Accept necessary only</target></trans-unit>
+			<trans-unit id="eprivacy.update.reset" approved="yes">
+				<source>Reset</source> <target state="translated">Reset</target></trans-unit>
+		</body>
+	</file>
+</xliff>
