@@ -13,9 +13,9 @@
 
 namespace Tollwerk\TwEprivacy\Domain\Repository;
 
+use Tollwerk\TwBase\Domain\Repository\Traits\DebuggableRepositoryTrait;
 use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
-use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -25,6 +25,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class SubjectRepository extends Repository
 {
+    use DebuggableRepositoryTrait;
     /**
      * Default ordering
      *
@@ -33,18 +34,6 @@ class SubjectRepository extends Repository
     protected $defaultOrderings = [
         'sorting' => QueryInterface::ORDER_ASCENDING
     ];
-
-    /**
-     * Make queries storage PID independent
-     */
-    public function initializeObject()
-    {
-//        $currentLanguageUid = $this->objectManager->get(Context::class)->getPropertyFromAspect('language', 'id');
-        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
-        $querySettings->setRespectStoragePage(false);
-//        $querySettings->setLanguageUid($currentLanguageUid);
-        $this->setDefaultQuerySettings($querySettings);
-    }
 
     /**
      * Return all subjects that are consented to by default
@@ -79,9 +68,8 @@ class SubjectRepository extends Repository
     public function findBySubjectIdentifiers(array $subjectIdentifiers): QueryResultInterface
     {
         $query = $this->createQuery();
-        $query->matching($query->in('identifier', $subjectIdentifiers));
 
-        return $query->execute();
+        return $query->matching($query->in('identifier', $subjectIdentifiers))->execute();
     }
 
     /**
@@ -116,5 +104,32 @@ class SubjectRepository extends Repository
               ->setOrderings(['sorting' => QueryInterface::ORDER_ASCENDING]);
 
         return $query->execute();
+    }
+
+    /**
+     * Find public subjects
+     *
+     * @param bool $public Public
+     *
+     * @return QueryResultInterface Public subjects
+     */
+    public function findByPublic(bool $public): QueryResultInterface
+    {
+        $query = $this->createQuery();
+
+        return $query->matching($query->equals('public', $public))->execute();
+    }
+
+    /**
+     * Returns a query for objects of this repository
+     *
+     * @return QueryInterface
+     */
+    public function createQuery()
+    {
+        $query = parent::createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+
+        return $query;
     }
 }

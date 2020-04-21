@@ -40,11 +40,11 @@ return [
                 'typo3/cms-frontend/output-compression',
             ],
         ],
-        'eprivacy/shield-incoming' => [
-            'target' => \Tollwerk\TwEprivacy\Middleware\IncomingMiddleware::class,
-            'before' => [
-                'typo3/cms-frontend/timetracker',
-            ],
-        ],
+//        'eprivacy/shield-incoming' => [
+//            'target' => \Tollwerk\TwEprivacy\Middleware\IncomingMiddleware::class,
+//            'before' => [
+//                'typo3/cms-frontend/timetracker',
+//            ],
+//        ],
     ]
 ];

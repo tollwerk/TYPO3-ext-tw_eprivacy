@@ -41,6 +41,8 @@ use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
  * ePrivacy Consent Condition Provider
@@ -78,16 +80,22 @@ class ConsentConditionProvider implements ExpressionFunctionProviderInterface
                     return false;
                 }
 
+                /** @var ObjectManagerInterface $objectManager */
                 $objectManager  = GeneralUtility::makeInstance(ObjectManager::class);
                 $ePrivacyShield = $objectManager->get(EprivacyShield::class);
+                $result         = true;
 
                 foreach ($subjects as $subject) {
                     if (!$ePrivacyShield->isAllowedIdentifier($subject)) {
-                        return false;
+                        $result = false;
+                        break;
                     }
                 }
 
-                return true;
+                // Reset the persistence mangager state
+                $objectManager->get(PersistenceManager::class)->clearState();
+
+                return $result;
             }
         );
     }

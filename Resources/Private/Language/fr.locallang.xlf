@@ -3,32 +3,24 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2020-02-14T09:08:30Z" product-name="tw_eprivacy">
 		<header/>
 		<body>
-			<trans-unit id="eprivacy.subject.name">
-				<source>Cookie Name</source> <target></target></trans-unit>
-			<trans-unit id="eprivacy.subject.provider">
-				<source>Provider</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.subject.purpose">
-				<source>Purpose</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.subject.lifetime">
-				<source>Lifetime</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.subject.lifetime.session">
-				<source>Session</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.update.update">
-				<source>Update settings</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.update.accept">
-				<source>Accept all</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.update.deny">
-				<source>Accept necessary only</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.update.reset">
-				<source>Reset</source>
-			</trans-unit>
+			<trans-unit id="eprivacy.subject.name" approved="yes">
+				<source>Cookie Name</source> <target state="translated">Nom du cookie</target></trans-unit>
+			<trans-unit id="eprivacy.subject.provider" approved="yes">
+				<source>Provider</source> <target state="translated">Prestataire</target></trans-unit>
+			<trans-unit id="eprivacy.subject.purpose" approved="yes">
+				<source>Purpose</source> <target state="translated">Motif</target></trans-unit>
+			<trans-unit id="eprivacy.subject.lifetime" approved="yes">
+				<source>Lifetime</source> <target state="translated">Durée de vie</target></trans-unit>
+			<trans-unit id="eprivacy.subject.lifetime.session" approved="yes">
+				<source>Session</source> <target state="translated">Session</target></trans-unit>
+			<trans-unit id="eprivacy.update.update" approved="yes">
+				<source>Update settings</source> <target state="translated">Mettre à jour les paramètres</target></trans-unit>
+			<trans-unit id="eprivacy.update.accept" approved="yes">
+				<source>Accept all</source> <target state="translated">Accepter tous les cookies</target></trans-unit>
+			<trans-unit id="eprivacy.update.deny" approved="yes">
+				<source>Accept necessary only</source> <target state="translated">N'accepter que les cookies nécessaires</target></trans-unit>
+			<trans-unit id="eprivacy.update.reset" approved="yes">
+				<source>Reset</source> <target state="translated">Réinitialiser</target></trans-unit>
 		</body>
 	</file>
 </xliff>
