@@ -1,93 +1,123 @@
 <?php
 
+/**
+ * tollwerk ePrivacy Consent Manager
+ *
+ * @category   Tollwerk
+ * @package    Tollwerk\TwEprivacy
+ * @author     Joschi Kuphal <joschi@tollwerk.de> / @jkphl
+ * @copyright  Copyright © 2020 Joschi Kuphal <joschi@tollwerk.de> / @jkphl
+ * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPLv2
+ */
+
+/***************************************************************
+ * Copyright © 2020 Joschi Kuphal <joschi@tollwerk.de>
+ *
+ * This script is part of the TYPO3 project. The TYPO3 project is
+ * free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301, USA.
+ ***************************************************************/
+
 if (!defined('TYPO3_MODE')) {
     die ('Access denied.');
 }
 
 $GLOBALS['TCA']['tx_tweprivacy_domain_model_type'] = [
-    'ctrl' => $GLOBALS['TCA']['tx_tweprivacy_domain_model_type']['ctrl'],
+    'ctrl'      => $GLOBALS['TCA']['tx_tweprivacy_domain_model_type']['ctrl'],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, needs_consent',
     ],
-    'types' => [
+    'types'     => [
         '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description;;;richtext:rte_transform[mode=ts_links], needs_consent'],
     ],
-    'columns' => [
+    'columns'   => [
         'sys_language_uid' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
-            'config' => array(
-                'type' => 'select',
-                'foreign_table' => 'sys_language',
+            'label'   => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
+            'config'  => array(
+                'type'                => 'select',
+                'foreign_table'       => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items' => array(
+                'items'               => array(
                     array('LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages', -1),
                     array('LLL:EXT:lang/locallang_general.xlf:LGL.default_value', 0)
                 ),
             ),
         ),
-        'l10n_parent' => array(
+        'l10n_parent'      => array(
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
-            'config' => array(
-                'type' => 'select',
-                'items' => array(
+            'exclude'     => 1,
+            'label'       => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
+            'config'      => array(
+                'type'                => 'select',
+                'items'               => array(
                     array('', 0),
                 ),
-                'foreign_table' => 'tx_twcampaign_domain_model_campaign',
+                'foreign_table'       => 'tx_twcampaign_domain_model_campaign',
                 'foreign_table_where' => 'AND tx_twcampaign_domain_model_campaign.pid=###CURRENT_PID### AND tx_twcampaign_domain_model_campaign.sys_language_uid IN (-1,0)',
             ),
         ),
-        'l10n_diffsource' => array(
+        'l10n_diffsource'  => array(
             'config' => array(
                 'type' => 'passthrough',
             ),
         ),
 
-        't3ver_label' => array(
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
+        't3ver_label'   => array(
+            'label'  => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
             'config' => array(
                 'type' => 'input',
                 'size' => 30,
-                'max' => 255,
+                'max'  => 255,
             )
         ),
-        'hidden' => array(
+        'hidden'        => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
-            'config' => array(
+            'label'   => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
+            'config'  => array(
                 'type' => 'check',
             ),
         ),
-        'sorting' => [
+        'sorting'       => [
             'config' => [
                 'type' => 'passthrough',
             ],
         ],
         'needs_consent' => [
-            'exclude' => true,
+            'exclude'   => true,
             'l10n_mode' => 'exclude',
-            'label' => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.needs_consent',
-            'config' => [
-                'type' => 'check',
+            'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.needs_consent',
+            'config'    => [
+                'type'       => 'check',
                 'renderType' => 'checkboxToggle',
-                'default' => 1,
+                'default'    => 1,
             ],
         ],
-        'title' => [
+        'title'         => [
             'exclude' => true,
-            'label' => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.title',
-            'config' => [
+            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.title',
+            'config'  => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
             ],
         ],
-        'description' => [
+        'description'   => [
             'exclude' => true,
-            'label' => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.description',
-            'config' => [
+            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.description',
+            'config'  => [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 15,
