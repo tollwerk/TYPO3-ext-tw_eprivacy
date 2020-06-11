@@ -82,23 +82,9 @@
                         <f:translate key="eprivacy.subject.name"/>
                     </dt>
                     <dd class="Eprivacy__subject-name">{subject.name}</dd>
-                    <dt class="Eprivacy__subject-provider-label">
-                        <f:translate key="eprivacy.subject.provider"/>
-                    </dt>
                     <f:if condition="{subject.mode}">
                         <f:else>
-                            <dd class="Eprivacy__subject-provider">{subject.provider}</dd>
-                            <dt class="Eprivacy__subject-lifetime-label">
-                                <f:translate key="eprivacy.subject.lifetime"/>
-                            </dt>
-                            <dd class="Eprivacy__subject-lifetime">
-                                <f:if condition="{subject.session}">
-                                    <f:then>
-                                        <f:translate key="eprivacy.subject.lifetime.session"/>
-                                    </f:then>
-                                    <f:else>{subject.lifetime}</f:else>
-                                </f:if>
-                            </dd>
+                            <f:render section="Cookie" arguments="{subject: subject}"/>
                         </f:else>
                     </f:if>
                     <dt class="Eprivacy__subject-purpose-label">
@@ -110,5 +96,30 @@
                 </dl>
             </label>
         </li>
+    </f:section>
+
+    <f:comment><!--
+
+        Render cookie subject properties
+
+        @param Subject subject              Subject
+
+    --></f:comment>
+    <f:section name="Cookie">
+        <dt class="Eprivacy__subject-provider-label">
+            <f:translate key="eprivacy.subject.provider"/>
+        </dt>
+        <dd class="Eprivacy__subject-provider">{subject.provider}</dd>
+        <dt class="Eprivacy__subject-lifetime-label">
+            <f:translate key="eprivacy.subject.lifetime"/>
+        </dt>
+        <dd class="Eprivacy__subject-lifetime">
+            <f:if condition="{subject.session}">
+                <f:then>
+                    <f:translate key="eprivacy.subject.lifetime.session"/>
+                </f:then>
+                <f:else>{eprivacy:format.duration(seconds: subject.lifetime)}</f:else>
+            </f:if>
+        </dd>
     </f:section>
 </html>

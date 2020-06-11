@@ -1,35 +1,78 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2020-02-14T09:08:30Z" product-name="tw_eprivacy">
-		<header/>
-		<body>
-			<trans-unit id="eprivacy.subject.name">
-				<source>Cookie Name</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.subject.provider">
-				<source>Provider</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.subject.purpose">
-				<source>Purpose</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.subject.lifetime">
-				<source>Lifetime</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.subject.lifetime.session">
-				<source>Session</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.update.update">
-				<source>Update settings</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.update.accept">
-				<source>Accept all</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.update.deny">
-				<source>Accept necessary only</source>
-			</trans-unit>
-			<trans-unit id="eprivacy.update.reset">
-				<source>Reset</source>
-			</trans-unit>
-		</body>
-	</file>
+    <file source-language="en" datatype="plaintext" original="messages" date="2020-02-14T09:08:30Z"
+          product-name="tw_eprivacy">
+        <header/>
+        <body>
+            <trans-unit id="eprivacy.subject.name">
+                <source>Cookie Name</source>
+            </trans-unit>
+            <trans-unit id="eprivacy.subject.provider">
+                <source>Provider</source>
+            </trans-unit>
+            <trans-unit id="eprivacy.subject.purpose">
+                <source>Purpose</source>
+            </trans-unit>
+            <trans-unit id="eprivacy.subject.lifetime">
+                <source>Lifetime</source>
+            </trans-unit>
+            <trans-unit id="eprivacy.subject.lifetime.session">
+                <source>Session</source>
+            </trans-unit>
+            <trans-unit id="eprivacy.update.update">
+                <source>Update settings</source>
+            </trans-unit>
+            <trans-unit id="eprivacy.update.accept">
+                <source>Accept all</source>
+            </trans-unit>
+            <trans-unit id="eprivacy.update.deny">
+                <source>Accept necessary only</source>
+            </trans-unit>
+            <trans-unit id="eprivacy.update.reset">
+                <source>Reset</source>
+            </trans-unit>
+            <trans-unit id="age.second.duration">
+                <source>One second</source>
+            </trans-unit>
+            <trans-unit id="age.seconds.duration">
+                <source>%s seconds</source>
+            </trans-unit>
+            <trans-unit id="age.minute.duration">
+                <source>One minute</source>
+            </trans-unit>
+            <trans-unit id="age.minutes.duration">
+                <source>%s minutes</source>
+            </trans-unit>
+            <trans-unit id="age.hour.duration">
+                <source>One hour</source>
+            </trans-unit>
+            <trans-unit id="age.hours.duration">
+                <source>%s hours</source>
+            </trans-unit>
+            <trans-unit id="age.day.duration">
+                <source>One day</source>
+            </trans-unit>
+            <trans-unit id="age.days.duration">
+                <source>%s days</source>
+            </trans-unit>
+            <trans-unit id="age.week.duration">
+                <source>One week</source>
+            </trans-unit>
+            <trans-unit id="age.weeks.duration">
+                <source>%s weeks</source>
+            </trans-unit>
+            <trans-unit id="age.month.duration">
+                <source>One month</source>
+            </trans-unit>
+            <trans-unit id="age.months.duration">
+                <source>%s months</source>
+            </trans-unit>
+            <trans-unit id="age.year.duration">
+                <source>One year</source>
+            </trans-unit>
+            <trans-unit id="age.years.duration">
+                <source>%s years</source>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>

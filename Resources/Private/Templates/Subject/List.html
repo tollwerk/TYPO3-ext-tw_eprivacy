@@ -12,8 +12,10 @@
       data-namespace-typo3-fluid="true">
     <f:render partial="Elements/Consent/Manager" arguments="{_all}"/>
 
-    <eprivacy:consent identifier="{0: 'eprivacy.consent', 1: 'hubspot'}">
-        <f:then>Hubspot is allowed</f:then>
-        <f:else>Hubspot is not allowed</f:else>
-    </eprivacy:consent>
+    <f:comment><!--
+        <eprivacy:consent identifier="{0: 'eprivacy.consent', 1: 'hubspot'}">
+            <f:then>Hubspot is allowed</f:then>
+            <f:else>Hubspot is not allowed</f:else>
+        </eprivacy:consent>
+    --></f:comment>
 </html>
