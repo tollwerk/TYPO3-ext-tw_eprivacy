@@ -1,6 +1,5 @@
 # tollwerk ePrivacy Consent Manager
 
-
 ## Fluid ViewHelper
 
 The `<eprivacy:consent>` viewhelper is a specialized condition viewhelper that enables you to test for the user's consent with particular subject identifiers. Examples:
@@ -20,3 +19,19 @@ The `<eprivacy:consent>` viewhelper is a specialized condition viewhelper that e
 ```
 
 **ATTENTION:** As the result depends on the users current consent settings, it is essential to ensure that the viewhelper is used in an **uncached environment / template**!
+
+## TypoScript condition
+
+Similar to the Fluid viewhelper, there's also a custom TypoScript condition (implemented as [Expression Language extension](https://docs.typo3.org/m/typo3/reference-typoscript/master/en-us/Conditions/Index.html)) named `ePrivacy` that you can use to test for the user's consent with particular subject identifiers.
+
+```typo3_typoscript
+# Test for a single subject
+[ePrivacy("enable.webfonts") == true]
+    # Add web fonts
+[END]
+
+# All these subjects must be allowed
+[ePrivacy("google.gtm", "google._ga", "google._gid", "google._gat") == true]
+    # Add Google Tag Manager resources
+[END]
+```
