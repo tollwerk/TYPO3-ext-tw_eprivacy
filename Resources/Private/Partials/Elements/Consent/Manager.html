@@ -8,7 +8,7 @@
 
 --></f:comment>
 <html xmlns:f="https://xsd.helhum.io/ns/typo3/cms-fluid/master/ViewHelpers"
-      xmlns:base="http://typo3.org/ns/Tollwerk/TwBase/ViewHelpers"
+      xmlns:eprivacy="http://typo3.org/ns/Tollwerk/TwEprivacy/ViewHelpers"
       data-namespace-typo3-fluid="true">
 <f:debug>{consent}</f:debug>
 <f:form action="list" controller="Subject" object="{consent}" class="Eprivacy">
@@ -22,7 +22,7 @@
     <f:for each="{subjects}" as="subjectsByType">
         <fieldset class="Eprivacy__tab-panel" id="eprivacy-{subjectsByType.0.type.uid}">
             <legend>
-                <h3>{types.{subjectsByType.0.type.uid}.title}</h3>
+                <h3>{eprivacy:subjectTypeTitle(types: types, type: subjectsByType.0.type.uid)}</h3>
             </legend>
             <ol class="Eprivacy__subjects">
                 <f:for each="{subjectsByType}" as="subject">
