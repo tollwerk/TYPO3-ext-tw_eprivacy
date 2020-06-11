@@ -88,11 +88,11 @@ class ConsentRepository implements SingletonInterface
 
             // If there are no subjects enabled by cookie: Register the default subjects
             if (!count(self::$consent->getSubjects())) {
-                $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+                $objectManager     = GeneralUtility::makeInstance(ObjectManager::class);
                 $subjectRepository = $objectManager->get(SubjectRepository::class);
                 self::$consent->setSubjects(
                     array_map(
-                        function (Subject $subject) {
+                        function(Subject $subject) {
                             return $subject->getIdentifier();
                         },
                         $subjectRepository->findDefaultSubjects()->toArray()
@@ -119,31 +119,37 @@ class ConsentRepository implements SingletonInterface
         // Reset the ePrivacy shield
         EprivacyShield::reset();
 
-        self::$consent = $consent;
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        self::$consent        = $consent;
+        $objectManager        = GeneralUtility::makeInstance(ObjectManager::class);
         $configurationManager = $objectManager->get(ConfigurationManager::class);
-        $settings = $configurationManager->getConfiguration(
+        $settings             = $configurationManager->getConfiguration(
             ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
             'TwEprivacy'
         );
-        $cookieSettings = empty($settings['plugin.']['tx_tweprivacy_eprivacy.']['settings.']) ? [] : $settings['plugin.']['tx_tweprivacy_eprivacy.']['settings.'];
-        $lifetime = intval(empty($cookieSettings['lifetime']) ? 2629800 : $cookieSettings['lifetime']);
+        $cookieSettings       = empty($settings['plugin.']['tx_tweprivacy_eprivacy.']['settings.']) ? [] : $settings['plugin.']['tx_tweprivacy_eprivacy.']['settings.'];
+        $lifetime             = intval(empty($cookieSettings['lifetime']) ? 2629800 : $cookieSettings['lifetime']);
+        $path                 = trim(empty($cookieSettings['path']) ? '/' : $cookieSettings['path']);
+        $domain               = trim(empty($cookieSettings['domain']) ? '' : $cookieSettings['domain']);
+        $secure               = GeneralUtility::getIndpEnv('TYPO3_SSL') &&
+                                boolval(empty($cookieSettings['secure']) ? true : $cookieSettings['secure']);
+        $secure               = $secure && GeneralUtility::getIndpEnv('TYPO3_SSL');
+        $httpOnly             = boolval(empty($cookieSettings['httponly']) ? true : $cookieSettings['httponly']);
 
         // Set the consent cookie
         $consentSuccess = setcookie(
             self::COOKIE_NAME,
             strval($consent),
             time() + $lifetime,
-            trim(empty($cookieSettings['path']) ? '/' : $cookieSettings['path']),
-            trim(empty($cookieSettings['domain']) ? '' : $cookieSettings['domain']),
-            boolval(empty($cookieSettings['secure']) ? true : $cookieSettings['secure']),
-            boolval(empty($cookieSettings['httponly']) ? true : $cookieSettings['httponly'])
+            $path,
+            $domain,
+            $secure,
+            $httpOnly
         );
 
         // If the consent could be updated: Kill all unmatched cookies
         if ($consentSuccess) {
             $allSubjects = array_map(
-                function (Subject $subject) {
+                function(Subject $subject) {
                     return $subject->getIdentifier();
                 },
                 $objectManager->get(SubjectRepository::class)->findByPublic(true)->toArray()
@@ -153,10 +159,10 @@ class ConsentRepository implements SingletonInterface
                     $denySubject,
                     '',
                     1,
-                    trim(empty($cookieSettings['path']) ? '/' : $cookieSettings['path']),
-                    trim(empty($cookieSettings['domain']) ? '' : $cookieSettings['domain']),
-                    boolval(empty($cookieSettings['secure']) ? true : $cookieSettings['secure']),
-                    boolval(empty($cookieSettings['httponly']) ? true : $cookieSettings['httponly'])
+                    $path,
+                    $domain,
+                    $secure,
+                    $httpOnly
                 )) {
                     return false;
                 }

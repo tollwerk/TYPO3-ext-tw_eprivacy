@@ -136,6 +136,6 @@ class SubjectController extends ActionController
             'now'      => new \DateTime()
         ]);
 
-//        setcookie('test', 'value', time() + 86400, '/');
+//        'tw_eprivacy'('test', 'value', time() + 86400, '/');
     }
 }
