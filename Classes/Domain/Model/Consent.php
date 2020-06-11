@@ -129,7 +129,7 @@ class Consent extends AbstractEntity
      *
      * @return bool Subject is allowed
      */
-    public function allowsSubject(string $subject)
+    public function allowsSubject($subject)
     {
         return strlen($subject) && in_array($subject, $this->subjects);
     }
