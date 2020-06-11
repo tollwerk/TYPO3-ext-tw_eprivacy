@@ -128,6 +128,7 @@ class ConsentRepository implements SingletonInterface
         );
         $cookieSettings       = $settings['plugin.']['tx_tweprivacy_eprivacy.']['settings.'] ?? [];
         $lifetime             = intval($cookieSettings['lifetime'] ?? 2629800);
+        $secure               = GeneralUtility::getIndpEnv('TYPO3_SSL');
 
         // Set the consent cookie
         $consentSuccess = setcookie(
@@ -136,7 +137,7 @@ class ConsentRepository implements SingletonInterface
             time() + $lifetime,
             trim($cookieSettings['path'] ?? '/'),
             trim($cookieSettings['domain'] ?? ''),
-            boolval($cookieSettings['secure'] ?? true),
+            $secure && boolval($cookieSettings['secure'] ?? true),
             boolval($cookieSettings['httponly'] ?? true)
         );
 
@@ -155,7 +156,7 @@ class ConsentRepository implements SingletonInterface
                     1,
                     trim($cookieSettings['path'] ?? '/'),
                     trim($cookieSettings['domain'] ?? ''),
-                    boolval($cookieSettings['secure'] ?? true),
+                    $secure && boolval($cookieSettings['secure'] ?? true),
                     boolval($cookieSettings['httponly'] ?? true)
                 )) {
                     return false;
