@@ -85,7 +85,7 @@ class EprivacyShield implements SingletonInterface
      * @return bool Subject identifier is allowed
      * @throws Exception
      */
-    public function isAllowedIdentifier(string $subjectIdentifier)
+    public function isAllowedIdentifier($subjectIdentifier)
     {
         $consent = $this->getConsentRepository()->get();
 
@@ -100,11 +100,11 @@ class EprivacyShield implements SingletonInterface
      * @return bool Subject identifier is allowed
      * @throws Exception
      */
-    public function isAllowedName(string $subjectName)
+    public function isAllowedName($subjectName)
     {
         if (self::$subjectNames === null) {
             self::$subjectNames = [];
-            $consent = $this->getConsentRepository()->get();
+            $consent            = $this->getConsentRepository()->get();
             $subjectIdentifiers = $consent->getSubjects();
             if (count($subjectIdentifiers)) {
                 /** @var Subject $subject */
@@ -127,7 +127,7 @@ class EprivacyShield implements SingletonInterface
     {
         if ($this->consentRepository === null) {
             $this->consentRepository = GeneralUtility::makeInstance(ObjectManager::class)
-                ->get(ConsentRepository::class);
+                                                     ->get(ConsentRepository::class);
         }
 
         return $this->consentRepository;
@@ -143,7 +143,7 @@ class EprivacyShield implements SingletonInterface
     {
         if ($this->subjectRepository === null) {
             $this->subjectRepository = GeneralUtility::makeInstance(ObjectManager::class)
-                ->get(SubjectRepository::class);
+                                                     ->get(SubjectRepository::class);
         }
 
         return $this->subjectRepository;

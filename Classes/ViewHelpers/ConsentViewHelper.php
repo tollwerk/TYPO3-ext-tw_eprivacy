@@ -52,27 +52,32 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 class ConsentViewHelper extends AbstractConditionViewHelper
 {
     /**
-     * Evaluate subject consent
+     * renders <f:then> child if $condition is true, otherwise renders <f:else> child.
      *
-     * @param array $arguments
-     * @param RenderingContextInterface $renderingContext
+     * @param boolean $condition View helper condition
      *
-     * @return bool
-     * @throws Exception
+     * @return string the rendered string
+     * @api
      */
-    public static function verdict(array $arguments, RenderingContextInterface $renderingContext)
+    public function render()
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $objectManager  = GeneralUtility::makeInstance(ObjectManager::class);
         $eprivacyShield = $objectManager->get(EprivacyShield::class);
+        $condition      = true;
 
         // Run through all required subject identifiers
-        foreach ((array)$arguments['identifier'] as $identifier) {
+        foreach ((array)$this->arguments['identifier'] as $identifier) {
             if (!$eprivacyShield->isAllowedIdentifier($identifier)) {
-                return false;
+                $condition = false;
+                break;
             }
         }
 
-        return true;
+        if ($condition) {
+            return $this->renderThenChild();
+        } else {
+            return $this->renderElseChild();
+        }
     }
 
     /**
