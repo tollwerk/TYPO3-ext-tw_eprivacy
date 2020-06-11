@@ -241,7 +241,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int Lifetime
      */
-    public function getLifetime(): int
+    public function getLifetime()
     {
         return $this->lifetime;
     }
@@ -251,7 +251,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param int $lifetime Lifetime
      */
-    public function setLifetime(int $lifetime): void
+    public function setLifetime(int $lifetime)
     {
         $this->lifetime = $lifetime;
     }
@@ -261,7 +261,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return bool Is public
      */
-    public function isPublic(): bool
+    public function isPublic()
     {
         return $this->public;
     }
@@ -271,7 +271,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param bool $public Is public
      */
-    public function setPublic(bool $public): void
+    public function setPublic(bool $public)
     {
         $this->public = $public;
     }
@@ -281,7 +281,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return bool Expires with the session
      */
-    public function isSession(): bool
+    public function isSession()
     {
         return $this->session;
     }
@@ -291,7 +291,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param bool $session Expires with the session
      */
-    public function setSession(bool $session): void
+    public function setSession(bool $session)
     {
         $this->session = $session;
     }
@@ -301,7 +301,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int Mode
      */
-    public function getMode(): int
+    public function getMode()
     {
         return $this->mode;
     }
@@ -311,7 +311,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param int $mode Mode
      */
-    public function setMode(int $mode): void
+    public function setMode(int $mode)
     {
         $this->mode = $mode;
     }
@@ -321,7 +321,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return Subject Parent set
      */
-    public function getParentSet(): ?Subject
+    public function getParentSet()
     {
         return $this->parentSet;
     }
@@ -331,7 +331,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param Subject $parentSet Parent set
      */
-    public function setParentSet(Subject $parentSet): void
+    public function setParentSet(Subject $parentSet)
     {
         $this->parentSet = $parentSet;
     }
@@ -341,7 +341,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return QueryResultInterface Set members
      */
-    public function getSetMembers(): QueryResultInterface
+    public function getSetMembers()
     {
         return GeneralUtility::makeInstance(SubjectRepository::class)->findByParentSet($this);
     }

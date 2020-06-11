@@ -74,7 +74,7 @@ class Type extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return bool Needs user consent
      */
-    public function isNeedsConsent(): bool
+    public function isNeedsConsent()
     {
         return $this->needsConsent;
     }
@@ -84,7 +84,7 @@ class Type extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param bool $needsConsent Needs user consent
      */
-    public function setNeedsConsent(bool $needsConsent): void
+    public function setNeedsConsent(bool $needsConsent)
     {
         $this->needsConsent = $needsConsent;
     }
@@ -116,7 +116,7 @@ class Type extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int Sorting position
      */
-    public function getSorting(): int
+    public function getSorting()
     {
         return $this->sorting;
     }
@@ -126,7 +126,7 @@ class Type extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param int $sorting Sorting position
      */
-    public function setSorting(int $sorting): void
+    public function setSorting(int $sorting)
     {
         $this->sorting = $sorting;
     }

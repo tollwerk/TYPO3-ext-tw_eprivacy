@@ -72,7 +72,7 @@ class Consent extends AbstractEntity
      *
      * @return bool[] Subject consent states
      */
-    public function getSubjects(): array
+    public function getSubjects()
     {
         return $this->subjects;
     }
@@ -82,7 +82,7 @@ class Consent extends AbstractEntity
      *
      * @param bool[] $subjects Subject consent states
      */
-    public function setSubjects(array $subjects): void
+    public function setSubjects(array $subjects)
     {
         $this->subjects = $subjects;
     }
@@ -92,7 +92,7 @@ class Consent extends AbstractEntity
      *
      * @return \DateTimeInterface Last modification date and time
      */
-    public function getLastmod(): \DateTimeInterface
+    public function getLastmod()
     {
         return $this->lastmod;
     }
@@ -102,7 +102,7 @@ class Consent extends AbstractEntity
      *
      * @param \DateTimeInterface $lastmod Last modification date and time
      */
-    public function setLastmod(\DateTimeInterface $lastmod): void
+    public function setLastmod(\DateTimeInterface $lastmod)
     {
         $this->lastmod = $lastmod;
     }
@@ -129,7 +129,7 @@ class Consent extends AbstractEntity
      *
      * @return bool Subject is allowed
      */
-    public function allowsSubject(string $subject): bool
+    public function allowsSubject(string $subject)
     {
         return strlen($subject) && in_array($subject, $this->subjects);
     }

@@ -49,7 +49,7 @@ class SubjectController extends ActionController
      *
      * @param SubjectRepository $subjectRepository Subject repository
      */
-    public function injectSubjectRepository(SubjectRepository $subjectRepository): void
+    public function injectSubjectRepository(SubjectRepository $subjectRepository)
     {
         $this->subjectRepository = $subjectRepository;
     }
@@ -59,7 +59,7 @@ class SubjectController extends ActionController
      *
      * @param ConsentRepository $consentRepository Consent repository
      */
-    public function injectConsentRepository(ConsentRepository $consentRepository): void
+    public function injectConsentRepository(ConsentRepository $consentRepository)
     {
         $this->consentRepository = $consentRepository;
     }
@@ -73,7 +73,7 @@ class SubjectController extends ActionController
      * @throws Exception
      * @throws InvalidConfigurationTypeException
      */
-    public function listAction(int $update = 0, array $subjects = [])
+    public function listAction($update = 0, array $subjects = [])
     {
 //        print_r($_COOKIE);
         $consent = $this->consentRepository->get();
@@ -125,7 +125,7 @@ class SubjectController extends ActionController
         });
 
         // Sort the subjects by type list
-        uksort($subjectsByType, function(int $a, int $b) use ($types) {
+        uksort($subjectsByType, function($a, $b) use ($types) {
             return ($types[$a]->getSorting() > $types[$b]->getSorting()) ? 1 : -1;
         });
 

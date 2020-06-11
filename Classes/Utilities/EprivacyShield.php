@@ -72,7 +72,7 @@ class EprivacyShield implements SingletonInterface
     /**
      * Reset the cached subject names
      */
-    public static function reset(): void
+    public static function reset()
     {
         self::$subjectNames = null;
     }
@@ -85,7 +85,7 @@ class EprivacyShield implements SingletonInterface
      * @return bool Subject identifier is allowed
      * @throws Exception
      */
-    public function isAllowedIdentifier(string $subjectIdentifier): bool
+    public function isAllowedIdentifier(string $subjectIdentifier)
     {
         $consent = $this->getConsentRepository()->get();
 
@@ -100,11 +100,11 @@ class EprivacyShield implements SingletonInterface
      * @return bool Subject identifier is allowed
      * @throws Exception
      */
-    public function isAllowedName(string $subjectName): bool
+    public function isAllowedName(string $subjectName)
     {
         if (self::$subjectNames === null) {
             self::$subjectNames = [];
-            $consent            = $this->getConsentRepository()->get();
+            $consent = $this->getConsentRepository()->get();
             $subjectIdentifiers = $consent->getSubjects();
             if (count($subjectIdentifiers)) {
                 /** @var Subject $subject */
@@ -123,11 +123,11 @@ class EprivacyShield implements SingletonInterface
      * @return ConsentRepository Consent Repository
      * @throws \TYPO3\CMS\Extbase\Object\Exception
      */
-    protected function getConsentRepository(): ConsentRepository
+    protected function getConsentRepository()
     {
         if ($this->consentRepository === null) {
             $this->consentRepository = GeneralUtility::makeInstance(ObjectManager::class)
-                                                     ->get(ConsentRepository::class);
+                ->get(ConsentRepository::class);
         }
 
         return $this->consentRepository;
@@ -139,11 +139,11 @@ class EprivacyShield implements SingletonInterface
      * @return SubjectRepository Subject Repository
      * @throws \TYPO3\CMS\Extbase\Object\Exception
      */
-    protected function getSubjectRepository(): SubjectRepository
+    protected function getSubjectRepository()
     {
         if ($this->subjectRepository === null) {
             $this->subjectRepository = GeneralUtility::makeInstance(ObjectManager::class)
-                                                     ->get(SubjectRepository::class);
+                ->get(SubjectRepository::class);
         }
 
         return $this->subjectRepository;
