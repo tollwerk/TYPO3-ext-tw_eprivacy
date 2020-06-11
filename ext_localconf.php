@@ -1,8 +1,9 @@
 <?php
+
 defined('TYPO3_MODE') || die('Access denied.');
 
 call_user_func(
-    function () {
+    function() {
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'Tollwerk.TwEprivacy',
@@ -34,15 +35,46 @@ call_user_func(
         show = *
     }
 }');
-//        $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-//
-//        $iconRegistry->registerIcon(
-//            'tw_eprivacy-plugin-eprivacy',
-//            \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-//            ['source' => 'EXT:tw_eprivacy/Resources/Public/Icons/subject.svg']
-//        );
-//
-//        // Register Fluid namespace
-//        $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['eprivacy'] = ['Tollwerk\\TwEprivacy\\ViewHelpers'];
+
     }
 );
+
+/**
+ * Custom ePrivacy TypoScript condition
+ *
+ * @return bool Whether the given subject identifiers have the user's consent
+ * @throws Exception
+ */
+function user_ePrivacy()
+{
+    $subjects = [];
+    foreach (func_get_args() as $subject) {
+        $subject = trim(trim($subject, '"\''));
+        if (!empty($subject)) {
+            $subjects[] = $subject;
+        }
+    }
+    if (empty($subjects)) {
+        return false;
+    }
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+     * @var \Tollwerk\TwEprivacy\Utilities\EprivacyShield $ePrivacyShield
+     */
+    $objectManager  = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+    $ePrivacyShield = $objectManager->get(\Tollwerk\TwEprivacy\Utilities\EprivacyShield::class);
+    $result         = true;
+
+    foreach ($subjects as $subject) {
+        if (!$ePrivacyShield->isAllowedIdentifier($subject)) {
+            $result = false;
+            break;
+        }
+    }
+
+    // Reset the persistence mangager state
+    $objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class)->clearState();
+
+    return $result;
+}
