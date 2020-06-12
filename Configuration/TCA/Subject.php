@@ -10,6 +10,8 @@
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPLv2
  */
 
+use Tollwerk\TwEprivacy\Domain\Model\Subject;
+
 /***************************************************************
  * Copyright © 2020 Joschi Kuphal <joschi@tollwerk.de>
  *
@@ -55,6 +57,7 @@ $GLOBALS['TCA']['tx_tweprivacy_domain_model_subject'] = [
             'label'   => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config'  => array(
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'foreign_table'       => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items'               => array(
@@ -69,11 +72,12 @@ $GLOBALS['TCA']['tx_tweprivacy_domain_model_subject'] = [
             'label'       => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config'      => array(
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'items'               => array(
                     array('', 0),
                 ),
-                'foreign_table'       => 'tx_twcampaign_domain_model_campaign',
-                'foreign_table_where' => 'AND tx_twcampaign_domain_model_campaign.pid=###CURRENT_PID### AND tx_twcampaign_domain_model_campaign.sys_language_uid IN (-1,0)',
+                'foreign_table'       => 'tx_tweprivacy_domain_model_subject',
+                'foreign_table_where' => 'AND tx_tweprivacy_domain_model_subject.pid=###CURRENT_PID### AND tx_tweprivacy_domain_model_subject.sys_language_uid IN (-1,0)',
             ),
         ),
         'l10n_diffsource'  => array(
@@ -141,15 +145,15 @@ $GLOBALS['TCA']['tx_tweprivacy_domain_model_subject'] = [
             ],
         ],
         'purpose'     => [
-            'exclude' => true,
-            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.purpose',
-            'config'  => [
+            'exclude'       => true,
+            'label'         => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.purpose',
+            'config'        => [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim,required',
             ],
-
+            'defaultExtras' => 'richtext[]:rte_transform[mode=ts_links]'
         ],
         'type'        => [
             'exclude'   => true,
@@ -157,6 +161,7 @@ $GLOBALS['TCA']['tx_tweprivacy_domain_model_subject'] = [
             'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.type',
             'config'    => [
                 'type'          => 'select',
+                'renderType'    => 'selectSingle',
                 'foreign_table' => 'tx_tweprivacy_domain_model_type',
                 'minitems'      => 0,
                 'maxitems'      => 1,
@@ -167,19 +172,20 @@ $GLOBALS['TCA']['tx_tweprivacy_domain_model_subject'] = [
             'l10n_mode' => 'exclude',
             'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode',
             'config'    => [
-                'type'     => 'select',
-                'items'    => [
+                'type'       => 'select',
+                'renderType' => 'selectSingle',
+                'items'      => [
                     [
                         'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.cookie',
-                        \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_COOKIE,
+                        Subject::MODE_COOKIE,
                     ],
                     [
                         'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.set',
-                        \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET,
+                        Subject::MODE_SET,
                     ],
                 ],
-                'minitems' => 1,
-                'maxitems' => 1,
+                'minitems'   => 1,
+                'maxitems'   => 1,
             ],
         ],
         'parent_set'  => [
@@ -188,8 +194,9 @@ $GLOBALS['TCA']['tx_tweprivacy_domain_model_subject'] = [
             'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.parent_set',
             'config'    => [
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'foreign_table'       => 'tx_tweprivacy_domain_model_subject',
-                'foreign_table_where' => 'AND tx_tweprivacy_domain_model_subject.pid=###CURRENT_PID### AND tx_tweprivacy_domain_model_subject.sys_language_uid IN (-1,0) AND tx_tweprivacy_domain_model_subject.mode = '.\Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET.' ORDER BY tx_tweprivacy_domain_model_subject.name',
+                'foreign_table_where' => 'AND tx_tweprivacy_domain_model_subject.pid=###CURRENT_PID### AND tx_tweprivacy_domain_model_subject.sys_language_uid IN (-1,0) AND tx_tweprivacy_domain_model_subject.mode = '.Subject::MODE_SET.' ORDER BY tx_tweprivacy_domain_model_subject.name',
                 'items'               => [['---', 0]],
                 'minitems'            => 1,
                 'maxitems'            => 1,

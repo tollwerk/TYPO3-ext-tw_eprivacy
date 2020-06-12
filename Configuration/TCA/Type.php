@@ -48,6 +48,7 @@ $GLOBALS['TCA']['tx_tweprivacy_domain_model_type'] = [
             'label'   => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config'  => array(
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'foreign_table'       => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
                 'items'               => array(
@@ -62,11 +63,12 @@ $GLOBALS['TCA']['tx_tweprivacy_domain_model_type'] = [
             'label'       => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
             'config'      => array(
                 'type'                => 'select',
+                'renderType'          => 'selectSingle',
                 'items'               => array(
                     array('', 0),
                 ),
-                'foreign_table'       => 'tx_twcampaign_domain_model_campaign',
-                'foreign_table_where' => 'AND tx_twcampaign_domain_model_campaign.pid=###CURRENT_PID### AND tx_twcampaign_domain_model_campaign.sys_language_uid IN (-1,0)',
+                'foreign_table'       => 'tx_tweprivacy_domain_model_type',
+                'foreign_table_where' => 'AND tx_tweprivacy_domain_model_type.pid=###CURRENT_PID### AND tx_tweprivacy_domain_model_type.sys_language_uid IN (-1,0)',
             ),
         ),
         'l10n_diffsource'  => array(
@@ -100,9 +102,8 @@ $GLOBALS['TCA']['tx_tweprivacy_domain_model_type'] = [
             'l10n_mode' => 'exclude',
             'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.needs_consent',
             'config'    => [
-                'type'       => 'check',
-                'renderType' => 'checkboxToggle',
-                'default'    => 1,
+                'type'    => 'check',
+                'default' => 1,
             ],
         ],
         'title'         => [
@@ -115,14 +116,15 @@ $GLOBALS['TCA']['tx_tweprivacy_domain_model_type'] = [
             ],
         ],
         'description'   => [
-            'exclude' => true,
-            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.description',
-            'config'  => [
+            'exclude'       => true,
+            'label'         => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.description',
+            'config'        => [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim,required',
             ],
+            'defaultExtras' => 'richtext[]:rte_transform[mode=ts_links]'
         ],
     ],
 ];
