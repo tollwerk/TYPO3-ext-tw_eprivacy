@@ -1,4 +1,4 @@
-plugin.tx_tweprivacy_eprivacy {
+plugin.tx_tweprivacy {
     view {
         templateRootPaths.0 = EXT:{extension.extensionKey}/Resources/Private/Templates/
         templateRootPaths.1 = {$plugin.tx_tweprivacy_eprivacy.view.templateRootPath}
@@ -21,6 +21,8 @@ plugin.tx_tweprivacy_eprivacy {
         httponly = {$plugin.tx_tweprivacy_eprivacy.settings.httponly}
         imprint = {$plugin.tx_tweprivacy_eprivacy.settings.imprint}
         privacy = {$plugin.tx_tweprivacy_eprivacy.settings.privacy}
+        settings = {$plugin.tx_tweprivacy_eprivacy.settings.settings}
+        banner = {$plugin.tx_tweprivacy_eprivacy.settings.banner}
     }
 
     features {
@@ -35,3 +37,41 @@ plugin.tx_tweprivacy_eprivacy {
         #callDefaultActionIfActionCantBeResolved = 1
     }
 }
+
+plugin.tx_tweprivacy_banner = USER_INT
+plugin.tx_tweprivacy_banner {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    vendorName = Tollwerk
+    extensionName = TwEprivacy
+    pluginName = Eprivacy
+    controller = Subject
+    action = banner
+    switchableControllerActions {
+        Subject {
+            1 = banner
+            2 = update
+        }
+    }
+
+    view < plugin.tx_tweprivacy.view
+    persistence < plugin.tx_tweprivacy.persistence
+    settings < plugin.tx_tweprivacy.settings
+}
+
+# Library element for rendering arbitrary content elements
+lib.ePrivacyRefRecord = RECORDS
+lib.ePrivacyRefRecord {
+    tables = tt_content
+    source.current = 1
+    dontCheckPid = 1
+}
+
+# Add an ID to all <hX> elements so that the cookie banner dialog can use them as label
+lib.stdheader.3.headerClass.cObject.stdWrap.outerWrap = | id="ce-header-{field:uid}"
+lib.stdheader.3.headerClass.cObject.stdWrap.outerWrap.insertData = 1
+
+# Render a cookie banner (except on the settings page)
+page.1 < plugin.tx_tweprivacy_banner
+[PIDinRootline = {$plugin.tx_tweprivacy_eprivacy.settings.settings}]
+    page.1 >
+[global]

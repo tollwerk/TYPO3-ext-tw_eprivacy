@@ -32,16 +32,20 @@
 
 namespace Tollwerk\TwEprivacy\Controller;
 
+use DateTime;
+use Tollwerk\TwEprivacy\Domain\Model\Consent;
 use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Domain\Model\Type;
 use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
 use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
+use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Object\Exception;
 
 /**
- * SubjectController
+ * Subject Controller
  */
 class SubjectController extends ActionController
 {
@@ -87,42 +91,14 @@ class SubjectController extends ActionController
      * List action
      *
      * @param int $update     Update consent state
-     * @param array $subjecst Subjects with consent
+     * @param array $subjects Subjects with consent
      *
      * @throws Exception
      * @throws InvalidConfigurationTypeException
      */
     public function listAction($update = 0, array $subjects = [])
     {
-        $consent = $this->consentRepository->get();
-
-        // Process updates
-        if ($update) {
-            switch ($update) {
-                case self::UPDATE_ACCEPT:
-                    $subjects = array_map(
-                        function(Subject $subject) {
-                            return $subject->getIdentifier();
-                        },
-                        $this->subjectRepository->findByPublic(true)->toArray()
-                    );
-                    break;
-                case self::UPDATE_DENY:
-                    $subjects = [];
-                case self::UPDATE_UPDATE:
-                    $defaultSubjectIdentifiers = array_map(
-                        function(Subject $subject) {
-                            return $subject->getIdentifier();
-                        },
-                        $this->subjectRepository->findDefaultSubjects()->toArray()
-                    );
-                    $subjects                  = array_unique(array_merge($subjects, $defaultSubjectIdentifiers));
-                    break;
-            }
-            $consent->setSubjects($subjects);
-            $this->consentRepository->update($consent);
-            $this->redirect('list');
-        }
+        $consent = $this->updateConsent($update, $subjects, 'list');
 
         $types          = [];
         $subjectsByType = [];
@@ -152,7 +128,82 @@ class SubjectController extends ActionController
             'subjects' => $subjectsByType,
             'types'    => $types,
             'consent'  => $consent,
-            'now'      => new \DateTime()
+            'now'      => new DateTime()
         ]);
+    }
+
+    /**
+     * Update consent
+     *
+     * @param int $update            Update consent state
+     * @param array $subjects        Subjects with consent
+     * @param string $redirectAction Redirect to action
+     *
+     * @return Consent|null
+     * @throws Exception
+     * @throws InvalidConfigurationTypeException
+     * @throws StopActionException
+     * @throws UnsupportedRequestTypeException
+     */
+    protected function updateConsent($update, array $subjects = [], $redirectAction = null)
+    {
+        $consent = $this->consentRepository->get();
+
+        // Process updates
+        if ($update) {
+            switch ($update) {
+                case self::UPDATE_ACCEPT:
+                    $subjects = array_map(
+                        function(Subject $subject) {
+                            return $subject->getIdentifier();
+                        },
+                        $this->subjectRepository->findByPublic(true)->toArray()
+                    );
+                    break;
+                case self::UPDATE_DENY:
+                    $subjects = [];
+                case self::UPDATE_UPDATE:
+                    $defaultSubjectIdentifiers = array_map(
+                        function(Subject $subject) {
+                            return $subject->getIdentifier();
+                        },
+                        $this->subjectRepository->findDefaultSubjects()->toArray()
+                    );
+                    $subjects                  = array_unique(array_merge($subjects, $defaultSubjectIdentifiers));
+                    break;
+            }
+            $consent->setSubjects($subjects);
+            $this->consentRepository->update($consent);
+
+            // Redirect
+            if ($redirectAction) {
+                $this->redirect($redirectAction);
+            }
+        }
+
+        return $consent;
+    }
+
+    /**
+     * Show a cookie banner
+     */
+    public function bannerAction()
+    {
+        // Skip if cookie consent is already given
+        if (!empty($_COOKIE[ConsentRepository::COOKIE_NAME])) {
+            return '';
+        }
+    }
+
+    /**
+     * Update the privacy settings from the cookie banner
+     *
+     * @param int $update Update mode
+     *
+     * @throws StopActionException
+     */
+    public function updateAction($update = 0)
+    {
+        $this->updateConsent($update, [], 'banner');
     }
 }

@@ -11,9 +11,12 @@
             <trans-unit id="common.privacy" approved="yes">
                 <source>Privacy Policy Page (ID)</source>
             <target state="translated">Privacy Policy Page (ID)</target></trans-unit>
+            <trans-unit id="common.settings" approved="yes">
+                <source>ePrivacy Settings Page (ID)</source> <target state="translated">ePrivacy Settings Page (ID)</target></trans-unit>
+            <trans-unit id="common.banner" approved="yes">
+                <source>Cookie Banner Content Element (CID)</source> <target state="translated">Cookie Banner Content Element (CID)</target></trans-unit>
             <trans-unit id="cookie" approved="yes">
-                <source>Consent Cookie</source>
-            <target state="translated">Consent Cookie</target></trans-unit>
+                <source>Consent Cookie</source> <target state="translated">Consent Cookie</target></trans-unit>
             <trans-unit id="cookie.lifetime" approved="yes">
                 <source>Consent Lifetime (seconds)</source>
             <target state="translated">Consent Lifetime (seconds)</target></trans-unit>

@@ -39,11 +39,11 @@ call_user_func(
             'Tollwerk.TwEprivacy',
             'Eprivacy',
             [
-                'Subject' => 'list'
+                'Subject' => 'list',
             ],
             // non-cacheable actions
             [
-                'Subject' => ''
+                'Subject' => '',
             ]
         );
 

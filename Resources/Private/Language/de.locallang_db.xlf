@@ -6,9 +6,15 @@
             <trans-unit id="common" approved="yes">
                 <source>Common Settings</source> <target state="translated">Allgemeine Einstellungen</target></trans-unit>
             <trans-unit id="common.imprint" approved="yes">
-                <source>Imprint Page (ID)</source> <target state="translated">Impressumsseite (ID)</target></trans-unit>
+                <source>Imprint Page (ID)</source>
+            <target state="translated">Impressumsseite (ID)</target></trans-unit>
             <trans-unit id="common.privacy" approved="yes">
-                <source>Privacy Policy Page (ID)</source> <target state="translated">Datenschutzerklärung (ID)</target></trans-unit>
+                <source>Privacy Policy Page (ID)</source>
+            <target state="translated">Datenschutzerklärung (ID)</target></trans-unit>
+            <trans-unit id="common.settings" approved="yes">
+                <source>ePrivacy Settings Page (ID)</source> <target state="translated">ePrivacy-Einstellungsseite (ID)</target></trans-unit>
+            <trans-unit id="common.banner" approved="yes">
+                <source>Cookie Banner Content Element (CID)</source> <target state="translated">Cookie-Banner Content-Element (CID)</target></trans-unit>
             <trans-unit id="cookie" approved="yes">
                 <source>Consent Cookie</source> <target state="translated">Cookie-Zustimmung</target></trans-unit>
             <trans-unit id="cookie.lifetime" approved="yes">

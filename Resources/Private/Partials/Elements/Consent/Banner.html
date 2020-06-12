@@ -1,0 +1,23 @@
+<f:comment><!--
+
+    Render the ePrivacy Cookie Banner
+
+--></f:comment>
+<html xmlns:f="https://xsd.helhum.io/ns/typo3/cms-fluid/master/ViewHelpers" data-namespace-typo3-fluid="true">
+    <dialog class="EprivacyBanner" role="dialog" aria-modal="true" aria-labelledby="ce-header-{settings.banner}" open>
+        <f:form action="update" class="EprivacyBanner__body">
+            <f:cObject typoscriptObjectPath="lib.ePrivacyRefRecord" data="{settings.banner}"/>
+            <nav class="EprivacyBanner__nav" aria-label="{f:translate(key: 'eprivacy.banner.nav')}">
+                <f:form.button type="submit" name="update" value="2" class="EprivacyBanner__nav-control">
+                    <f:translate key="eprivacy.update.accept"/>
+                </f:form.button>
+                <f:form.button type="submit" name="update" value="3" class="EprivacyBanner__nav-control">
+                    <f:translate key="eprivacy.update.deny"/>
+                </f:form.button>
+                <f:link.page pageUid="{settings.settings}" class="EprivacyBanner__nav-control">
+                    <f:translate key="eprivacy.banner.settings"/>
+                </f:link.page>
+            </nav>
+        </f:form>
+    </dialog>
+</html>

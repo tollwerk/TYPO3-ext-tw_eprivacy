@@ -6,61 +6,94 @@
             <trans-unit id="common" approved="yes">
                 <source>Common Settings</source> <target state="translated">Configuración común</target></trans-unit>
             <trans-unit id="common.imprint" approved="yes">
-                <source>Imprint Page (ID)</source> <target state="translated">Página Impresión (ID)</target></trans-unit>
+                <source>Imprint Page (ID)</source>
+            <target state="translated">Página Impresión (ID)</target></trans-unit>
             <trans-unit id="common.privacy" approved="yes">
-                <source>Privacy Policy Page (ID)</source> <target state="translated">Página Política de Privacidad (ID)</target></trans-unit>
+                <source>Privacy Policy Page (ID)</source>
+            <target state="translated">Página Política de Privacidad (ID)</target></trans-unit>
+            <trans-unit id="common.settings" approved="yes">
+                <source>ePrivacy Settings Page (ID)</source> <target state="translated">ePrivacy Settings Page (ID)</target></trans-unit>
+            <trans-unit id="common.banner" approved="yes">
+                <source>Cookie Banner Content Element (CID)</source> <target state="translated">Cookie Banner Content Element (CID)</target></trans-unit>
             <trans-unit id="cookie" approved="yes">
                 <source>Consent Cookie</source> <target state="translated">Cookie de consentimiento</target></trans-unit>
             <trans-unit id="cookie.lifetime" approved="yes">
-                <source>Consent Lifetime (seconds)</source> <target state="translated">Duración de consentimiento (segundos)</target></trans-unit>
+                <source>Consent Lifetime (seconds)</source>
+            <target state="translated">Duración de consentimiento (segundos)</target></trans-unit>
             <trans-unit id="cookie.path" approved="yes">
-                <source>Cookie Path</source> <target state="translated">Ruta de acceso de la cookie</target></trans-unit>
+                <source>Cookie Path</source>
+            <target state="translated">Ruta de acceso de la cookie</target></trans-unit>
             <trans-unit id="cookie.domain" approved="yes">
-                <source>Cookie Domain</source> <target state="translated">Dominio de cookie</target></trans-unit>
+                <source>Cookie Domain</source>
+            <target state="translated">Dominio de cookie</target></trans-unit>
             <trans-unit id="cookie.secure" approved="yes">
-                <source>Secure Cookie</source> <target state="translated">Cookie de seguridad</target></trans-unit>
+                <source>Secure Cookie</source>
+            <target state="translated">Cookie de seguridad</target></trans-unit>
             <trans-unit id="cookie.httponly" approved="yes">
-                <source>HTTP-Only Cookie</source> <target state="translated">Cookie HTTP-Only</target></trans-unit>
+                <source>HTTP-Only Cookie</source>
+            <target state="translated">Cookie HTTP-Only</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_type" approved="yes">
-                <source>ePrivacy Subject Type</source> <target state="translated">Tipo de asunto ePrivacy</target></trans-unit>
+                <source>ePrivacy Subject Type</source>
+            <target state="translated">Tipo de asunto ePrivacy</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_type.title" approved="yes">
-                <source>Title</source> <target state="translated">Título</target></trans-unit>
+                <source>Title</source>
+            <target state="translated">Título</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_type.description" approved="yes">
-                <source>Description</source> <target state="translated">Descripción</target></trans-unit>
+                <source>Description</source>
+            <target state="translated">Descripción</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_type.needs_consent" approved="yes">
-                <source>Needs Consent</source> <target state="translated">Requiere consentimiento</target></trans-unit>
+                <source>Needs Consent</source>
+            <target state="translated">Requiere consentimiento</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject" approved="yes">
-                <source>ePrivacy Subject</source> <target state="translated">Asunto ePrivacy</target></trans-unit>
+                <source>ePrivacy Subject</source>
+            <target state="translated">Asunto ePrivacy</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.title" approved="yes">
-                <source>Title</source> <target state="translated">Título</target></trans-unit>
+                <source>Title</source>
+            <target state="translated">Título</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.name" approved="yes">
-                <source>Public Name</source> <target state="translated">Nombre público</target></trans-unit>
+                <source>Public Name</source>
+            <target state="translated">Nombre público</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.identifier" approved="yes">
-                <source>Identifier</source> <target state="translated">Identificador</target></trans-unit>
+                <source>Identifier</source>
+            <target state="translated">Identificador</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.provider" approved="yes">
-                <source>Provider</source> <target state="translated">Proveedor</target></trans-unit>
+                <source>Provider</source>
+            <target state="translated">Proveedor</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.purpose" approved="yes">
-                <source>Purpose</source> <target state="translated">Finalidad</target></trans-unit>
+                <source>Purpose</source>
+            <target state="translated">Finalidad</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.type" approved="yes">
-                <source>Type</source> <target state="translated">Tipo</target></trans-unit>
+                <source>Type</source>
+            <target state="translated">Tipo</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.mode" approved="yes">
-                <source>Mode</source> <target state="translated">Modo</target></trans-unit>
+                <source>Mode</source>
+            <target state="translated">Modo</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.mode.cookie" approved="yes">
-                <source>Cookie</source> <target state="translated">Cookie</target></trans-unit>
+                <source>Cookie</source>
+            <target state="translated">Cookie</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.mode.set" approved="yes">
-                <source>Set</source> <target state="translated">Conjunto</target></trans-unit>
+                <source>Set</source>
+            <target state="translated">Conjunto</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.parent_set" approved="yes">
-                <source>Belongs to set</source> <target state="translated">Pertenece a conjunto</target></trans-unit>
+                <source>Belongs to set</source>
+            <target state="translated">Pertenece a conjunto</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.lifetime" approved="yes">
-                <source>Lifetime (seconds)</source> <target state="translated">Duración (segundos)</target></trans-unit>
+                <source>Lifetime (seconds)</source>
+            <target state="translated">Duración (segundos)</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.public" approved="yes">
-                <source>Public</source> <target state="translated">Nombre público</target></trans-unit>
+                <source>Public</source>
+            <target state="translated">Nombre público</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.session" approved="yes">
-                <source>Expires with session</source> <target state="translated">Expira con la sesión</target></trans-unit>
+                <source>Expires with session</source>
+            <target state="translated">Expira con la sesión</target></trans-unit>
             <trans-unit id="tx_tw_eprivacy_eprivacy.name" approved="yes">
-                <source>ePrivacy Consent Manager</source> <target state="translated">Administrador de consentimiento ePrivacy</target></trans-unit>
+                <source>ePrivacy Consent Manager</source>
+            <target state="translated">Administrador de consentimiento ePrivacy</target></trans-unit>
             <trans-unit id="tx_tw_eprivacy_eprivacy.description" approved="yes">
-                <source>Form listing registered ePrivacy subjects including a way to give or withdraw consent to each of them.</source> <target state="translated">Formulario registrado de asuntos ePrivacy incluida una forma para dar o retirar el consentimiento a cada uno de ellos.</target></trans-unit>
+                <source>Form listing registered ePrivacy subjects including a way to give or withdraw consent to each of
+                    them.
+                </source>
+            <target state="translated">Formulario registrado de asuntos ePrivacy incluida una forma para dar o retirar el consentimiento a cada uno de ellos.</target></trans-unit>
         </body>
     </file>
 </xliff>

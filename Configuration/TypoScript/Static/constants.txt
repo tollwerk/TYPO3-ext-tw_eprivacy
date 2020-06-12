@@ -31,5 +31,9 @@ plugin.tx_tweprivacy_eprivacy {
         imprint =
         # cat=plugin.tx_tweprivacy_eprivacy/common/c; type=int+; label=LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:common.privacy
         privacy =
+        # cat=plugin.tx_tweprivacy_eprivacy/common/d; type=int+; label=LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:common.settings
+        settings =
+        # cat=plugin.tx_tweprivacy_eprivacy/common/e; type=int+; label=LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:common.banner
+        banner =
     }
 }

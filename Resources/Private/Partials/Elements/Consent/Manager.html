@@ -10,20 +10,20 @@
 <html xmlns:f="https://xsd.helhum.io/ns/typo3/cms-fluid/master/ViewHelpers"
       xmlns:eprivacy="http://typo3.org/ns/Tollwerk/TwEprivacy/ViewHelpers"
       data-namespace-typo3-fluid="true">
-    <f:form action="list" controller="Subject" object="{consent}" class="Eprivacy">
-        <ol class="Eprivacy__tabs">
+    <f:form action="list" controller="Subject" object="{consent}" class="EprivacyManager">
+        <ol class="EprivacyManager__tabs">
             <f:for each="{types}" as="type">
-                <li class="Eprivacy__tab">
+                <li class="EprivacyManager__tab">
                     <a href="#eprivacy-{type.uid}">{type.title}</a>
                 </li>
             </f:for>
         </ol>
         <f:for each="{subjects}" as="subjectsByType">
-            <fieldset class="Eprivacy__tab-panel" id="eprivacy-{subjectsByType.0.type.uid}">
+            <fieldset class="EprivacyManager__tab-panel" id="eprivacy-{subjectsByType.0.type.uid}">
                 <legend>
                     <h3>{eprivacy:subjectTypeTitle(types: types, type: subjectsByType.0.type.uid)}</h3>
                 </legend>
-                <ol class="Eprivacy__subjects">
+                <ol class="EprivacyManager__subjects">
                     <f:for each="{subjectsByType}" as="subject">
                         <f:render section="Subject" arguments="{
                             subject: subject,
@@ -35,17 +35,17 @@
                 </ol>
             </fieldset>
         </f:for>
-        <div class="Eprivacy__controls">
-            <f:form.button type="submit" name="update" value="1" class="Eprivacy__controls Eprivacy__controls--update">
+        <div class="EprivacyManager__controls">
+            <f:form.button type="submit" name="update" value="1" class="EprivacyManager__controls EprivacyManager__controls--update">
                 <f:translate key="eprivacy.update.update"/>
             </f:form.button>
-            <f:form.button type="submit" name="update" value="2" class="Eprivacy__controls Eprivacy__controls--accept">
+            <f:form.button type="submit" name="update" value="2" class="EprivacyManager__controls EprivacyManager__controls--accept">
                 <f:translate key="eprivacy.update.accept"/>
             </f:form.button>
-            <f:form.button type="submit" name="update" value="3" class="Eprivacy__controls Eprivacy__controls--deny">
+            <f:form.button type="submit" name="update" value="3" class="EprivacyManager__controls EprivacyManager__controls--deny">
                 <f:translate key="eprivacy.update.deny"/>
             </f:form.button>
-            <f:form.button type="reset" class="Eprivacy__controls Eprivacy__controls--reset">
+            <f:form.button type="reset" class="EprivacyManager__controls EprivacyManager__controls--reset">
                 <f:translate key="eprivacy.update.reset"/>
             </f:form.button>
         </div>
@@ -62,7 +62,7 @@
 
     --></f:comment>
     <f:section name="Subject">
-        <li class="Eprivacy__subject">
+        <li class="EprivacyManager__subject">
             <f:if condition="{subjectsByType.0.type.needsConsent}">
                 <f:then>
                     <f:form.checkbox name="subjects[]" property="subjects" value="{subject.identifier}"
@@ -75,22 +75,22 @@
                                      id="eprivacy-{subject.identifier}"/>
                 </f:else>
             </f:if>
-            <label class="Eprivacy__subject-label" for="eprivacy-{subject.identifier}">
-                <h4 id="Eprivacy__subject-title">{subject.title}</h4>
+            <label class="EprivacyManager__subject-label" for="eprivacy-{subject.identifier}">
+                <h4 id="EprivacyManager__subject-title">{subject.title}</h4>
                 <dl>
-                    <dt class="Eprivacy__subject-name-label">
+                    <dt class="EprivacyManager__subject-name-label">
                         <f:translate key="eprivacy.subject.name"/>
                     </dt>
-                    <dd class="Eprivacy__subject-name">{subject.name}</dd>
+                    <dd class="EprivacyManager__subject-name">{subject.name}</dd>
                     <f:if condition="{subject.mode}">
                         <f:else>
                             <f:render section="Cookie" arguments="{subject: subject}"/>
                         </f:else>
                     </f:if>
-                    <dt class="Eprivacy__subject-purpose-label">
+                    <dt class="EprivacyManager__subject-purpose-label">
                         <f:translate key="eprivacy.subject.purpose"/>
                     </dt>
-                    <dd class="Eprivacy__subject-purpose">
+                    <dd class="EprivacyManager__subject-purpose">
                         <f:format.html>{subject.purpose}</f:format.html>
                     </dd>
                 </dl>
@@ -106,14 +106,14 @@
 
     --></f:comment>
     <f:section name="Cookie">
-        <dt class="Eprivacy__subject-provider-label">
+        <dt class="EprivacyManager__subject-provider-label">
             <f:translate key="eprivacy.subject.provider"/>
         </dt>
-        <dd class="Eprivacy__subject-provider">{subject.provider}</dd>
-        <dt class="Eprivacy__subject-lifetime-label">
+        <dd class="EprivacyManager__subject-provider">{subject.provider}</dd>
+        <dt class="EprivacyManager__subject-lifetime-label">
             <f:translate key="eprivacy.subject.lifetime"/>
         </dt>
-        <dd class="Eprivacy__subject-lifetime">
+        <dd class="EprivacyManager__subject-lifetime">
             <f:if condition="{subject.session}">
                 <f:then>
                     <f:translate key="eprivacy.subject.lifetime.session"/>

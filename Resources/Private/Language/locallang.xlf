@@ -4,6 +4,12 @@
           product-name="tw_eprivacy">
         <header/>
         <body>
+            <trans-unit id="eprivacy.banner.nav">
+                <source>Privacy settings</source>
+            </trans-unit>
+            <trans-unit id="eprivacy.banner.settings">
+                <source>Settings</source>
+            </trans-unit>
             <trans-unit id="eprivacy.subject.name">
                 <source>Cookie Name</source>
             </trans-unit>
@@ -26,7 +32,7 @@
                 <source>Accept all</source>
             </trans-unit>
             <trans-unit id="eprivacy.update.deny">
-                <source>Accept necessary only</source>
+                <source>Required only</source>
             </trans-unit>
             <trans-unit id="eprivacy.update.reset">
                 <source>Reset</source>
