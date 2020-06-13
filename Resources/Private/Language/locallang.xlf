@@ -8,7 +8,7 @@
                 <source>Privacy settings</source>
             </trans-unit>
             <trans-unit id="eprivacy.banner.settings">
-                <source>Settings</source>
+                <source>Privacy Settings</source>
             </trans-unit>
             <trans-unit id="eprivacy.subject.name">
                 <source>Cookie Name</source>
@@ -32,7 +32,7 @@
                 <source>Accept all</source>
             </trans-unit>
             <trans-unit id="eprivacy.update.deny">
-                <source>Required only</source>
+                <source>Necessary only</source>
             </trans-unit>
             <trans-unit id="eprivacy.update.reset">
                 <source>Reset</source>

@@ -11,44 +11,41 @@
       xmlns:eprivacy="http://typo3.org/ns/Tollwerk/TwEprivacy/ViewHelpers"
       data-namespace-typo3-fluid="true">
     <f:form action="list" controller="Subject" object="{consent}" class="EprivacyManager">
-        <ol class="EprivacyManager__tabs">
-            <f:for each="{types}" as="type">
-                <li class="EprivacyManager__tab">
-                    <a href="#eprivacy-{type.uid}">{type.title}</a>
-                </li>
+        <div data-atabs>
+            <f:for each="{subjects}" as="subjectsByType">
+                <fieldset class="EprivacyManager__tab-panel" id="eprivacy-{subjectsByType.0.type.uid}" data-atabs-panel>
+                    <legend class="EprivacyManager__tab-legend">
+                        <h2 data-atabs-heading>{eprivacy:subjectTypeTitle(types: types, type: subjectsByType.0.type.uid)}</h2>
+                    </legend>
+                    <f:format.html>{subjectsByType.0.type.description}</f:format.html>
+                    <ol class="EprivacyManager__subjects">
+                        <f:for each="{subjectsByType}" as="subject">
+                            <f:render section="Subject" arguments="{
+                                subject:        subject,
+                                subjectsByType: subjectsByType,
+                                types:          types,
+                                consent:        consent,
+                                set:            '{f:if(condition: subject.mode, then: subject.identifier)}'
+                            }"/>
+                        </f:for>
+                    </ol>
+                </fieldset>
             </f:for>
-        </ol>
-        <f:for each="{subjects}" as="subjectsByType">
-            <fieldset class="EprivacyManager__tab-panel" id="eprivacy-{subjectsByType.0.type.uid}">
-                <legend>
-                    <h3>{eprivacy:subjectTypeTitle(types: types, type: subjectsByType.0.type.uid)}</h3>
-                </legend>
-                <ol class="EprivacyManager__subjects">
-                    <f:for each="{subjectsByType}" as="subject">
-                        <f:render section="Subject" arguments="{
-                            subject: subject,
-                            subjectsByType: subjectsByType,
-                            types: types,
-                            consent: consent
-                        }"/>
-                    </f:for>
-                </ol>
-            </fieldset>
-        </f:for>
-        <div class="EprivacyManager__controls">
-            <f:form.button type="submit" name="update" value="1" class="EprivacyManager__controls EprivacyManager__controls--update">
+        </div>
+        <nav class="EprivacyManager__controls">
+            <f:form.button type="submit" name="update" value="1" class="EprivacyManager__control EprivacyManager__control--update">
                 <f:translate key="eprivacy.update.update"/>
             </f:form.button>
-            <f:form.button type="submit" name="update" value="2" class="EprivacyManager__controls EprivacyManager__controls--accept">
+            <f:form.button type="submit" name="update" value="2" class="EprivacyManager__control EprivacyManager__control--accept">
                 <f:translate key="eprivacy.update.accept"/>
             </f:form.button>
-            <f:form.button type="submit" name="update" value="3" class="EprivacyManager__controls EprivacyManager__controls--deny">
+            <f:form.button type="submit" name="update" value="3" class="EprivacyManager__control EprivacyManager__control--deny">
                 <f:translate key="eprivacy.update.deny"/>
             </f:form.button>
-            <f:form.button type="reset" class="EprivacyManager__controls EprivacyManager__controls--reset">
+            <f:form.button type="reset" class="EprivacyManager__control EprivacyManager__control--reset">
                 <f:translate key="eprivacy.update.reset"/>
             </f:form.button>
-        </div>
+        </nav>
     </f:form>
 
     <f:comment><!--
@@ -59,10 +56,59 @@
         @param Subject[] subjectsByType     Subjects by type
         @param Type[] types				    Subject types
         @param Consent consent              Current user's consent status
+        @param string set                   Set identifier
 
     --></f:comment>
     <f:section name="Subject">
-        <li class="EprivacyManager__subject">
+        <li class="EprivacyManager__subject"{f:if(condition: set, then: ' data-eprivacy-set="{set}"')}>
+            <f:if condition="{subject.mode}">
+                <f:then><h3><f:render section="Control" arguments="{_all}"/></h3></f:then>
+                <f:else>
+                    <f:if condition="{set}">
+                        <f:then><h4><f:render section="Control" arguments="{_all}"/></h4></f:then>
+                        <f:else><h3><f:render section="Control" arguments="{_all}"/></h3></f:else>
+                    </f:if>
+                </f:else>
+            </f:if>
+
+            <dl class="EprivacyManager__subject-properties">
+                <dt class="EprivacyManager__subject-property EprivacyManager__subject-purpose-label">
+                    <f:translate key="eprivacy.subject.purpose"/>
+                </dt>
+                <dd class="EprivacyManager__subject-value EprivacyManager__subject-purpose-value">
+                    <f:format.html>{subject.purpose}</f:format.html>
+                </dd>
+                <f:if condition="{subject.mode}">
+                    <f:else>
+                        <f:render section="Cookie" arguments="{subject: subject}"/>
+                    </f:else>
+                </f:if>
+            </dl>
+        </li>
+
+        <f:for each="{subject.setMembers}" as="memberSubject">
+            <f:render section="Subject" arguments="{
+                      subject:          memberSubject,
+                      subjectsByType:   subjectsByType,
+                      types:            types,
+                      consent:          consent,
+                      set:              set
+                  }"
+            />
+        </f:for>
+    </f:section>
+
+    <f:comment><!--
+
+        Render a subject control
+
+        @param Subject subject              Subject
+        @param Subject[] subjectsByType     Subjects by type
+        @param Consent consent              Current user's consent status
+
+    --></f:comment>
+    <f:section name="Control">
+        <span class="EprivacyManager__subject-control">
             <f:if condition="{subjectsByType.0.type.needsConsent}">
                 <f:then>
                     <f:form.checkbox name="subjects[]" property="subjects" value="{subject.identifier}"
@@ -75,27 +121,8 @@
                                      id="eprivacy-{subject.identifier}"/>
                 </f:else>
             </f:if>
-            <label class="EprivacyManager__subject-label" for="eprivacy-{subject.identifier}">
-                <h4 id="EprivacyManager__subject-title">{subject.title}</h4>
-                <dl>
-                    <dt class="EprivacyManager__subject-name-label">
-                        <f:translate key="eprivacy.subject.name"/>
-                    </dt>
-                    <dd class="EprivacyManager__subject-name">{subject.name}</dd>
-                    <f:if condition="{subject.mode}">
-                        <f:else>
-                            <f:render section="Cookie" arguments="{subject: subject}"/>
-                        </f:else>
-                    </f:if>
-                    <dt class="EprivacyManager__subject-purpose-label">
-                        <f:translate key="eprivacy.subject.purpose"/>
-                    </dt>
-                    <dd class="EprivacyManager__subject-purpose">
-                        <f:format.html>{subject.purpose}</f:format.html>
-                    </dd>
-                </dl>
-            </label>
-        </li>
+        </span>
+        <label class="EprivacyManager__subject-label" for="eprivacy-{subject.identifier}">{subject.title}</label>
     </f:section>
 
     <f:comment><!--
@@ -106,14 +133,18 @@
 
     --></f:comment>
     <f:section name="Cookie">
-        <dt class="EprivacyManager__subject-provider-label">
+        <dt class="EprivacyManager__subject-property EprivacyManager__subject-name-label">
+            <f:translate key="eprivacy.subject.name"/>
+        </dt>
+        <dd class="EprivacyManager__subject-value EprivacyManager__subject-name-value">{subject.name}</dd>
+        <dt class="EprivacyManager__subject-property EprivacyManager__subject-provider-label">
             <f:translate key="eprivacy.subject.provider"/>
         </dt>
-        <dd class="EprivacyManager__subject-provider">{subject.provider}</dd>
-        <dt class="EprivacyManager__subject-lifetime-label">
+        <dd class="EprivacyManager__subject-value EprivacyManager__subject-provider-value">{subject.provider}</dd>
+        <dt class="EprivacyManager__subject-property EprivacyManager__subject-lifetime-label">
             <f:translate key="eprivacy.subject.lifetime"/>
         </dt>
-        <dd class="EprivacyManager__subject-lifetime">
+        <dd class="EprivacyManager__subject-value EprivacyManager__subject-lifetime-value">
             <f:if condition="{subject.session}">
                 <f:then>
                     <f:translate key="eprivacy.subject.lifetime.session"/>

@@ -8,13 +8,13 @@
         <f:form action="update" class="EprivacyBanner__body">
             <f:cObject typoscriptObjectPath="lib.ePrivacyRefRecord" data="{settings.banner}"/>
             <nav class="EprivacyBanner__nav" aria-label="{f:translate(key: 'eprivacy.banner.nav')}">
-                <f:form.button type="submit" name="update" value="2" class="EprivacyBanner__nav-control">
+                <f:form.button type="submit" name="update" value="2" class="EprivacyBanner__control EprivacyBanner__control--accept">
                     <f:translate key="eprivacy.update.accept"/>
                 </f:form.button>
-                <f:form.button type="submit" name="update" value="3" class="EprivacyBanner__nav-control">
+                <f:form.button type="submit" name="update" value="3" class="EprivacyBanner__control EprivacyBanner__control--deny">
                     <f:translate key="eprivacy.update.deny"/>
                 </f:form.button>
-                <f:link.page pageUid="{settings.settings}" class="EprivacyBanner__nav-control">
+                <f:link.page pageUid="{settings.settings}" class="EprivacyBanner__control EprivacyBanner__control--settings">
                     <f:translate key="eprivacy.banner.settings"/>
                 </f:link.page>
             </nav>

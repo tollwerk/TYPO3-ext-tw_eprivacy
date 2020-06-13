@@ -6,7 +6,7 @@
             <trans-unit id="eprivacy.banner.nav" approved="yes">
                 <source>Privacy settings</source> <target state="translated">Privatsphären-Einstellungen</target></trans-unit>
             <trans-unit id="eprivacy.banner.settings" approved="yes">
-                <source>Settings</source> <target state="translated">Einstellungen</target></trans-unit>
+                <source>Privacy Settings</source> <target state="translated">Einstellungen</target></trans-unit>
             <trans-unit id="eprivacy.subject.name" approved="yes">
                 <source>Cookie Name</source> <target state="translated">Cookie-Name</target></trans-unit>
             <trans-unit id="eprivacy.subject.provider" approved="yes">
@@ -26,8 +26,8 @@
                 <source>Accept all</source>
             <target state="translated">Alle akzeptieren</target></trans-unit>
             <trans-unit id="eprivacy.update.deny" approved="yes">
-                <source>Required only</source>
-            <target state="translated">Notwendige akzeptieren</target></trans-unit>
+                <source>Necessary only</source>
+            <target state="translated">Nur notwendige</target></trans-unit>
             <trans-unit id="eprivacy.update.reset" approved="yes">
                 <source>Reset</source>
             <target state="translated">Zurücksetzen</target></trans-unit>

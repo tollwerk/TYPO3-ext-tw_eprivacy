@@ -98,8 +98,7 @@ class SubjectController extends ActionController
      */
     public function listAction($update = 0, array $subjects = [])
     {
-        $consent = $this->updateConsent($update, $subjects, 'list');
-
+        $consent        = $this->updateConsent($update, $subjects, 'list');
         $types          = [];
         $subjectsByType = [];
 
