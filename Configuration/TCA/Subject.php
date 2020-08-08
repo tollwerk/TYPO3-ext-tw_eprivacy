@@ -127,7 +127,6 @@ $GLOBALS['TCA']['tx_tweprivacy_domain_model_subject'] = [
         ],
         'identifier'  => [
             'exclude'   => true,
-            'l10n_mode' => 'exclude',
             'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.identifier',
             'config'    => [
                 'type' => 'input',
@@ -163,6 +162,7 @@ $GLOBALS['TCA']['tx_tweprivacy_domain_model_subject'] = [
                 'type'          => 'select',
                 'renderType'    => 'selectSingle',
                 'foreign_table' => 'tx_tweprivacy_domain_model_type',
+                'foreign_table_where' => 'AND tx_tweprivacy_domain_model_type.pid=###CURRENT_PID### AND tx_tweprivacy_domain_model_type.sys_language_uid IN (-1,0) ORDER BY tx_tweprivacy_domain_model_type.title',
                 'minitems'      => 0,
                 'maxitems'      => 1,
             ],

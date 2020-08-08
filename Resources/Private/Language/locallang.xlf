@@ -79,6 +79,9 @@
             <trans-unit id="age.years.duration">
                 <source>%s years</source>
             </trans-unit>
+            <trans-unit id="eprivacy.alt">
+                <source>Content may not be displayed because of your ePrivacy settings.</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

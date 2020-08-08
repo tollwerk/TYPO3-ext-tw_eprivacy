@@ -138,15 +138,19 @@ class SubjectRepository extends Repository
     }
 
     /**
-     * Returns a query for objects of this repository
+     * Find multiple subjects by identifiers
      *
-     * @return QueryInterface
+     * @param array $identifiers Identifiers
+     *
+     * @return array|QueryResultInterface Subjects
+     * @throws InvalidQueryException
      */
-    public function createQuery()
+    public function findByIdentifiers(array $identifiers)
     {
-        $query = parent::createQuery();
+        $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
+        $query->getQuerySettings()->setRespectSysLanguage(false);
 
-        return $query;
+        return $query->matching($query->in('uid', $identifiers))->execute();
     }
 }

@@ -75,3 +75,6 @@ page.1 < plugin.tx_tweprivacy_banner
 [PIDinRootline = {$plugin.tx_tweprivacy_eprivacy.settings.settings}]
     page.1 >
 [global]
+
+tt_content.stdWrap.override.cObject = USER
+tt_content.stdWrap.override.cObject.userFunc = Tollwerk\TwEprivacy\Utilities\ConsentUserFunc->hasConsent

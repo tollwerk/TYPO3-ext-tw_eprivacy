@@ -106,5 +106,36 @@ call_user_func(
                 'iconfile'                 => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('tw_eprivacy').'Resources/Public/Icons/subject.svg',
             ],
         ];
+
+        // Extend tt_content table
+        $newColumns = [
+            'tx_tweprivacy_required_consent' => [
+                'label'  => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tt_content.tx_tweprivacy_required_consent',
+                'config' => [
+                    'type'                => 'select',
+                    'renderType'          => 'selectMultipleSideBySide',
+                    'foreign_table'       => 'tx_tweprivacy_domain_model_subject',
+                    'foreign_table_where' => 'AND tx_tweprivacy_domain_model_subject.pid=###PAGE_TSCONFIG_ID### AND tx_tweprivacy_domain_model_subject.mode='.\Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_COOKIE.' AND tx_tweprivacy_domain_model_subject.sys_language_uid IN (-1,0) ORDER BY tx_tweprivacy_domain_model_subject.title',
+                    'size'                => 5,
+                    'maxitems'            => 999
+                ],
+            ],
+            'tx_tweprivacy_alt_text'         => [
+                'label'         => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tt_content.tx_tweprivacy_alt_text',
+                'config'        => [
+                    'type' => 'text',
+                    'cols' => 40,
+                    'rows' => 15,
+                    'eval' => 'trim',
+                ],
+                'defaultExtras' => 'richtext[]:rte_transform[mode=ts_links]'
+            ],
+        ];
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $newColumns);
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+            'tt_content',
+            '--div--;LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tt_content.tabs.tx_tweprivacy;;;;1-1-1, tx_tweprivacy_required_consent, tx_tweprivacy_alt_text'
+        );
     }
 );

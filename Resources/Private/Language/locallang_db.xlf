@@ -37,6 +37,15 @@
             <trans-unit id="cookie.httponly">
                 <source>HTTP-Only Cookie</source>
             </trans-unit>
+            <trans-unit id="tt_content.tx_tweprivacy_required_consent">
+                <source>ePrivacy restrictions to display content</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_tweprivacy_alt_text">
+                <source>Alternative text if ePrivacy restrictions aren't met</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tabs.tx_tweprivacy">
+                <source>ePrivacy</source>
+            </trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_type">
                 <source>ePrivacy Subject Type</source>
             </trans-unit>

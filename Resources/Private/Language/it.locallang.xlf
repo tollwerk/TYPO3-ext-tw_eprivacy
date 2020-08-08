@@ -4,11 +4,13 @@
         <header/>
         <body>
             <trans-unit id="eprivacy.banner.nav" approved="yes">
-                <source>Privacy settings</source> <target state="translated">Privacy settings</target></trans-unit>
+                <source>Privacy settings</source> <target state="translated">Impostazioni</target></trans-unit>
             <trans-unit id="eprivacy.banner.settings" approved="yes">
-                <source>Privacy Settings</source> <target state="translated">Privacy Settings</target></trans-unit>
+                <source>Privacy Settings</source>
+            <target state="translated">Impostazioni</target></trans-unit>
             <trans-unit id="eprivacy.subject.name" approved="yes">
-                <source>Cookie Name</source> <target state="translated">Nome del cookie</target></trans-unit>
+                <source>Cookie Name</source>
+            <target state="translated">Nome del cookie</target></trans-unit>
             <trans-unit id="eprivacy.subject.provider" approved="yes">
                 <source>Provider</source>
             <target state="translated">Fornitore</target></trans-unit>
@@ -75,6 +77,8 @@
             <trans-unit id="age.years.duration" approved="yes">
                 <source>%s years</source>
             <target state="translated">%s anni</target></trans-unit>
+            <trans-unit id="eprivacy.alt" approved="yes">
+                <source>Content may not be displayed because of your ePrivacy settings.</source> <target state="translated">Content may not be displayed because of your ePrivacy settings. [IT]</target></trans-unit>
         </body>
     </file>
 </xliff>
