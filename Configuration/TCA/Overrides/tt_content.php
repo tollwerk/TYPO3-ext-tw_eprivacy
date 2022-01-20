@@ -21,6 +21,3 @@ $newColumns = [
 ];
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $newColumns);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content', 'tx_tweprivacy_consent', '', 'after:hidden');
-
-// Add custom enablecolumns
-$GLOBALS['TCA']['tt_content']['ctrl']['enablecolumns']['cookie_consent'] = 'tx_tweprivacy_consent';
