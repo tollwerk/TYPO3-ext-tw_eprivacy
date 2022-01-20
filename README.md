@@ -1,5 +1,10 @@
 # tollwerk ePrivacy Consent Manager
 
+## For editors
+
+Editors can set the required consent for content elements individually inside the TYPO3 backend.
+The field "Needs cookie consent" can be found on inside the "access"-tab of each content element.
+
 ## Fluid ViewHelper
 
 The `<eprivacy:consent>` viewhelper is a specialized condition viewhelper that enables you to test for the user's consent with particular subject identifiers. Examples:
