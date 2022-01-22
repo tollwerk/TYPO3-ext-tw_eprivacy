@@ -61,6 +61,10 @@
                 <source>ePrivacy Consent Manager</source> <target state="translated">ePrivacy Einstellungsmananger</target></trans-unit>
             <trans-unit id="tx_tw_eprivacy_eprivacy.description" approved="yes">
                 <source>Form listing registered ePrivacy subjects including a way to give or withdraw consent to each of them.</source> <target state="translated">Formular mit einer Auflistung registrierter ePrivacy Einstellungen inklusive der Möglichkeit, zu jeder die Zustimmung geben oder entziehen zu können.</target></trans-unit>
+            <trans-unit id="tt_content.tx_tweprivacy_consent" approved="yes">
+                <source>Needs cookie consent</source>
+                <target>Benötigt Cookie-Consent</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -93,6 +93,9 @@
                     them.
                 </source>
             </trans-unit>
+            <trans-unit id="tt_content.tx_tweprivacy_consent">
+                <source>Needs cookie consent</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

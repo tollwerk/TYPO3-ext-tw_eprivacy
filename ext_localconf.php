@@ -45,5 +45,8 @@ call_user_func(
 
         // Register Fluid namespace
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['eprivacy'] = ['Tollwerk\\TwEprivacy\\ViewHelpers'];
+
+        // Add Hooks
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['stdWrap'][] = \Tollwerk\TwEprivacy\Hooks\ContentObject\StdWrapHook::class;
     }
 );

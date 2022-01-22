@@ -89,6 +89,10 @@
             <trans-unit id="tx_tw_eprivacy_eprivacy.description" approved="yes">
                 <source>Form listing registered ePrivacy subjects including a way to give or withdraw consent to each of them.</source> <target state="translated">Modulo che elenca i soggetti ePrivacy registrati, incluso un modo per dare o ritirare il consenso a ciascuno di essi.
 </target></trans-unit>
+            <trans-unit id="tt_content.tx_tweprivacy_consent" approved="yes">
+                <source>Needs cookie consent</source>
+                <target>Richiede il consenso ai cookie</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

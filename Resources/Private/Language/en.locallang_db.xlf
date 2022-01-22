@@ -91,6 +91,10 @@
                     them.
                 </source>
             <target state="translated">Form listing registered ePrivacy subjects including a way to give or withdraw consent to each of them.</target></trans-unit>
+            <trans-unit id="tt_content.tx_tweprivacy_consent" approved="yes">
+                <source>Needs cookie consent</source>
+                <target>Needs cookie consent</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
