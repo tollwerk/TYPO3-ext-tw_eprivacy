@@ -90,7 +90,7 @@ class SubjectController extends ActionController
     /**
      * List action
      *
-     * @param int $update     Update consent state
+     * @param int $update Update consent state
      * @param array $subjects Subjects with consent
      *
      * @throws Exception
@@ -98,44 +98,44 @@ class SubjectController extends ActionController
      */
     public function listAction($update = 0, array $subjects = [])
     {
-        $consent        = $this->updateConsent($update, $subjects, 'list');
-        $types          = [];
+        $consent = $this->updateConsent($update, $subjects, 'list');
+        $types = [];
         $subjectsByType = [];
 
         /** @var Subject $subject */
         foreach ($this->subjectRepository->findByPublicTopLevel() as $subject) {
-            $type   = $subject->getType();
+            $type = $subject->getType();
             $typeId = $type->getUid();
             if (empty($types[$typeId])) {
-                $types[$typeId]          = $type;
+                $types[$typeId] = $type;
                 $subjectsByType[$typeId] = [];
             }
             $subjectsByType[$typeId][] = $subject;
         }
 
         // Sort the type list
-        uasort($types, function(Type $a, Type $b) {
+        uasort($types, function (Type $a, Type $b) {
             return ($a->getSorting() > $b->getSorting()) ? 1 : -1;
         });
 
         // Sort the subjects by type list
-        uksort($subjectsByType, function($a, $b) use ($types) {
+        uksort($subjectsByType, function ($a, $b) use ($types) {
             return ($types[$a]->getSorting() > $types[$b]->getSorting()) ? 1 : -1;
         });
 
         $this->view->assignMultiple([
             'subjects' => $subjectsByType,
-            'types'    => $types,
-            'consent'  => $consent,
-            'now'      => new DateTime()
+            'types' => $types,
+            'consent' => $consent,
+            'now' => new DateTime()
         ]);
     }
 
     /**
      * Update consent
      *
-     * @param int $update            Update consent state
-     * @param array $subjects        Subjects with consent
+     * @param int $update Update consent state
+     * @param array $subjects Subjects with consent
      * @param string $redirectAction Redirect to action
      *
      * @return Consent|null
@@ -153,7 +153,7 @@ class SubjectController extends ActionController
             switch ($update) {
                 case self::UPDATE_ACCEPT:
                     $subjects = array_map(
-                        function(Subject $subject) {
+                        function (Subject $subject) {
                             return $subject->getIdentifier();
                         },
                         $this->subjectRepository->findByPublic(true)->toArray()
@@ -163,12 +163,12 @@ class SubjectController extends ActionController
                     $subjects = [];
                 case self::UPDATE_UPDATE:
                     $defaultSubjectIdentifiers = array_map(
-                        function(Subject $subject) {
+                        function (Subject $subject) {
                             return $subject->getIdentifier();
                         },
                         $this->subjectRepository->findDefaultSubjects()->toArray()
                     );
-                    $subjects                  = array_unique(array_merge($subjects, $defaultSubjectIdentifiers));
+                    $subjects = array_unique(array_merge($subjects, $defaultSubjectIdentifiers));
                     break;
             }
             $consent->setSubjects($subjects);
@@ -176,6 +176,27 @@ class SubjectController extends ActionController
 
             // Redirect
             if ($redirectAction) {
+
+                // Check for redirect parameters
+                $redirectParams = [];
+                foreach ($_GET as $key => $getParameter) {
+                    if ($key !== 'tx_tweprivacy_eprivacy') {
+                        $redirectParams[$key] = $getParameter;
+                    }
+                }
+
+                // Redirect with parameters if needed
+                if ($redirectParams && $redirectParams['id']) {
+                    // Build query string
+                    $uriBuilder = $this->getControllerContext()->getUriBuilder();
+                    $uri = $uriBuilder->reset()
+                        ->setAddQueryString(true)
+                        ->setAddQueryStringMethod('GET')
+                        ->uriFor($redirectAction);
+                    $this->redirectToUri($uri);
+                }
+
+                // Simple redirect without parameters if not
                 $this->redirect($redirectAction);
             }
         }
@@ -192,6 +213,8 @@ class SubjectController extends ActionController
         if (!empty($_COOKIE[ConsentRepository::COOKIE_NAME])) {
             return '';
         }
+
+        $this->view->assign('additionalParameters', [$_GET]);
     }
 
     /**
