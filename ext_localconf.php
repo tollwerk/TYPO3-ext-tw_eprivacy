@@ -8,11 +8,11 @@ call_user_func(
             'Tollwerk.TwEprivacy',
             'Eprivacy',
             [
-                'Subject' => 'list'
+                'Subject' => 'list, addConsent'
             ],
             // non-cacheable actions
             [
-                'Subject' => ''
+                'Subject' => 'addConsent'
             ]
         );
 

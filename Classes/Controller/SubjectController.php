@@ -17,9 +17,13 @@ use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Domain\Model\Type;
 use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
 use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
+use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Object\Exception;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * SubjectController
@@ -62,6 +66,47 @@ class SubjectController extends ActionController
     public function injectConsentRepository(ConsentRepository $consentRepository): void
     {
         $this->consentRepository = $consentRepository;
+    }
+
+    /**
+     * @param int|null $pid
+     * @param array    $addIdentifiers
+     *
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     */
+    public function addConsentAction(int $pid = null, array $addIdentifiers = []) {
+
+        // Get all subjects
+        $allSubjects = array_map(
+            function(Subject $subject) {
+                return $subject->getIdentifier();
+            },
+            $this->subjectRepository->findByPublic(true)->toArray()
+        );
+
+        // Remove all subjects currently not allowed by user
+        $eprivacyShield = GeneralUtility::makeInstance(EprivacyShield::class);
+        for($i = 0, $length = count($allSubjects); $i < $length; $i++) {
+            if(!$eprivacyShield->isAllowedIdentifier($allSubjects[$i])) {
+                unset($allSubjects[$i]);
+            }
+        }
+
+        // Now add the new identifiers the users wants to allow.
+        $subjects = array_merge($allSubjects, $addIdentifiers);
+
+        DebuggerUtility::var_dump([
+            'addIdentifiers' => $addIdentifiers,
+            'allSubjects' => $allSubjects,
+            'subjects' => $subjects,
+        ], __CLASS__);
+
+        $consent = $this->consentRepository->get();
+        $consent->setSubjects($subjects);
+        $this->consentRepository->update($consent);
+
+        // Remove all subjects currently not allowed by user
+        $this->redirectToUri($this->uriBuilder->setTargetPageUid($pid)->build());
     }
 
     /**

@@ -21,6 +21,7 @@ plugin.tx_tweprivacy_eprivacy {
         httponly = {$plugin.tx_tweprivacy_eprivacy.settings.httponly}
         imprint = {$plugin.tx_tweprivacy_eprivacy.settings.imprint}
         privacy = {$plugin.tx_tweprivacy_eprivacy.settings.privacy}
+        pluginPid = {$plugin.tx_tweprivacy_eprivacy.settings.pluginPid}
     }
 
     features {

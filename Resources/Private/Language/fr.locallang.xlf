@@ -21,6 +21,10 @@
 				<source>Accept necessary only</source> <target state="translated">N'accepter que les cookies nécessaires</target></trans-unit>
 			<trans-unit id="eprivacy.update.reset" approved="yes">
 				<source>Reset</source> <target state="translated">Réinitialiser</target></trans-unit>
+			<trans-unit id="content.needsConsent.text">
+				<source>A content was hidden because you did not agree to all necessary cookies. In order to see the content, you must agree to the following cookies.</source>
+				<target>Le contenu "%s" a été masqué car vous n'avez pas accepté tous les cookies nécessaires. Pour voir le contenu, vous devez accepter les cookies suivants.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

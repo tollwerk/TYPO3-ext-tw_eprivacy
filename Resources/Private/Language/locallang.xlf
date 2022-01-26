@@ -30,6 +30,9 @@
 			<trans-unit id="eprivacy.update.reset">
 				<source>Reset</source>
 			</trans-unit>
+			<trans-unit id="content.needsConsent.text">
+				<source>The content "%s" was hidden because you did not agree to all necessary cookies. In order to see the content, you must agree to the following cookies.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
