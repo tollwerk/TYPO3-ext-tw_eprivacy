@@ -1,9 +1,12 @@
 <f:comment><!--
 
-    Content needs consent message
+    Content needs consent message.
 
-    @param int      uid             UID of the content element
-    @param array[]  consentItems    Subject identifiers of required cookies for this content
+    Show all required cookies.
+    Show link to accept the required cookies and another link open to the cookie plugin page.
+
+    @param array  data            Content element data
+    @param array  consentItems    Subject identifiers of required cookies for this content
 
 --></f:comment>
 <html xmlns:f="https://xsd.helhum.io/ns/typo3/cms-fluid/master/ViewHelpers"
@@ -16,7 +19,7 @@
 
         <f:comment><!-- Description text --></f:comment>
         <p class="CookieNeedsConsent__text">
-            {f:translate(key: 'content.needsConsent.text', arguments: {0: header})}
+            {f:translate(key: 'content.needsConsent.text', arguments: {0: data.header})}
         </p>
 
         <f:comment><!-- List of required subjects --></f:comment>
@@ -34,21 +37,20 @@
         <f:comment><!-- Accept cookies --></f:comment>
         <f:variable name="acceptUrl"
                     value="{f:uri.action(
-                        pageUid: 473,
+                        pageUid: settings.pluginPid,
                         action: 'addConsent',
                         controller: 'Subject',
                         pluginName: 'Eprivacy',
                         extensionName: 'TwEprivacy',
-                        section: 'c{uid}',
-                        arguments: '{pid: 1, addIdentifiers: subjects.identifiers}'
+                        section: 'c{data.uid}',
+                        arguments: '{pid: data.pid, addIdentifiers: subjects.identifiers}'
                     )}"
         />
-        <f:variable name="pluginPageUrl" value="{f:uri.page(pageUid: 473)}" />
-        <f:debug>{acceptUrl}</f:debug>
-        <f:debug>{pluginPageUrl}</f:debug>
+        <f:variable name="pluginPageUrl" value="{f:uri.page(pageUid: settings.pluginPid)}"/>
         <p class="CookieNeedsConsent__actions">
-            <f:format.raw>{f:translate(key: 'content.needsConsent.actions', arguments: {0: acceptUrl, 1: pluginPageUrl})}</f:format.raw>
+            <f:format.raw>{f:translate(key: 'content.needsConsent.actions', arguments: {0: acceptUrl, 1:
+                pluginPageUrl})}
+            </f:format.raw>
         </p>
     </aside>
-
 </html>

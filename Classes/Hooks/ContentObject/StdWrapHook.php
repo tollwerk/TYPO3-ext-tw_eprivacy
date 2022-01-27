@@ -4,6 +4,8 @@ namespace Tollwerk\TwEprivacy\Hooks\ContentObject;
 
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectStdWrapHookInterface;
@@ -94,6 +96,10 @@ class StdWrapHook implements ContentObjectStdWrapHookInterface
                     // TODO: Remove if()-statement after development.
                     if($_SERVER['REMOTE_ADDR'] == '80.144.228.187') {
 
+                        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
+                        $typoscript = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+                        $settings = $typoscript['plugin.']['tx_tweprivacy_eprivacy.']['settings.'];
+
                         /** @var StandaloneView $standaloneView */
                         $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
                         $standaloneView->setLayoutRootPaths([GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Layouts')]);
@@ -104,8 +110,8 @@ class StdWrapHook implements ContentObjectStdWrapHookInterface
                         $standaloneView->assign('consentItems', $consentItems);
                         $standaloneView->assignMultiple([
                             'consentItems' => $consentItems,
-                            'header' => $parentObject->data['header'],
-                            'uid' => $parentObject->data['uid'],
+                            'data' => $parentObject->data,
+                            'settings' => $settings,
                         ]);
 
                         return $standaloneView->render();
