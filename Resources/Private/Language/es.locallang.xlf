@@ -25,6 +25,10 @@
 				<source>A content was hidden because you did not agree to all necessary cookies. In order to see the content, you must agree to the following cookies.</source>
 				<target>Se ocultó el contenido porque no aceptaste todas las cookies necesarias. Para ver el contenido, debe aceptar las siguientes cookies.</target>
 			</trans-unit>
+			<trans-unit id="content.needsConsent.actions">
+				<source>Click <![CDATA[<a href="%s">here</a>]]> to show the content, accepting all required cookies. You can manage all of your settings on <![CDATA[<a href="%s">this page</a>]]>.</source>
+				<target>Haga clic <![CDATA[<a href="%s">aquí</a>]]> para mostrar el contenido, aceptando todas las cookies requeridas. Puede administrar todas sus configuraciones en <![CDATA[<a href="%s">esta página</a>]]>.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

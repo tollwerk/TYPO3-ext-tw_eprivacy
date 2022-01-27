@@ -23,7 +23,11 @@
 				<source>Reset</source> <target state="translated">Zurücksetzen</target></trans-unit>
 			<trans-unit id="content.needsConsent.text">
 				<source>A content was hidden because you did not agree to all necessary cookies. In order to see the content, you must agree to the following cookies.</source>
-				<target>Der Inhalt "%s" wurde ausgeblendet, weil Sie nicht allen notwendigen Cookies zugestimmt haben. Um den Inhalt zu sehen, müssen Sie den folgenden Cookies zustimmen.</target>
+				<target>Der Inhalt "%s" wurde ausgeblendet, weil Sie nicht allen notwendigen Cookies zugestimmt haben. Um den Inhalt zu sehen zu können, müssen folgenden Cookies zugelassen werden.</target>
+			</trans-unit>
+			<trans-unit id="content.needsConsent.actions">
+				<source>Click <![CDATA[<a href="%s">here</a>]]> to show the content, accepting all required cookies. You can manage all of your settings on <![CDATA[<a href="%s">this page</a>]]>.</source>
+				<target>Klicken Sie <![CDATA[<a href="%s">hier</a>]]>, um den Inhalt anzuzeigen und alle notwendigen Cookies zu akzeptieren. Auf <![CDATA[<a href="%s">dieser Seite</a>]]> können sämtliche Cookie-Einstellungen verwaltet werden.</target>
 			</trans-unit>
 		</body>
 	</file>
