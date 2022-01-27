@@ -82,8 +82,12 @@ class StdWrapHook implements ContentObjectStdWrapHookInterface
         // Check if cookie consent for one or more cookies is required. Do not render element if consent is missing.
         if ($parentObject->getCurrentTable() == 'tt_content' && !empty($parentObject->data['tx_tweprivacy_consent'])) {
             // Get required consent names from record
-            $consentItems = array_filter(GeneralUtility::trimExplode(',',
-                $parentObject->data['tx_tweprivacy_consent']));
+            $consentItems = array_filter(
+                GeneralUtility::trimExplode(
+                    ',',
+                    $parentObject->data['tx_tweprivacy_consent']
+                )
+            );
             if (!count($consentItems)) {
                 return $content;
             }
@@ -93,36 +97,29 @@ class StdWrapHook implements ContentObjectStdWrapHookInterface
             foreach ($consentItems as $consentItem) {
                 if (!$eprivacyShield->isAllowedName($consentItem)) {
 
-                    // TODO: Remove if()-statement after development.
-                    if($_SERVER['REMOTE_ADDR'] == '80.144.228.187') {
+                    $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
+                    $typoscript           = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+                    $settings             = $typoscript['plugin.']['tx_tweprivacy_eprivacy.']['settings.'];
 
-                        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
-                        $typoscript = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-                        $settings = $typoscript['plugin.']['tx_tweprivacy_eprivacy.']['settings.'];
+                    /** @var StandaloneView $standaloneView */
+                    $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
+                    $standaloneView->setLayoutRootPaths([GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Layouts')]);
+                    $standaloneView->setPartialRootPaths([GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Partials')]);
+                    $standaloneView->setTemplateRootPaths([GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Templates')]);
+                    $standaloneView->getRequest()
+                                   ->setControllerExtensionName(GeneralUtility::underscoredToUpperCamelCase('tw_eprivacy'));
+                    $standaloneView->setTemplate('Content/NeedsConsent');
+                    $standaloneView->assign('consentItems', $consentItems);
+                    $standaloneView->assignMultiple([
+                        'consentItems' => $consentItems,
+                        'data'         => $parentObject->data,
+                        'settings'     => $settings,
+                    ]);
 
-                        /** @var StandaloneView $standaloneView */
-                        $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
-                        $standaloneView->setLayoutRootPaths([GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Layouts')]);
-                        $standaloneView->setPartialRootPaths([GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Partials')]);
-                        $standaloneView->setTemplateRootPaths([GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Templates')]);
-                        $standaloneView->getRequest()->setControllerExtensionName(GeneralUtility::underscoredToUpperCamelCase('tw_eprivacy'));
-                        $standaloneView->setTemplate('Content/NeedsConsent');
-                        $standaloneView->assign('consentItems', $consentItems);
-                        $standaloneView->assignMultiple([
-                            'consentItems' => $consentItems,
-                            'data' => $parentObject->data,
-                            'settings' => $settings,
-                        ]);
-
-                        return $standaloneView->render();
-                    }
-
-                    return '';
-
+                    return $standaloneView->render();
                 }
             }
         }
-
 
         return $content;
     }

@@ -19,11 +19,9 @@ use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
 use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Object\Exception;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * SubjectController
@@ -94,13 +92,6 @@ class SubjectController extends ActionController
 
         // Now add the new identifiers the users wants to allow.
         $subjects = array_merge($allSubjects, $addIdentifiers);
-
-        DebuggerUtility::var_dump([
-            'addIdentifiers' => $addIdentifiers,
-            'allSubjects' => $allSubjects,
-            'subjects' => $subjects,
-        ], __CLASS__);
-
         $consent = $this->consentRepository->get();
         $consent->setSubjects($subjects);
         $this->consentRepository->update($consent);
