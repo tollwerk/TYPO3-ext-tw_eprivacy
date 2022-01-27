@@ -6,7 +6,7 @@
  * @category   Tollwerk
  * @package    Tollwerk\TwEprivacy
  * @subpackage Tollwerk\TwEprivacy\ViewHelpers
- * @author     Joschi Kuphal <joschi@tollwerk.de> / @jkphl
+ * @author     Klaus Fiedler <klaus@tollwerk.de>
  * @copyright  Copyright © 2020 Joschi Kuphal <joschi@tollwerk.de> / @jkphl
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
@@ -14,7 +14,7 @@
 /***********************************************************************************
  *  The MIT License (MIT)
  *
- *  Copyright © 2020 Joschi Kuphal <joschi@tollwerk.de>
+ * Copyright © 2020 Joschi Kuphal <joschi@tollwerk.de> / @jkphl
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of
  *  this software and associated documentation files (the "Software"), to deal in
