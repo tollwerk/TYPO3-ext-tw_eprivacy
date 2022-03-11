@@ -13,6 +13,9 @@
             <trans-unit id="common.privacy">
                 <source>Privacy Policy Page (ID)</source>
             </trans-unit>
+            <trans-unit id="common.pluginPid">
+                <source>Plugin Page (ID)</source>
+            </trans-unit>
             <trans-unit id="cookie">
                 <source>Consent Cookie</source>
             </trans-unit>

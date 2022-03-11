@@ -21,6 +21,14 @@
 				<source>Accept necessary only</source> <target state="translated">Accetta solo se necessario</target></trans-unit>
 			<trans-unit id="eprivacy.update.reset" approved="yes">
 				<source>Reset</source> <target state="translated">Reset</target></trans-unit>
+			<trans-unit id="content.needsConsent.text">
+				<source>A content was hidden because you did not agree to all necessary cookies. In order to see the content, you must agree to the following cookies.</source>
+				<target>il contenuto "%s" è stato nascosto perché non hai acconsentito a tutti i cookie necessari. Per visualizzare il contenuto, devi accettare i seguenti cookie.</target>
+			</trans-unit>
+			<trans-unit id="content.needsConsent.actions">
+				<source>Click <![CDATA[<a href="%s">here</a>]]> to show the content, accepting all required cookies. You can manage all of your settings on <![CDATA[<a href="%s">this page</a>]]>.</source>
+				<target>Clicca <![CDATA[<a href="%s">qui</a>]]> per mostrare il contenuto, accettando tutti i cookie richiesti. Puoi gestire tutte le tue impostazioni su <![CDATA[<a href="%s">questa pagina</a>]]>.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -9,6 +9,10 @@
                 <source>Imprint Page (ID)</source> <target state="translated">Impressumsseite (ID)</target></trans-unit>
             <trans-unit id="common.privacy" approved="yes">
                 <source>Privacy Policy Page (ID)</source> <target state="translated">Datenschutzerklärung (ID)</target></trans-unit>
+            <trans-unit id="common.pluginPid">
+                <source>Plugin Page (ID)</source>
+                <target>Seite mit Plugin (ID)</target>
+            </trans-unit>
             <trans-unit id="cookie" approved="yes">
                 <source>Consent Cookie</source> <target state="translated">Cookie-Zustimmung</target></trans-unit>
             <trans-unit id="cookie.lifetime" approved="yes">

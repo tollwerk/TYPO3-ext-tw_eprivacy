@@ -11,6 +11,10 @@
             <trans-unit id="common.privacy" approved="yes">
                 <source>Privacy Policy Page (ID)</source> <target state="translated">Pagina informativa sulla privacy (ID)
 </target></trans-unit>
+            <trans-unit id="common.pluginPid">
+                <source>Plugin Page (ID)</source>
+                <target>Pagina con plugin (ID)</target>
+            </trans-unit>
             <trans-unit id="cookie" approved="yes">
                 <source>Consent Cookie</source> <target state="translated">Cookie di consenso
 </target></trans-unit>
