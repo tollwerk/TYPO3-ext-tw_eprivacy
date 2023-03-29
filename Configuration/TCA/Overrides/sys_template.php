@@ -35,17 +35,10 @@ defined('TYPO3') or die();
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-(function () {
-
-    ExtensionManagementUtility::addLLrefForTCAdescr(
-        'tx_tweprivacy_domain_model_type',
-        'EXT:tw_eprivacy/Resources/Private/Language/locallang_csh_tx_tweprivacy_domain_model_type.xlf'
+call_user_func(function () {
+    ExtensionManagementUtility::addStaticFile(
+        'tw_eprivacy',
+        'Configuration/TypoScript/Static',
+        'tollwerk ePrivacy Consent Manager'
     );
-    ExtensionManagementUtility::allowTableOnStandardPages('tx_tweprivacy_domain_model_type');
-
-    ExtensionManagementUtility::addLLrefForTCAdescr(
-        'tx_tweprivacy_domain_model_subject',
-        'EXT:tw_eprivacy/Resources/Private/Language/locallang_csh_tx_tweprivacy_domain_model_subject.xlf'
-    );
-    ExtensionManagementUtility::allowTableOnStandardPages('tx_tweprivacy_domain_model_subject');
-})();
+});

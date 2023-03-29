@@ -4,6 +4,15 @@ if (!defined('TYPO3_MODE')) {
     die('Access denied.');
 }
 
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
+ExtensionUtility::registerPlugin(
+    'TwEprivacy',
+    'Eprivacy',
+    'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tw_eprivacy_eprivacy.name',
+    'tw_eprivacy-plugin-eprivacy'
+);
+
 // Add new fields
 $newColumns = [
     'tx_tweprivacy_consent' => [
