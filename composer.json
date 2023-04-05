@@ -2,15 +2,17 @@
     "name": "tollwerk/tw-eprivacy",
     "type": "typo3-cms-extension",
     "description": "ePrivacy Consent Manager",
+    "license": ["GPL-2.0-or-later"],
     "authors": [
         {
             "name": "Joschi Kuphal",
+            "email": "joschi@tollwerk.de",
+            "homepage": "https://tollwerk.de",
             "role": "Developer"
         }
     ],
     "require": {
-        "typo3/cms-core": "^10.0",
-        "tollwerk/tw-base": "^4.0"
+        "typo3/cms-core": "^11"
     },
     "autoload": {
         "psr-4": {
@@ -18,7 +20,7 @@
         }
     },
     "replace": {
-        "tw_eprivacy": "self.version",
+        "tollwerk/tw_eprivacy": "self.version",
         "typo3-ter/tw-eprivacy": "self.version"
     }
 }
