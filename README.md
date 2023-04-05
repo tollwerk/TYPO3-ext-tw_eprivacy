@@ -27,38 +27,67 @@ composer install tollwerk/tw-eprivacy
 
 ### Include TypoScript template
 
-It is necessary to include the TypoScript provided by this extension. Select your root page and edit the TypoScript root template
+It is necessary to include the TypoScript provided by this extension. Select your root page, edit the TypoScript root template
 and add the "tw_privacy" template.
-
-![](/Docs/Installation/Assets/include_typoscript_template.jpg)
 
 ### Create all required pages
 
 The extension needs the following pages inside your page tree.
 
-* A page containing the ePrivacy frontend plugin. On this page, create a new content element by selecting "Plugins" inside the content wizzard and choose "ePrivacy Consent Manager".
+* A page containing the ePrivacy frontend plugin. On this page, create a new content element by selecting "Plugins" inside the content wizard and choose "ePrivacy Consent Manager".
 * A page containing the data privacy disclaimer.
 * A page containing the imprint and other legal information. This page will be linked.
 * A folder for all ePrivacy records. Alternatively, you can use the page with the ePrivacy plugin for storing your records.
-
-![](/Docs/Installation/Assets/pages_and_plugin.jpg)
 
 ### Set TypoScript constants
 
 Open the TYPO3 module `Web > Template`, select your root page in the page tree, select "Constant Editor" and the ePrivacy extension.
 
-![](/Docs/Installation/Assets/constant_editor.jpg)
-
 The following options are required for everything to work. All other options have default values.
 
-* **Default Storage PID** is the page UID where all ePrivacy records are stored. Only records of cookies (and other releated things)
-stored there will be found and used by the eprivacy plugin.
+* **Default Storage PID** `plugin.tx_tweprivacy_eprivacy.persistence.storagePid` is the page UID where all ePrivacy records are stored.
 
-* **Imprint Page (ID)** is the UID of the imprint page.
+* **Imprint Page (ID)** `plugin.tx_tweprivacy_eprivacy.settings.imprint` is the UID of the imprint page.
 
-* **Privacy Policy Page (ID)** is the UID of the data privacy page.
+* **Privacy Policy Page (ID)** `plugin.tx_tweprivacy_eprivacy.settings.privacy` is the UID of the data privacy page.
 
-* **Plugin Page (ID)** is the UID of the page that contains the eprivacy frontend plugin.
+* **Plugin Page (ID)** `plugin.tx_tweprivacy_eprivacy.settings.pluginPid` is the UID of the page that contains the eprivacy frontend plugin.
+
+### Create cookie records
+
+You should create cookie records for all cookies that are used by your website. Cookies that do not have a corresponding
+cookie record will be blocked by ePrivacy. There are two types of records:
+
+
+#### ePrivacy Subject Type
+
+Each cookie record must belong to a so-called subject type. Subject types are used to group cookie records together and
+provide basic information about all of them. Typicall subject types can be "Essential", "Marketing", "Statistics" etc.
+A subject type has the following properties:
+
+* **Visible:** Enables / disables all cookie records assigned to this subject type.
+* **Title:** Human readable title like "Essential cookies", "Marketing" etc.
+* **Description:** Human readable description for all cookies of this type.
+* **Needs consent:** If set, the user can choose to give consent or revoke it for  all cookies of this type.
+If not set, the cookies still are visible with their titles and descriptions but can not be revoked by the user.
+
+#### ePrivacy Subject
+
+This is a single cookie record. You need at least one cookie for remembering what other cookies
+the user accepted or revoked.
+
+![](/Docs/Installation/Assets/cookie_eprivacy.jpg)
+
+A cookie record has the following properties:
+
+* **Visible:** Enalbe / disable this record.
+* **Public:** If not set, will not be shown in the frontend plugin.
+* **Title:** Human readable title.
+* **Mode:** Can be "Cookie" (default) or "Set". Sets can be used to group cookies together so that the user can accept or revoke all of them at once.
+* **Type:** The ePrivacy Subject Type, see above.
+
+t.b.c.
+
 
 
 
