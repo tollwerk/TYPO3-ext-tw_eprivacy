@@ -105,7 +105,7 @@ class OutgoingMiddleware implements MiddlewareInterface
 
         $cookieParams = [];
         foreach (GeneralUtility::trimExplode(';', $value, true) as $part) {
-            list($partName, $partValue) = GeneralUtility::trimExplode('=', $part, true, 2);
+            list($partName, $partValue) = array_pad(GeneralUtility::trimExplode('=', $part, true, 2), 2, true);
             $cookieParams[$partName] = $partValue ?? true;
         }
 

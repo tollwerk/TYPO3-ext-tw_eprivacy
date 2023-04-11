@@ -18,9 +18,6 @@ return [
         'searchFields'             => 'title',
         'iconfile'                 => 'EXT:tw_eprivacy/Resources/Public/Icons/type.svg'
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, needs_consent',
-    ],
     'types'     => [
         '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, needs_consent'],
     ],
@@ -44,7 +41,6 @@ return [
         ],
         'l10n_parent'      => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude'     => true,
             'label'       => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
             'config'      => [
                 'type'                => 'select',
@@ -131,7 +127,6 @@ return [
                 'rows'                  => 15,
                 'eval'                  => 'trim,required',
             ],
-
         ],
     ],
 ];

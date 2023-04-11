@@ -13,7 +13,6 @@
 
 namespace Tollwerk\TwEprivacy\Domain\Repository;
 
-use Tollwerk\TwBase\Domain\Repository\Traits\DebuggableRepositoryTrait;
 use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
@@ -25,7 +24,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class SubjectRepository extends Repository
 {
-    use DebuggableRepositoryTrait;
     /**
      * Default ordering
      *
