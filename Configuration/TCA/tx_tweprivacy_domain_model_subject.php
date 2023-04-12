@@ -19,9 +19,6 @@ return [
         'searchFields'             => 'title,identifier,purpose',
         'iconfile'                 => 'EXT:tw_eprivacy/Resources/Public/Icons/subject.svg'
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, public, title, name, provider, identifier, purpose, type, session',
-    ],
     'types'     => [
         '0' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, --palette--;;nameidentifier, --palette--;;lifetime, purpose'],
         '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, purpose'],
@@ -52,7 +49,6 @@ return [
         ],
         'l10n_parent'      => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude'     => true,
             'label'       => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
             'config'      => [
                 'type'                => 'select',

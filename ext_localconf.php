@@ -7,13 +7,8 @@ call_user_func(
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'Tollwerk.TwEprivacy',
             'Eprivacy',
-            [
-                'Subject' => 'list, addConsent'
-            ],
-            // non-cacheable actions
-            [
-                'Subject' => 'addConsent'
-            ]
+            [Tollwerk\TwEprivacy\Controller\SubjectController::class => 'list, addConsent'],
+            [Tollwerk\TwEprivacy\Controller\SubjectController::class => 'addConsent']
         );
 
         // wizards
