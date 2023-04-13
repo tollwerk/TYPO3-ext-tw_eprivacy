@@ -73,8 +73,8 @@ If not set, the cookies still are visible with their titles and descriptions but
 
 #### ePrivacy Subject
 
-This is a single cookie record. You need at least one cookie for remembering what other cookies
-the user accepted or revoked.
+This is a single cookie record. You need at least one cookie 'eprivacy_consent' for remembering what other cookies
+the user accepted or revoked. For this you can use the values of the screenshot below.
 
 ![](/Docs/Installation/Assets/cookie_eprivacy.jpg)
 

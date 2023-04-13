@@ -20,7 +20,7 @@
         <f:for each="{subjects}" as="subjectsByType">
             <fieldset class="Eprivacy__tab-panel" id="eprivacy-{subjectsByType.0.type.uid}">
                 <legend>
-                    <base:heading content="{types.{subjectsByType.0.type.uid}.title}"/>
+                    <h2>{types.{subjectsByType.0.type.uid}.title}</h2>
                 </legend>
                 <ol class="Eprivacy__subjects">
                     <f:for each="{subjectsByType}" as="subject">
@@ -67,7 +67,7 @@
                 </f:else>
             </f:if>
             <label class="Eprivacy__subject-label" for="eprivacy-{subject.identifier}">
-                <base:heading content="{subject.title}" id="Eprivacy__subject-title">
+                <h3 id="Eprivacy__subject-title">{subject.title}</h3>
                     <dl>
                         <dt class="Eprivacy__subject-name-label">
                             <f:translate key="eprivacy.subject.name"/>
@@ -99,7 +99,6 @@
                             <f:format.html>{subject.purpose}</f:format.html>
                         </dd>
                     </dl>
-                </base:heading>
             </label>
         </li>
     </f:section>

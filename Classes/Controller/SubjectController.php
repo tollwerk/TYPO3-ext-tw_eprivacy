@@ -17,6 +17,7 @@ use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Domain\Model\Type;
 use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
 use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
+use Tollwerk\TwEprivacy\ExpressionLanguage\ConsentConditionProvider;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
@@ -173,5 +174,12 @@ class SubjectController extends ActionController
         ]);
 
 //        setcookie('test', 'value', time() + 86400, '/');
+    }
+
+    public function updateConsentAction(int $update = self::UPDATE_DENY) {
+        // Do nothing when invalid value.
+        if ($update !== self::UPDATE_ACCEPT && update !== self::UPDATE_DENY) {
+            return;
+        }
     }
 }
