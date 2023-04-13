@@ -22,14 +22,14 @@ $EM_CONF['tw_eprivacy'] = [
     'category'         => 'plugin',
     'author'           => 'Jolanta Dworczyk',
     'author_email'     => 'joschi@tollwerk.de',
-    'state'            => 'alpha',
+    'state'            => 'stable',
     'uploadfolder'     => 0,
     'createDirs'       => '',
     'clearCacheOnLoad' => 0,
-    'version'          => '1.0.0',
+    'version'          => '2.0.0',
     'constraints'      => [
         'depends'   => [
-            'typo3'   => '10.0.0-11.5.99',
+            'typo3'   => '11.0.0-11.99.99',
         ],
         'conflicts' => [],
         'suggests'  => [],
