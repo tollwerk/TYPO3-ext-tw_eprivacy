@@ -10,6 +10,12 @@ call_user_func(
             [Tollwerk\TwEprivacy\Controller\SubjectController::class => 'list, addConsent'],
             [Tollwerk\TwEprivacy\Controller\SubjectController::class => 'list, addConsent']
         );
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Tollwerk.TwEprivacy',
+            'EprivacyDialog',
+            [Tollwerk\TwEprivacy\Controller\SubjectController::class => 'dialog'],
+            [Tollwerk\TwEprivacy\Controller\SubjectController::class => 'dialog']
+        );
 
         // wizards
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(

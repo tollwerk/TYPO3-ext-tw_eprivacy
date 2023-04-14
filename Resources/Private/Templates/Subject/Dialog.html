@@ -1,0 +1,45 @@
+<f:comment><!--
+
+    Render a cookie consent dialog
+
+--></f:comment>
+<html xmlns:f="https://xsd.helhum.io/ns/typo3/cms-fluid/master/ViewHelpers"
+      xmlns:eprivacy="http://typo3.org/ns/Tollwerk/tw_eprivacy/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <f:debug>{_all}</f:debug>
+
+    <dialog open>
+        <h2>Cookie consent dialog here!</h2>
+
+        <!-- The `action` does not have to open a specific page, so you can just use your start page. -->
+        <form method="post" action="/?tx_twruag_cookiebanner[action]=cookie&tx_twruag_cookiebanner[controller]=Banner">
+
+            <!-- Hidden redirect link for returning to the current page. -->
+            <input type="hidden"
+                   name="cookieConsentBacklink"
+                   value="https://example.org/">
+
+            <!-- Accept all cookies and return to current page. -->
+            <button type="submit"
+                    name="tx_twruag_cookiebanner[accept]"
+                    value="2">
+                Select all
+            </button>
+
+            <!-- Accept only necessary cookies and return to the current page. -->
+            <button type="submit"
+                    name="tx_twruag_cookiebanner[accept]"
+                    value="1">
+                Only technical
+            </button>
+
+            <!-- Open the page with the ePrivacy frontend plugin -->
+            <a href="/cookie-consent">
+                Learn more
+            </a>
+        </form>
+
+    </dialog>
+
+</html>

@@ -176,10 +176,11 @@ class SubjectController extends ActionController
 //        setcookie('test', 'value', time() + 86400, '/');
     }
 
-    public function updateConsentAction(int $update = self::UPDATE_DENY) {
-        // Do nothing when invalid value.
-        if ($update !== self::UPDATE_ACCEPT && update !== self::UPDATE_DENY) {
-            return;
-        }
+    public function dialogAction(int $update = self::UPDATE_DENY) {
+        //die("dialogAction");
+        //// Do nothing when invalid value.
+        //if ($update !== self::UPDATE_ACCEPT && $update !== self::UPDATE_DENY) {
+        //    return;
+        //}
     }
 }

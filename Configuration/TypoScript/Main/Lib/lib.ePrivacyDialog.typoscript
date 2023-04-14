@@ -1,0 +1,17 @@
+lib.ePrivacyDialog = USER_INT
+lib.ePrivacyDialog {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    settings < plugin.tx_tweprivacy_eprivacy.settings
+    persistence < plugin.tx_tweprivacy_eprivacy.persistence
+    view < plugin.tx_tweprivacy_eprivacy.view
+    vendorName = Tollwerk
+    extensionName = TwEprivacy
+    pluginName = EprivacyDialog
+    controller = Subject
+    action = dialog
+    switchableControllerActions {
+        Subject {
+            1 = dialog
+        }
+    }
+}
