@@ -91,11 +91,13 @@ A cookie record has the following properties:
 * **Title:** Human readable title.
 * **Mode:** Can be "Cookie" (default) or "Set". Sets can be used to group cookies together so that the user can accept or revoke all of them at once.
 * **Type:** The ePrivacy Subject Type, see above.
-
-t.b.c.
-
-
-
+* **Identifier:** Use this to check for consent with the given ViewHelper or TypoScript conditions.
+* **Provider:** Where does this cookie come from? Something like "Google", "TYPO3", "Company XY"..
+* **Public name:** The actual name of the cookie.
+* **Belongs to set:** All cookies belonging to the same set are updated together if the user accepts/revokes the entire set.
+* **Lifetime:** Cookie lifetime in seconds.
+* **Expires with session:** If set, the cookie will expire when the browser session ends. It's up to the browser to decide on what occasions, like closing the Window, closing a tab etc.
+* **Purpose:** A hopefully easy to understand description of the purpose of this cookie.
 
 ## For editors
 
@@ -134,7 +136,7 @@ Returns a cookie as an array if found by its name.
 <f:debug>{eprivacy:getCookie(name: 'eprivacy_consent')}</f:debug>
 
 <!-- Check the "eprivacy_consent" cookie. -->
-<f:if condition="{consentCookie}">
+<f:if condition="{eprivacy:getCookie(name: 'eprivacy_consent')}">
     <f:else>
         <!-- Show something (like a consent dialog) if the cookie is not set. -->
     </f:else>
@@ -161,7 +163,7 @@ Similar to the Fluid viewhelper, there's also a custom TypoScript condition (imp
 ## Cookie consent dialog
 
 This extension provides a dialog that is shown when a user visits your page for the first time. This dialog will only
-be shown when the Cookie "eprivacy_consent" is not yet set. The dialog contains the following buttons and links:
+be shown when the Cookie "eprivacy_consent" is not set. The dialog contains the following buttons and links:
 
 * **Accept all:** Accepts all (registered, see "ePrivacy Subject") cookies and refreshes the current page.
 * **Accept necessary only:** Only accepts (registered, see "ePrivacy Subject") cookies marked as necessary,
