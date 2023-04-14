@@ -9,6 +9,12 @@
             "email": "joschi@tollwerk.de",
             "homepage": "https://tollwerk.de",
             "role": "Developer"
+        },
+        {
+            "name": "Klaus Fiedler",
+            "email": "klaus@tollwerk.de",
+            "homepage": "https://tollwerk.de",
+            "role": "Developer"
         }
     ],
     "require": {
