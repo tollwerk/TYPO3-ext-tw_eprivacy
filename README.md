@@ -4,8 +4,8 @@ The tollwerk ePrivacy Consent Manager ("ePrivacy") provides a clean way to manag
 
 ## Features
 
-* Also works without any javascript!
-* All cookies are blocked by default, no matter if they are set client -side or server-side.
+* Works without any javascript!
+* All cookies are blocked by default, no matter if they are set client-side or server-side.
 * As TYPO3 editor you can register cookies you want to be manageable by the user.
 * Provides a frontend plugin as TYPO3 content element where users can give or revoke consent for registered cookies.
 * Provides TypoScript conditions and Fluid ViewHelpers to check for cookie consent.
