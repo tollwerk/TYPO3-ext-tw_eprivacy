@@ -1,0 +1,3 @@
+# Include all typoscript files found in the following directories.
+<INCLUDE_TYPOSCRIPT: source="DIR:./Lib" extensions="typoscript">
+<INCLUDE_TYPOSCRIPT: source="DIR:./Page" extensions="typoscript">

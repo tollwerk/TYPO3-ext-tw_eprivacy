@@ -17,11 +17,15 @@ use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Domain\Model\Type;
 use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
 use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
+use Tollwerk\TwEprivacy\ExpressionLanguage\ConsentConditionProvider;
+use Tollwerk\TwEprivacy\Utilities\ConsentUtility;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Object\Exception;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * SubjectController
@@ -47,6 +51,13 @@ class SubjectController extends ActionController
     protected $consentRepository = null;
 
     /**
+     * Consent utility
+     *
+     * @var ConsentUtility
+     */
+    protected $consentUtility = null;
+
+    /**
      * Inject the subject repository
      *
      * @param SubjectRepository $subjectRepository Subject repository
@@ -64,6 +75,16 @@ class SubjectController extends ActionController
     public function injectConsentRepository(ConsentRepository $consentRepository): void
     {
         $this->consentRepository = $consentRepository;
+    }
+
+    /**
+     * Inject the consent utility
+     *
+     * @param ConsentUtility $consentUtility Consent utility
+     */
+    public function injectConsentUtility(ConsentUtility $consentUtility): void
+    {
+        $this->consentUtility = $consentUtility;
     }
 
     /**
@@ -111,36 +132,14 @@ class SubjectController extends ActionController
      */
     public function listAction(int $update = 0, array $subjects = [])
     {
-//        print_r($_COOKIE);
         $consent = $this->consentRepository->get();
 
         // Process updates
         if ($update) {
-            switch ($update) {
-                case self::UPDATE_ACCEPT:
-                    $subjects = array_map(
-                        function(Subject $subject) {
-                            return $subject->getIdentifier();
-                        },
-                        $this->subjectRepository->findByPublic(true)->toArray()
-                    );
-                    break;
-                case self::UPDATE_DENY:
-                    $subjects = [];
-                case self::UPDATE_UPDATE:
-                    $defaultSubjectIdentifiers = array_map(
-                        function(Subject $subject) {
-                            return $subject->getIdentifier();
-                        },
-                        $this->subjectRepository->findDefaultSubjects()->toArray()
-                    );
-                    $subjects                  = array_unique(array_merge($subjects, $defaultSubjectIdentifiers));
-                    break;
-            }
-            $consent->setSubjects($subjects);
-            $this->consentRepository->update($consent);
+            $this->consentUtility->update($update, $subjects, $consent);
         }
 
+        // Get everything for showing the cookie consent manager.
         $types          = [];
         $subjectsByType = [];
 
@@ -171,7 +170,27 @@ class SubjectController extends ActionController
             'consent'  => $consent,
             'now'      => new \DateTime()
         ]);
+    }
 
-//        setcookie('test', 'value', time() + 86400, '/');
+    /**
+     * Dialog action
+     *
+     * @param int|null $update Update consent state
+     *
+     * @return void
+     *
+     * @throws Exception
+     * @throws InvalidConfigurationTypeException
+     * @throws StopActionException
+     */
+    public function dialogAction(int $update = null) {
+        // Do nothing if update value is not valid.
+        if ($update !== self::UPDATE_ACCEPT && $update !== self::UPDATE_DENY) {
+            return;
+        }
+
+        // Update the consent and perform a redirect to the current page so that updated cookies take effect.
+        $this->consentUtility->update($update);
+        $this->redirect('dialog', 'Subject', 'TwEprivacy');
     }
 }

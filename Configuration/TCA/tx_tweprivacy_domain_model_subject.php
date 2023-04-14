@@ -193,9 +193,12 @@ return [
                 'renderType'          => 'selectSingle',
                 'foreign_table'       => 'tx_tweprivacy_domain_model_subject',
                 'foreign_table_where' => 'AND {#tx_tweprivacy_domain_model_subject}.{#pid}=###CURRENT_PID### AND {#tx_tweprivacy_domain_model_subject}.{#sys_language_uid} IN (-1,0) AND tx_tweprivacy_domain_model_subject.mode = '.\Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET.' ORDER BY tx_tweprivacy_domain_model_subject.name',
+
                 'items'               => [['---', 0]],
-                'minitems'            => 1,
+                'minitems'            => 0,
                 'maxitems'            => 1,
+                'eval'                => 'int',
+                'default'             => '0'
             ],
         ],
         'lifetime'   => [

@@ -1,3 +1,7 @@
+# Include main typoscript file for additional configuration like page types, lib objects etc.
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:tw_eprivacy/Configuration/TypoScript/Main/main.typoscript">
+
+# Plugin setup.
 plugin.tx_tweprivacy_eprivacy {
     view {
         templateRootPaths.0 = EXT:{extension.extensionKey}/Resources/Private/Templates/
@@ -22,6 +26,7 @@ plugin.tx_tweprivacy_eprivacy {
         imprint = {$plugin.tx_tweprivacy_eprivacy.settings.imprint}
         privacy = {$plugin.tx_tweprivacy_eprivacy.settings.privacy}
         pluginPid = {$plugin.tx_tweprivacy_eprivacy.settings.pluginPid}
+        showDialog = {$plugin.tx_tweprivacy_eprivacy.settings.showDialog}
     }
 
     features {

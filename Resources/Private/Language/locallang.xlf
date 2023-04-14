@@ -27,6 +27,25 @@
 			<trans-unit id="eprivacy.update.deny">
 				<source>Accept necessary only</source>
 			</trans-unit>
+
+
+
+			<trans-unit id="eprivacy.dialog.title">
+				<source>Cookie usage on this site</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="eprivacy.dialog.description">
+				<source>This website uses cookies to ensure you get the best experience on our website. By continuing to use this site, you agree to our use of cookies. For more information, please see our <![CDATA[<a href="%s">]]>imprint<![CDATA[<a/>]]> and our <![CDATA[<a href="%s">]]>privacy policy<![CDATA[<a/>]]>.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="eprivacy.dialog.learn-more">
+				<source>Learn more</source>
+				<target></target>
+			</trans-unit>
+
+
+
+
 			<trans-unit id="eprivacy.update.reset">
 				<source>Reset</source>
 			</trans-unit>
