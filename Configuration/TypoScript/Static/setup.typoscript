@@ -26,6 +26,7 @@ plugin.tx_tweprivacy_eprivacy {
         imprint = {$plugin.tx_tweprivacy_eprivacy.settings.imprint}
         privacy = {$plugin.tx_tweprivacy_eprivacy.settings.privacy}
         pluginPid = {$plugin.tx_tweprivacy_eprivacy.settings.pluginPid}
+        showDialog = {$plugin.tx_tweprivacy_eprivacy.settings.showDialog}
     }
 
     features {

@@ -13,6 +13,12 @@
                 <source>Plugin Page (ID)</source>
                 <target>Seite mit Plugin (ID)</target>
             </trans-unit>
+
+            <trans-unit id="common.showDialog">
+                <source>Show cookie dialog</source>
+                <target>Cookie-Dialog anzeigen</target>
+            </trans-unit>
+
             <trans-unit id="cookie" approved="yes">
                 <source>Consent Cookie</source> <target state="translated">Cookie-Zustimmung</target></trans-unit>
             <trans-unit id="cookie.lifetime" approved="yes">

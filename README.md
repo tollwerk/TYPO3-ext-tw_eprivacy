@@ -5,7 +5,7 @@ The tollwerk ePrivacy Consent Manager ("ePrivacy") provides a clean way to manag
 ## Features
 
 * Also works without any javascript!
-* All cookies are blocked by default, no matter if they are set client-side or server-side.
+* All cookies are blocked by default, no matter if they are set client -side or server-side.
 * As TYPO3 editor you can register cookies you want to be manageable by the user.
 * Provides a frontend plugin as TYPO3 content element where users can give or revoke consent for registered cookies.
 * Provides TypoScript conditions and Fluid ViewHelpers to check for cookie consent.
@@ -104,9 +104,11 @@ t.b.c.
 Editors can set the required consent for content elements individually inside the TYPO3 backend.
 The field "Needs cookie consent" can be found on inside the "access"-tab of each content element.
 
-## Fluid ViewHelper
+## Fluid ViewHelpers
 
-The `<eprivacy:consent>` viewhelper is a specialized condition viewhelper that enables you to test for the user's consent with particular subject identifiers. Examples:
+### eprivacy:consent
+
+The `&lt;eprivacy:consent>` viewhelper is a specialized condition viewhelper that enables you to test for the user's consent with particular subject identifiers. Examples:
 
 ```html
 <!-- Test for a single subject identfier -->
@@ -124,6 +126,24 @@ The `<eprivacy:consent>` viewhelper is a specialized condition viewhelper that e
 
 **ATTENTION:** As the result depends on the users current consent settings, it is essential to ensure that the viewhelper is used in an **uncached environment / template**!
 
+
+### eprivacy:getCookie
+
+Returns a cookie as an array if found by its name.
+
+```html
+<!-- Show the "eprivacy_consent" cookie data. -->
+<f:debug>{eprivacy:getCookie(name: 'eprivacy_consent')}</f:debug>
+
+<!-- Check the "eprivacy_consent" cookie. -->
+<f:if condition="{consentCookie}">
+    <f:else>
+        <!-- Show something (like a consent dialog) if the cookie is not set. -->
+    </f:else>
+</f:if>
+```
+
+
 ## TypoScript condition
 
 Similar to the Fluid viewhelper, there's also a custom TypoScript condition (implemented as [Expression Language extension](https://docs.typo3.org/m/typo3/reference-typoscript/master/en-us/Conditions/Index.html)) named `ePrivacy` that you can use to test for the user's consent with particular subject identifiers.
@@ -140,34 +160,17 @@ Similar to the Fluid viewhelper, there's also a custom TypoScript condition (imp
 [END]
 ```
 
-## Cookie banner
+## Cookie consent dialog
 
-```html
-<!-- The `action` does not have to open a specific page, so you can just use your start page. -->
-<form method="post" action="/?tx_twruag_cookiebanner[action]=cookie&tx_twruag_cookiebanner[controller]=Banner">
+This extension provides a dialog that is shown when a user visits your page for the first time. This dialog will only
+be shown when the Cookie "eprivacy_consent" is not yet set. The dialog contains the following buttons and links:
 
-    <!-- Hidden redirect link for returning to the current page. -->
-    <input type="hidden"
-           name="cookieConsentBacklink"
-           value="https://example.org/">
+* **Accept all:** Accepts all (registered, see "ePrivacy Subject") cookies and refreshes the current page.
+* **Accept necessary only:** Only accepts (registered, see "ePrivacy Subject") cookies marked as necessary,
+revokes all others, refreshes the current pages.
+* **Learn more:** Opens the page with the ePrivacy plugin.
+* Additionally, there are links to the imprint and data privacy pages.
 
-    <!-- Accept all cookies and return to current page. -->
-    <button type="submit"
-            name="tx_twruag_cookiebanner[accept]"
-            value="2">
-        Select all
-    </button>
+![](/Docs/Installation/Assets/dialog.jpg)
 
-    <!-- Accept only necessary cookies and return to the current page. -->
-    <button type="submit"
-            name="tx_twruag_cookiebanner[accept]"
-            value="1">
-        Only technical
-    </button>
-
-    <!-- Open the page with the ePrivacy frontend plugin -->
-    <a href="/cookie-consent">
-        Learn more
-    </a>
-</form>
-```
+You can disable this dialog inside the constant editor, see `plugin.tx_tweprivacy_eprivacy.settings.showDialog`.
