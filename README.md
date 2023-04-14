@@ -14,8 +14,6 @@ The tollwerk ePrivacy Consent Manager ("ePrivacy") provides a clean way to manag
 ## Not included
 
 * This extension comes without any CSS and Javascript.
-* There is no "cookie consent banner" or any other overlay that appears when the user visits your page for the first time.
-You have to provide this yourself. See "Cookie banner".
 
 ## Supported languages
 
