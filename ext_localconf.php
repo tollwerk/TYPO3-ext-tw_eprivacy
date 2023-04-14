@@ -8,7 +8,7 @@ call_user_func(
             'Tollwerk.TwEprivacy',
             'Eprivacy',
             [Tollwerk\TwEprivacy\Controller\SubjectController::class => 'list, addConsent'],
-            [Tollwerk\TwEprivacy\Controller\SubjectController::class => 'addConsent']
+            [Tollwerk\TwEprivacy\Controller\SubjectController::class => 'list, addConsent']
         );
 
         // wizards
