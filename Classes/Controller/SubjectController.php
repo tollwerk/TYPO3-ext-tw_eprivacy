@@ -23,6 +23,7 @@ use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Object\Exception;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
@@ -180,12 +181,16 @@ class SubjectController extends ActionController
      *
      * @throws Exception
      * @throws InvalidConfigurationTypeException
+     * @throws StopActionException
      */
     public function dialogAction(int $update = null) {
+        // Do nothing if update value is not valid.
         if ($update !== self::UPDATE_ACCEPT && $update !== self::UPDATE_DENY) {
             return;
         }
 
+        // Update the consent and perform a redirect to the current page so that updated cookies take effect.
         $this->consentUtility->update($update);
+        $this->redirect('dialog', 'Subject', 'TwEprivacy');
     }
 }
