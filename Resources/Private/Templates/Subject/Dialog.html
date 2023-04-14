@@ -7,39 +7,46 @@
       xmlns:eprivacy="http://typo3.org/ns/Tollwerk/tw_eprivacy/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-    <f:debug>{_all}</f:debug>
-
+    <!-- Dialog -->
     <dialog open>
-        <h2>Cookie consent dialog here!</h2>
 
-        <!-- The `action` does not have to open a specific page, so you can just use your start page. -->
-        <form method="post" action="/?tx_twruag_cookiebanner[action]=cookie&tx_twruag_cookiebanner[controller]=Banner">
+        <!-- Title and text -->
+        <h2>{f:translate(key: 'eprivacy.dialog.title')}</h2>
+        <p>
+            <f:format.raw>
+                <f:translate key="eprivacy.dialog.description"
+                             arguments="{
+                                0: '{f:uri.page(pageUid: settings.imprint)}',
+                                1: '{f:uri.page(pageUid: settings.privacy)}'
+                             }"/>
+            </f:format.raw>
+        </p>
 
-            <!-- Hidden redirect link for returning to the current page. -->
-            <input type="hidden"
-                   name="cookieConsentBacklink"
-                   value="https://example.org/">
+        <!-- Form for updating the user consent -->
+        <f:form action="dialog"
+                controller="Subject"
+                pluginName="ePrivacyDialog"
+                extensionName="TwEprivacy"
+                method="POST">
 
-            <!-- Accept all cookies and return to current page. -->
-            <button type="submit"
-                    name="tx_twruag_cookiebanner[accept]"
-                    value="2">
-                Select all
-            </button>
+            <!-- Accept all cookies. -->
+            <f:form.button type="submit"
+                           name="update"
+                           value="2">
+                {f:translate(key: 'eprivacy.update.accept')}
+            </f:form.button>
 
-            <!-- Accept only necessary cookies and return to the current page. -->
-            <button type="submit"
-                    name="tx_twruag_cookiebanner[accept]"
-                    value="1">
-                Only technical
-            </button>
+            <!-- Accept only necessary cookies. -->
+            <f:form.button type="submit"
+                           name="update"
+                           value="3">
+                {f:translate(key: 'eprivacy.update.deny')}
+            </f:form.button>
 
             <!-- Open the page with the ePrivacy frontend plugin -->
-            <a href="/cookie-consent">
-                Learn more
-            </a>
-        </form>
-
+            <f:link.page pageUid="{settings.pluginPid}">
+                {f:translate(key: 'eprivacy.dialog.learn-more')}
+            </f:link.page>
+        </f:form>
     </dialog>
-
 </html>

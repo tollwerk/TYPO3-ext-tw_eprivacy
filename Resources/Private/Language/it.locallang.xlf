@@ -19,6 +19,21 @@
 				<source>Accept all</source> <target state="translated">Accetta tutti</target></trans-unit>
 			<trans-unit id="eprivacy.update.deny" approved="yes">
 				<source>Accept necessary only</source> <target state="translated">Accetta solo se necessario</target></trans-unit>
+
+			<trans-unit id="eprivacy.dialog.title">
+				<source>Cookie usage on this site</source>
+				<target>Utilizzo dei cookie su questo sito</target>
+			</trans-unit>
+			<trans-unit id="eprivacy.dialog.description">
+				<source>This website uses cookies to ensure you get the best experience on our website. By continuing to use this site, you agree to our use of cookies. For more information, please see our <![CDATA[<a href="%s">]]>imprint<![CDATA[<a/>]]> and our <![CDATA[<a href="%s">]]>privacy policy<![CDATA[<a/>]]>.</source>
+				<target>Questo sito Web utilizza i cookie per assicurarti la migliore esperienza sul nostro sito Web. Continuando a utilizzare questo sito, accetti il nostro utilizzo dei cookie. Per ulteriori informazioni, consultare il nostro <![CDATA[<a href="%s">]]>impronta<![CDATA[<a/>]]> e il nostro <![CDATA[<a href="% s">]]>informativa sulla privacy<![CDATA[<a/>]]>.</target>
+			</trans-unit>
+			<trans-unit id="eprivacy.dialog.learn-more">
+				<source>Learn more</source>
+				<target>Saperne di più</target>
+			</trans-unit>
+
+
 			<trans-unit id="eprivacy.update.reset" approved="yes">
 				<source>Reset</source> <target state="translated">Reset</target></trans-unit>
 			<trans-unit id="content.needsConsent.text">
