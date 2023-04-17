@@ -28,7 +28,7 @@ The tollwerk ePrivacy Consent Manager ("ePrivacy") provides a clean way to manag
 ### Install extension with composer
 
 ```
-composer install tollwerk/tw-eprivacy
+composer require tollwerk/tw-eprivacy
 ```
 
 ### Include TypoScript template
