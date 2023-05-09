@@ -26,8 +26,8 @@
 				<target>Verwendung von Cookies auf dieser Website</target>
 			</trans-unit>
 			<trans-unit id="eprivacy.dialog.description">
-				<source>This website uses cookies to ensure you get the best experience on our website. By continuing to use this site, you agree to our use of cookies. For more information, please see our <![CDATA[<a href="%s">]]>imprint<![CDATA[<a/>]]> and our <![CDATA[<a href="%s">]]>privacy policy<![CDATA[<a/>]]>.</source>
-				<target>Diese Website verwendet Cookies, um sicherzustellen, dass Sie die beste Erfahrung auf unserer Website erhalten. Indem Sie diese Website weiterhin nutzen, stimmen Sie unserer Verwendung von Cookies zu. Weitere Informationen finden Sie in unserem <![CDATA[<a href="%s">]]>Impressum<![CDATA[<a/>]]> und in unserem <![CDATA[<a href="% s">]]>Datenschutzerklärung<![CDATA[<a/>]]>.</target>
+				<source>This website uses cookies to ensure you get the best experience on our website. By continuing to use this site, you agree to our use of cookies. For more information, please see our <![CDATA[<a href="%s">]]>imprint<![CDATA[</a>]]> and our <![CDATA[<a href="%s">]]>privacy policy<![CDATA[</a>]]>.</source>
+				<target>Diese Website verwendet Cookies, um sicherzustellen, dass Sie die beste Erfahrung auf unserer Website erhalten. Indem Sie diese Website weiterhin nutzen, stimmen Sie unserer Verwendung von Cookies zu. Weitere Informationen finden Sie in unserem <![CDATA[<a href="%s">]]>Impressum<![CDATA[</a>]]> und in der <![CDATA[<a href="% s">]]>Datenschutzerklärung<![CDATA[</a>]]>.</target>
 			</trans-unit>
 			<trans-unit id="eprivacy.dialog.learn-more">
 				<source>Learn more</source>
