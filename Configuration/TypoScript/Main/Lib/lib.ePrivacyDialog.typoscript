@@ -1,9 +1,6 @@
 lib.ePrivacyDialog = USER_INT
 lib.ePrivacyDialog {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-    settings < plugin.tx_tweprivacy_eprivacy.settings
-    persistence < plugin.tx_tweprivacy_eprivacy.persistence
-    view < plugin.tx_tweprivacy_eprivacy.view
     vendorName = Tollwerk
     extensionName = TwEprivacy
     pluginName = EprivacyDialog
@@ -13,5 +10,27 @@ lib.ePrivacyDialog {
         Subject {
             1 = dialog
         }
+    }
+    persistence {
+        storagePid = {$plugin.tx_tweprivacy_eprivacy.persistence.storagePid}
+    }
+    view {
+        templateRootPaths.0 = EXT:{extension.extensionKey}/Resources/Private/Templates/
+        templateRootPaths.1 = {$plugin.tx_tweprivacy_eprivacy.view.templateRootPath}
+        partialRootPaths.0 = EXT:tw_eprivacy/Resources/Private/Partials/
+        partialRootPaths.1 = {$plugin.tx_tweprivacy_eprivacy.view.partialRootPath}
+        layoutRootPaths.0 = EXT:tw_eprivacy/Resources/Private/Layouts/
+        layoutRootPaths.1 = {$plugin.tx_tweprivacy_eprivacy.view.layoutRootPath}
+    }
+    settings {
+        lifetime = {$plugin.tx_tweprivacy_eprivacy.settings.lifetime}
+        path = {$plugin.tx_tweprivacy_eprivacy.settings.path}
+        domain = {$plugin.tx_tweprivacy_eprivacy.settings.domain}
+        secure = {$plugin.tx_tweprivacy_eprivacy.settings.secure}
+        httponly = {$plugin.tx_tweprivacy_eprivacy.settings.httponly}
+        imprint = {$plugin.tx_tweprivacy_eprivacy.settings.imprint}
+        privacy = {$plugin.tx_tweprivacy_eprivacy.settings.privacy}
+        pluginPid = {$plugin.tx_tweprivacy_eprivacy.settings.pluginPid}
+        showDialog = {$plugin.tx_tweprivacy_eprivacy.settings.showDialog}
     }
 }
