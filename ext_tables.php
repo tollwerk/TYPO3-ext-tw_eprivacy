@@ -31,7 +31,8 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***********************************************************************************/
-defined('TYPO3') or die();
+
+defined('TYPO3') || die();
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
