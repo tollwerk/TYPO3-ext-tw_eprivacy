@@ -2,5 +2,5 @@ page = PAGE
 
 # Include the cookie consent dialog.
 [{$plugin.tx_tweprivacy_eprivacy.settings.showDialog}]
-    page.1681466566 < lib.ePrivacyDialog
+    page.2 < lib.ePrivacyDialog
 [GLOBAL]
