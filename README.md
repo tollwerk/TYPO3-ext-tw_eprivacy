@@ -90,7 +90,7 @@ A cookie record has the following properties:
 * **Public:** If not set, will not be shown in the frontend plugin.
 * **Title:** Human readable title.
 * **Mode:** Can be "Cookie" (default) or "Set". Sets can be used to group cookies together so that the user can accept or revoke all of them at once.
-* **Type:** The ePrivacy Subject Type, see above.
+* **Type:** The ePrivacy Subject Type. **Important:** This type must have "Needs consent" disabled, otherwise the user consent can not be saved correctly. See "ePrivacy Subject" above.
 * **Identifier:** Use this to check for consent with the given ViewHelper or TypoScript conditions.
 * **Provider:** Where does this cookie come from? Something like "Google", "TYPO3", "Company XY"..
 * **Public name:** The actual name of the cookie.
@@ -174,3 +174,20 @@ revokes all others, refreshes the current pages.
 ![](/Docs/Installation/Assets/dialog.jpg)
 
 You can disable this dialog inside the constant editor, see `plugin.tx_tweprivacy_eprivacy.settings.showDialog`.
+
+### Render the dialog by hand
+
+When using `plugin.tx_tweprivacy_eprivacy.settings.showDialog` inside the constant editor, the dialog will be
+included by the following TypoScript code:
+
+```typoscript
+# Include the cookie consent dialog.
+[{$plugin.tx_tweprivacy_eprivacy.settings.showDialog}]
+    page.2 < lib.ePrivacyDialog
+[GLOBAL]
+```
+
+If `page.2` is already occupied, or, for some reason, you want to render the dialog anywhere else, you can do this by disabling
+`plugin.tx_tweprivacy_eprivacy.settings.showDialog` and including `lib.ePrivacyDialog` by yourself.
+
+Please note that for accessibility reasons you should place the dialog as first content inside the `<body>`-tag.
