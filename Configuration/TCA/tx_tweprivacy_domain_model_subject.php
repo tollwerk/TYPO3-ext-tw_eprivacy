@@ -195,7 +195,6 @@ return [
                 'items'               => [['---', 0]],
                 'minitems'            => 0,
                 'maxitems'            => 1,
-                'eval'                => 'int',
                 'default'             => '0'
             ],
         ],
@@ -204,9 +203,8 @@ return [
             'l10n_mode' => 'exclude',
             'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.lifetime',
             'config'    => [
-                'type'    => 'input',
+                'type'    => 'number',
                 'size'    => 5,
-                'eval'    => 'int',
                 'required' => true,
                 'default' => '0'
             ],
