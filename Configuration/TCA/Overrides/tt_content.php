@@ -21,7 +21,6 @@ $newColumns = [
             'exclude' => true,
             'type' => 'select',
             'renderType' => 'selectMultipleSideBySide',
-            'enableMultiSelectFilterTextfield' => true,
             'itemsProcFunc' => \Tollwerk\TwEprivacy\Utilities\TcaUtility::class . '->getConsentItems'
         ],
     ],
