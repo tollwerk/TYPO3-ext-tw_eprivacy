@@ -39,7 +39,10 @@ return [
                 'renderType'          => 'selectSingle',
                 'default'             => 0,
                 'items'               => [
-                    ['', 0],
+                    [
+                        'label' => '',
+                        'value' => 0
+                    ],
                 ],
                 'foreign_table'       => 'tx_tweprivacy_domain_model_type',
                 'foreign_table_where' => 'AND {#tx_tweprivacy_domain_model_type}.{#pid}=###CURRENT_PID### AND {#tx_tweprivacy_domain_model_type}.{#sys_language_uid} IN (-1,0)',
@@ -71,9 +74,8 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items'      => [
                     [
-                        0                    => '',
-                        1                    => '',
-                        'invertStateDisplay' => true
+                        'label'                    => '',
+                        'value'                    => '',
                     ]
                 ],
             ],
@@ -87,8 +89,8 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items'      => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
+                        'value' => '',
                     ]
                 ],
                 'default'    => 1,

@@ -47,7 +47,10 @@ return [
                 'renderType'          => 'selectSingle',
                 'default'             => 0,
                 'items'               => [
-                    ['', 0],
+                    [
+                        'label' => '',
+                        'value' => 0
+                    ],
                 ],
                 'foreign_table'       => 'tx_tweprivacy_domain_model_subject',
                 'foreign_table_where' => 'AND {#tx_tweprivacy_domain_model_subject}.{#pid}=###CURRENT_PID### AND {#tx_tweprivacy_domain_model_subject}.{#sys_language_uid} IN (-1,0)',
@@ -79,9 +82,8 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items'      => [
                     [
-                        0                    => '',
-                        1                    => '',
-                        'invertStateDisplay' => true
+                        'label' => '',
+                        'value' => '',
                     ]
                 ],
             ],
@@ -169,12 +171,12 @@ return [
                 'renderType' => 'selectSingle',
                 'items'      => [
                     [
-                        'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.cookie',
-                        \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_COOKIE,
+                        'label' => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.cookie',
+                        'value' => \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_COOKIE,
                     ],
                     [
-                        'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.set',
-                        \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET,
+                        'label' => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.set',
+                        'value' => \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET,
                     ],
                 ],
                 'minitems'   => 1,
@@ -191,7 +193,12 @@ return [
                 'foreign_table'       => 'tx_tweprivacy_domain_model_subject',
                 'foreign_table_where' => 'AND {#tx_tweprivacy_domain_model_subject}.{#pid}=###CURRENT_PID### AND {#tx_tweprivacy_domain_model_subject}.{#sys_language_uid} IN (-1,0) AND tx_tweprivacy_domain_model_subject.mode = '.\Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET.' ORDER BY tx_tweprivacy_domain_model_subject.name',
 
-                'items'               => [['---', 0]],
+                'items'               => [
+                    [
+                        'label' => '---',
+                        'value' => 0
+                    ]
+                ],
                 'minitems'            => 0,
                 'maxitems'            => 1,
                 'default'             => '0'
@@ -217,8 +224,8 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items'      => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
+                        'value' => '',
                     ]
                 ],
                 'default'    => 1,
@@ -233,8 +240,8 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items'      => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
+                        'value' => '',
                     ]
                 ],
                 'default'    => 0,
