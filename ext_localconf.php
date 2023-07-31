@@ -38,26 +38,6 @@ call_user_func(
             [SubjectController::class => 'dialog']
         );
 
-        // Make plugins available in content wizard. TODO: Remove / Migrate?
-        ExtensionManagementUtility::addPageTSConfig(
-            'mod {
-            wizards.newContentElement.wizardItems.plugins {
-                elements {
-                    eprivacy {
-                        iconIdentifier = tw_eprivacy-plugin-eprivacy
-                        title = LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tw_eprivacy_eprivacy.name
-                        description = LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tw_eprivacy_eprivacy.description
-                        tt_content_defValues {
-                            CType = list
-                            list_type = tweprivacy_eprivacy
-                        }
-                    }
-                }
-                show = *
-            }
-       }'
-        );
-
         // Add Hooks
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['stdWrap'][] = StdWrapHook::class;
     }
