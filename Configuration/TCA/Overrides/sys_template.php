@@ -38,7 +38,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 call_user_func(function () {
     ExtensionManagementUtility::addStaticFile(
         'tw_eprivacy',
-        'Configuration/TypoScript/Static',
+        'Configuration/TypoScript',
         'tollwerk ePrivacy Consent Manager'
     );
 });
