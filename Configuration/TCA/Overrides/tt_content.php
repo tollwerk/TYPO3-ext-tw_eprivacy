@@ -4,6 +4,7 @@ defined('TYPO3') || die();
 
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
+// Register plugins.
 ExtensionUtility::registerPlugin(
     'TwEprivacy',
     'Eprivacy',
