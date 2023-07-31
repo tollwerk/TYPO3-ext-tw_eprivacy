@@ -13,19 +13,18 @@
 
 namespace Tollwerk\TwEprivacy\Controller;
 
+use Psr\Http\Message\ResponseInterface;
 use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Domain\Model\Type;
 use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
 use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
-use Tollwerk\TwEprivacy\ExpressionLanguage\ConsentConditionProvider;
 use Tollwerk\TwEprivacy\Utilities\ConsentUtility;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
-use TYPO3\CMS\Extbase\Object\Exception;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use \Exception;
+
 
 /**
  * SubjectController
@@ -88,12 +87,16 @@ class SubjectController extends ActionController
     }
 
     /**
-     * @param int|null $pid
-     * @param array    $addIdentifiers
+     * AddConsentAction
      *
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @param int|null $pid         PID
+     * @param array $addIdentifiers Add identifiers
+     *
+     * @return ResponseInterface
+     *
+     * @throws InvalidConfigurationTypeException
      */
-    public function addConsentAction(int $pid = null, array $addIdentifiers = []) {
+    public function addConsentAction(int $pid = null, array $addIdentifiers = []): ResponseInterface {
 
         // Get all subjects
         $allSubjects = array_map(
@@ -118,19 +121,20 @@ class SubjectController extends ActionController
         $this->consentRepository->update($consent);
 
         // Remove all subjects currently not allowed by user
-        $this->redirectToUri($this->uriBuilder->setTargetPageUid($pid)->build());
+        return $this->redirectToUri($this->uriBuilder->setTargetPageUid($pid)->build());
     }
 
     /**
      * List action
      *
-     * @param int $update     Update consent state
-     * @param array $subjecst Subjects with consent
+     * @param int   $update   Update consent state
+     * @param array $subjects Subjects with consent
      *
      * @throws Exception
+     *
      * @throws InvalidConfigurationTypeException
      */
-    public function listAction(int $update = 0, array $subjects = [])
+    public function listAction(int $update = 0, array $subjects = []): ResponseInterface
     {
         $consent = $this->consentRepository->get();
 
@@ -170,6 +174,8 @@ class SubjectController extends ActionController
             'consent'  => $consent,
             'now'      => new \DateTime()
         ]);
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -177,20 +183,19 @@ class SubjectController extends ActionController
      *
      * @param int|null $update Update consent state
      *
-     * @return void
+     * @return ResponseInterface
      *
      * @throws Exception
      * @throws InvalidConfigurationTypeException
-     * @throws StopActionException
      */
-    public function dialogAction(int $update = null) {
+    public function dialogAction(int $update = null): ResponseInterface {
         // Do nothing if update value is not valid.
         if ($update !== self::UPDATE_ACCEPT && $update !== self::UPDATE_DENY) {
-            return;
+            return $this->htmlResponse();
         }
 
         // Update the consent and perform a redirect to the current page so that updated cookies take effect.
         $this->consentUtility->update($update);
-        $this->redirect('dialog', 'Subject', 'TwEprivacy');
+        return $this->redirect('dialog', 'Subject', 'TwEprivacy');
     }
 }
