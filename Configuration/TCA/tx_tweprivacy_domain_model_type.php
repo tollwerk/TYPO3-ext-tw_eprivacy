@@ -16,7 +16,10 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields'             => 'title',
-        'iconfile'                 => 'EXT:tw_eprivacy/Resources/Public/Icons/type.svg'
+        'iconfile'                 => 'EXT:tw_eprivacy/Resources/Public/Icons/type.svg',
+        'security'                 => [
+            'ignorePageTypeRestriction' => true
+        ],
     ],
     'types'     => [
         '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, needs_consent'],

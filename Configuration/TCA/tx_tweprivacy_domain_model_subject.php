@@ -17,7 +17,10 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields'             => 'title,identifier,purpose',
-        'iconfile'                 => 'EXT:tw_eprivacy/Resources/Public/Icons/subject.svg'
+        'iconfile'                 => 'EXT:tw_eprivacy/Resources/Public/Icons/subject.svg',
+        'security'                 => [
+            'ignorePageTypeRestriction' => true
+        ],
     ],
     'types'     => [
         '0' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, --palette--;;nameidentifier, --palette--;;lifetime, purpose'],

@@ -41,11 +41,9 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
         'tx_tweprivacy_domain_model_type',
         'EXT:tw_eprivacy/Resources/Private/Language/locallang_csh_tx_tweprivacy_domain_model_type.xlf'
     );
-    ExtensionManagementUtility::allowTableOnStandardPages('tx_tweprivacy_domain_model_type');
 
     ExtensionManagementUtility::addLLrefForTCAdescr(
         'tx_tweprivacy_domain_model_subject',
         'EXT:tw_eprivacy/Resources/Private/Language/locallang_csh_tx_tweprivacy_domain_model_subject.xlf'
     );
-    ExtensionManagementUtility::allowTableOnStandardPages('tx_tweprivacy_domain_model_subject');
 })();
