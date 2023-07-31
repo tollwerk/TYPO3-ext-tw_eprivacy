@@ -38,8 +38,6 @@ namespace Tollwerk\TwEprivacy\ViewHelpers;
 
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\Exception;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
@@ -62,8 +60,7 @@ class ConsentViewHelper extends AbstractConditionViewHelper
      */
     public static function verdict(array $arguments, RenderingContextInterface $renderingContext)
     {
-        $objectManager  = GeneralUtility::makeInstance(ObjectManager::class);
-        $eprivacyShield = $objectManager->get(EprivacyShield::class);
+        $eprivacyShield = GeneralUtility::makeInstance(EprivacyShield::class);
 
         // Run through all required subject identifiers
         foreach ((array)$arguments['identifier'] as $identifier) {
