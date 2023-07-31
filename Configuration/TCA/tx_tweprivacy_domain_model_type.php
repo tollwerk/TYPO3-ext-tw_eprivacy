@@ -101,7 +101,8 @@ return [
             'config'  => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'description'      => [
@@ -118,7 +119,8 @@ return [
                 ],
                 'cols'                  => 40,
                 'rows'                  => 15,
-                'eval'                  => 'trim,required',
+                'eval'                  => 'trim',
+                'required' => true,
             ],
         ],
     ],

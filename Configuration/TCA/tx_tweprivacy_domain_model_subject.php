@@ -94,7 +94,8 @@ return [
             'config'  => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'name'       => [
@@ -104,7 +105,8 @@ return [
             'config'    => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'identifier' => [
@@ -114,7 +116,8 @@ return [
             'config'    => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'provider'   => [
@@ -123,7 +126,8 @@ return [
             'config'  => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'purpose'    => [
@@ -140,7 +144,8 @@ return [
                 ],
                 'cols'                  => 40,
                 'rows'                  => 15,
-                'eval'                  => 'trim,required',
+                'eval'                  => 'trim',
+                'required' => true,
             ],
 
         ],
@@ -201,7 +206,8 @@ return [
             'config'    => [
                 'type'    => 'input',
                 'size'    => 5,
-                'eval'    => 'int,required',
+                'eval'    => 'int',
+                'required' => true,
                 'default' => '0'
             ],
         ],
