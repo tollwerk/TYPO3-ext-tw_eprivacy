@@ -1,13 +1,12 @@
-lib.ePrivacyDialog = USER_INT
+lib.ePrivacyDialog = EXTBASEPLUGIN
 lib.ePrivacyDialog {
-    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
     vendorName = Tollwerk
     extensionName = TwEprivacy
     pluginName = EprivacyDialog
-    controller = Subject
+    controller = Tollwerk\TwBzmfr\Controller\SubjectController
     action = dialog
     switchableControllerActions {
-        Subject {
+        Tollwerk\TwBzmfr\Controller\SubjectController {
             1 = dialog
         }
     }
