@@ -1,19 +1,8 @@
-lib.ePrivacyDialog = USER_INT
-lib.ePrivacyDialog {
-    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-    vendorName = Tollwerk
-    extensionName = TwEprivacy
-    pluginName = EprivacyDialog
-    controller = Subject
-    action = dialog
-    switchableControllerActions {
-        Subject {
-            1 = dialog
-        }
-    }
-    persistence {
-        storagePid = {$plugin.tx_tweprivacy_eprivacy.persistence.storagePid}
-    }
+# Include main typoscript file for additional configuration like page types, lib objects etc.
+@import 'EXT:tw_eprivacy/Configuration/TypoScript/Setup/main.typoscript'
+
+# Plugin setup.
+plugin.tx_tweprivacy_eprivacy {
     view {
         templateRootPaths.0 = EXT:{extension.extensionKey}/Resources/Private/Templates/
         templateRootPaths.1 = {$plugin.tx_tweprivacy_eprivacy.view.templateRootPath}
@@ -22,6 +11,12 @@ lib.ePrivacyDialog {
         layoutRootPaths.0 = EXT:tw_eprivacy/Resources/Private/Layouts/
         layoutRootPaths.1 = {$plugin.tx_tweprivacy_eprivacy.view.layoutRootPath}
     }
+
+    persistence {
+        storagePid = {$plugin.tx_tweprivacy_eprivacy.persistence.storagePid}
+        #recursive = 1
+    }
+
     settings {
         lifetime = {$plugin.tx_tweprivacy_eprivacy.settings.lifetime}
         path = {$plugin.tx_tweprivacy_eprivacy.settings.path}
@@ -32,5 +27,17 @@ lib.ePrivacyDialog {
         privacy = {$plugin.tx_tweprivacy_eprivacy.settings.privacy}
         pluginPid = {$plugin.tx_tweprivacy_eprivacy.settings.pluginPid}
         showDialog = {$plugin.tx_tweprivacy_eprivacy.settings.showDialog}
+    }
+
+    features {
+        #skipDefaultArguments = 1
+        # if set to 1, the enable fields are ignored in BE context
+        ignoreAllEnableFieldsInBe = 0
+        # Should be on by default, but can be disabled if all action in the plugin are uncached
+        requireCHashArgumentForActionArguments = 1
+    }
+
+    mvc {
+        #callDefaultActionIfActionCantBeResolved = 1
     }
 }

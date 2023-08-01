@@ -243,6 +243,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getLifetime(): int
     {
+        // @extensionScannerIgnoreLine
         return $this->lifetime;
     }
 

@@ -1,0 +1,16 @@
+ mod.wizards.newContentElement.wizardItems {
+    plugins {
+        elements {
+            eprivacy {
+                iconIdentifier = tw_eprivacy-plugin-eprivacy
+                title = LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tw_eprivacy_eprivacy.name
+                description = LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tw_eprivacy_eprivacy.description
+                tt_content_defValues {
+                    CType = list
+                    list_type = tweprivacy_eprivacy
+                }
+            }
+        }
+        show = *
+    }
+}

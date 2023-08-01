@@ -43,7 +43,6 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * ePrivacy Outgoing Middleware
@@ -65,8 +64,7 @@ class OutgoingMiddleware implements MiddlewareInterface
 
         // If there are cookie headers
         if (count($cookieHeaders)) {
-            $objectManager  = GeneralUtility::makeInstance(ObjectManager::class);
-            $ePrivacyShield = $objectManager->get(EprivacyShield::class);
+            $ePrivacyShield = GeneralUtility::makeInstance(EprivacyShield::class);
 
             // Parse and run through all cookies
             foreach (array_map([$this, 'parseCookieHeader'], $cookieHeaders) as $cookieParams) {

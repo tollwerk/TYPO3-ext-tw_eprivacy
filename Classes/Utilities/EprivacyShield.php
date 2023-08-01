@@ -40,7 +40,6 @@ use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
 use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * ePrivacy Shield
@@ -121,13 +120,13 @@ class EprivacyShield implements SingletonInterface
      * Instantiate and return the consent repository
      *
      * @return ConsentRepository Consent Repository
-     * @throws \TYPO3\CMS\Extbase\Object\Exception
+     *
+     * @throws Exception
      */
     protected function getConsentRepository(): ConsentRepository
     {
         if ($this->consentRepository === null) {
-            $this->consentRepository = GeneralUtility::makeInstance(ObjectManager::class)
-                                                     ->get(ConsentRepository::class);
+            $this->consentRepository = GeneralUtility::makeInstance(ConsentRepository::class);
         }
 
         return $this->consentRepository;
@@ -137,13 +136,13 @@ class EprivacyShield implements SingletonInterface
      * Instantiate and return the subject repository
      *
      * @return SubjectRepository Subject Repository
-     * @throws \TYPO3\CMS\Extbase\Object\Exception
+     *
+     * @throws Exception
      */
     protected function getSubjectRepository(): SubjectRepository
     {
         if ($this->subjectRepository === null) {
-            $this->subjectRepository = GeneralUtility::makeInstance(ObjectManager::class)
-                                                     ->get(SubjectRepository::class);
+            $this->subjectRepository = GeneralUtility::makeInstance(SubjectRepository::class);
         }
 
         return $this->subjectRepository;

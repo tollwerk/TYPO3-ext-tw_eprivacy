@@ -6,7 +6,6 @@ return [
         'type'                     => 'mode',
         'tstamp'                   => 'tstamp',
         'crdate'                   => 'crdate',
-        'cruser_id'                => 'cruser_id',
         'sortby'                   => 'sorting',
         'versioningWS'             => true,
         'languageField'            => 'sys_language_uid',
@@ -17,7 +16,10 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields'             => 'title,identifier,purpose',
-        'iconfile'                 => 'EXT:tw_eprivacy/Resources/Public/Icons/subject.svg'
+        'iconfile'                 => 'EXT:tw_eprivacy/Resources/Public/Icons/subject.svg',
+        'security'                 => [
+            'ignorePageTypeRestriction' => true
+        ],
     ],
     'types'     => [
         '0' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, --palette--;;nameidentifier, --palette--;;lifetime, purpose'],
@@ -34,17 +36,7 @@ return [
             'exclude' => true,
             'label'   => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
             'config'  => [
-                'type'       => 'select',
-                'renderType' => 'selectSingle',
-                'special'    => 'languages',
-                'items'      => [
-                    [
-                        'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages',
-                        -1,
-                        'flags-multiple'
-                    ]
-                ],
-                'default'    => 0,
+                'type'       => 'language',
             ],
         ],
         'l10n_parent'      => [
@@ -55,7 +47,10 @@ return [
                 'renderType'          => 'selectSingle',
                 'default'             => 0,
                 'items'               => [
-                    ['', 0],
+                    [
+                        'label' => '',
+                        'value' => 0
+                    ],
                 ],
                 'foreign_table'       => 'tx_tweprivacy_domain_model_subject',
                 'foreign_table_where' => 'AND {#tx_tweprivacy_domain_model_subject}.{#pid}=###CURRENT_PID### AND {#tx_tweprivacy_domain_model_subject}.{#sys_language_uid} IN (-1,0)',
@@ -87,9 +82,8 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items'      => [
                     [
-                        0                    => '',
-                        1                    => '',
-                        'invertStateDisplay' => true
+                        'label' => '',
+                        'value' => '',
                     ]
                 ],
             ],
@@ -101,7 +95,8 @@ return [
             'config'  => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'name'       => [
@@ -111,7 +106,8 @@ return [
             'config'    => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'identifier' => [
@@ -121,7 +117,8 @@ return [
             'config'    => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'provider'   => [
@@ -130,7 +127,8 @@ return [
             'config'  => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'purpose'    => [
@@ -147,7 +145,8 @@ return [
                 ],
                 'cols'                  => 40,
                 'rows'                  => 15,
-                'eval'                  => 'trim,required',
+                'eval'                  => 'trim',
+                'required' => true,
             ],
 
         ],
@@ -172,12 +171,12 @@ return [
                 'renderType' => 'selectSingle',
                 'items'      => [
                     [
-                        'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.cookie',
-                        \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_COOKIE,
+                        'label' => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.cookie',
+                        'value' => \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_COOKIE,
                     ],
                     [
-                        'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.set',
-                        \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET,
+                        'label' => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.mode.set',
+                        'value' => \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET,
                     ],
                 ],
                 'minitems'   => 1,
@@ -194,10 +193,14 @@ return [
                 'foreign_table'       => 'tx_tweprivacy_domain_model_subject',
                 'foreign_table_where' => 'AND {#tx_tweprivacy_domain_model_subject}.{#pid}=###CURRENT_PID### AND {#tx_tweprivacy_domain_model_subject}.{#sys_language_uid} IN (-1,0) AND tx_tweprivacy_domain_model_subject.mode = '.\Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_SET.' ORDER BY tx_tweprivacy_domain_model_subject.name',
 
-                'items'               => [['---', 0]],
+                'items'               => [
+                    [
+                        'label' => '---',
+                        'value' => 0
+                    ]
+                ],
                 'minitems'            => 0,
                 'maxitems'            => 1,
-                'eval'                => 'int',
                 'default'             => '0'
             ],
         ],
@@ -206,9 +209,9 @@ return [
             'l10n_mode' => 'exclude',
             'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.lifetime',
             'config'    => [
-                'type'    => 'input',
+                'type'    => 'number',
                 'size'    => 5,
-                'eval'    => 'int,required',
+                'required' => true,
                 'default' => '0'
             ],
         ],
@@ -221,8 +224,8 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items'      => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
+                        'value' => '',
                     ]
                 ],
                 'default'    => 1,
@@ -237,8 +240,8 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items'      => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
+                        'value' => '',
                     ]
                 ],
                 'default'    => 0,

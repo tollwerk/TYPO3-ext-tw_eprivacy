@@ -40,8 +40,6 @@ use Symfony\Component\ExpressionLanguage\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
@@ -80,9 +78,7 @@ class ConsentConditionProvider implements ExpressionFunctionProviderInterface
                     return false;
                 }
 
-                /** @var ObjectManagerInterface $objectManager */
-                $objectManager  = GeneralUtility::makeInstance(ObjectManager::class);
-                $ePrivacyShield = $objectManager->get(EprivacyShield::class);
+                $ePrivacyShield = GeneralUtility::makeInstance(EprivacyShield::class);
                 $result         = true;
 
                 foreach ($subjects as $subject) {
@@ -93,7 +89,7 @@ class ConsentConditionProvider implements ExpressionFunctionProviderInterface
                 }
 
                 // Reset the persistence mangager state
-                $objectManager->get(PersistenceManager::class)->clearState();
+                GeneralUtility::makeInstance(PersistenceManager::class)->clearState();
 
                 return $result;
             }

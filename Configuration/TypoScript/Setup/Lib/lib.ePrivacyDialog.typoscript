@@ -1,8 +1,18 @@
-# Include main typoscript file for additional configuration like page types, lib objects etc.
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:tw_eprivacy/Configuration/TypoScript/Main/main.typoscript">
-
-# Plugin setup.
-plugin.tx_tweprivacy_eprivacy {
+lib.ePrivacyDialog = EXTBASEPLUGIN
+lib.ePrivacyDialog {
+    vendorName = Tollwerk
+    extensionName = TwEprivacy
+    pluginName = EprivacyDialog
+    controller = Tollwerk\TwBzmfr\Controller\SubjectController
+    action = dialog
+    switchableControllerActions {
+        Tollwerk\TwBzmfr\Controller\SubjectController {
+            1 = dialog
+        }
+    }
+    persistence {
+        storagePid = {$plugin.tx_tweprivacy_eprivacy.persistence.storagePid}
+    }
     view {
         templateRootPaths.0 = EXT:{extension.extensionKey}/Resources/Private/Templates/
         templateRootPaths.1 = {$plugin.tx_tweprivacy_eprivacy.view.templateRootPath}
@@ -11,12 +21,6 @@ plugin.tx_tweprivacy_eprivacy {
         layoutRootPaths.0 = EXT:tw_eprivacy/Resources/Private/Layouts/
         layoutRootPaths.1 = {$plugin.tx_tweprivacy_eprivacy.view.layoutRootPath}
     }
-
-    persistence {
-        storagePid = {$plugin.tx_tweprivacy_eprivacy.persistence.storagePid}
-        #recursive = 1
-    }
-
     settings {
         lifetime = {$plugin.tx_tweprivacy_eprivacy.settings.lifetime}
         path = {$plugin.tx_tweprivacy_eprivacy.settings.path}
@@ -27,17 +31,5 @@ plugin.tx_tweprivacy_eprivacy {
         privacy = {$plugin.tx_tweprivacy_eprivacy.settings.privacy}
         pluginPid = {$plugin.tx_tweprivacy_eprivacy.settings.pluginPid}
         showDialog = {$plugin.tx_tweprivacy_eprivacy.settings.showDialog}
-    }
-
-    features {
-        #skipDefaultArguments = 1
-        # if set to 1, the enable fields are ignored in BE context
-        ignoreAllEnableFieldsInBe = 0
-        # Should be on by default, but can be disabled if all action in the plugin are uncached
-        requireCHashArgumentForActionArguments = 1
-    }
-
-    mvc {
-        #callDefaultActionIfActionCantBeResolved = 1
     }
 }

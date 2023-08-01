@@ -44,8 +44,8 @@ use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
-use TYPO3\CMS\Extbase\Object\Exception;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
+use \Exception;
+
 
 /**
  * Consent Repository
@@ -88,8 +88,7 @@ class ConsentRepository implements SingletonInterface
 
             // If there are no subjects enabled by cookie: Register the default subjects
             if (!count(self::$consent->getSubjects())) {
-                $objectManager     = GeneralUtility::makeInstance(ObjectManager::class);
-                $subjectRepository = $objectManager->get(SubjectRepository::class);
+                $subjectRepository = GeneralUtility::makeInstance(SubjectRepository::class);
                 self::$consent->setSubjects(
                     array_map(
                         function(Subject $subject) {
@@ -120,8 +119,7 @@ class ConsentRepository implements SingletonInterface
         EprivacyShield::reset();
 
         self::$consent        = $consent;
-        $objectManager        = GeneralUtility::makeInstance(ObjectManager::class);
-        $configurationManager = $objectManager->get(ConfigurationManager::class);
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
         $settings             = $configurationManager->getConfiguration(
             ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
             'TwEprivacy'
@@ -147,7 +145,7 @@ class ConsentRepository implements SingletonInterface
                 function(Subject $subject) {
                     return $subject->getIdentifier();
                 },
-                $objectManager->get(SubjectRepository::class)->findByPublic(true)->toArray()
+                GeneralUtility::makeInstance(SubjectRepository::class)->findByPublic(true)->toArray()
             );
             foreach (array_diff($allSubjects, $consent->getSubjects()) as $denySubject) {
                 if (!setcookie(

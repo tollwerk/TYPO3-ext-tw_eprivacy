@@ -50,7 +50,7 @@ class SubjectRepository extends Repository
             $constraints[] = $query->equals('public', true);
         }
 
-        $query->matching($query->logicalAnd($constraints));
+        $query->matching($query->logicalAnd(...$constraints));
 
         return $query->execute();
     }
