@@ -4,11 +4,11 @@ declare(strict_types=1);
 defined('TYPO3') || die();
 
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use Tollwerk\TwEprivacy\Controller\SubjectController;
+use Tollwerk\TwEprivacy\Hooks\ContentObject\PostInitHook;
 use Tollwerk\TwEprivacy\Hooks\ContentObject\StdWrapHook;
 
 call_user_func(
@@ -39,6 +39,8 @@ call_user_func(
         );
 
         // Add Hooks
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['stdWrap'][] = StdWrapHook::class;
+        // TODO: Re-enable tt_content check
+        // $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['stdWrap'][] = StdWrapHook::class;
+        // $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['postInit'][] = PostInitHook::class;
     }
 );

@@ -9,7 +9,9 @@ The tollwerk ePrivacy Consent Manager ("ePrivacy") provides a clean way to manag
 * As TYPO3 editor you can register cookies you want to be manageable by the user.
 * Provides a frontend plugin as TYPO3 content element where users can give or revoke consent for registered cookies.
 * Provides TypoScript conditions and Fluid ViewHelpers to check for cookie consent.
-* As TYPO3 editor you can set access options for content elements so that they are only rendered if the user gave consent to the required cookies.
+* ~~As TYPO3 editor you can set access options for content elements so that they are only rendered if the user gave
+  consent to the required cookies.~~ Temporarily disabled because of issues with TYPO3 caching and another issue with
+  existing TYPO3 hooks for content rendering.
 
 ## Not included
 
