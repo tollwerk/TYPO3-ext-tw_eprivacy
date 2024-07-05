@@ -36,6 +36,7 @@
 
 namespace Tollwerk\TwEprivacy\Hooks\ContentObject;
 
+use Tollwerk\TwEprivacy\Controller\SubjectController;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
@@ -107,6 +108,7 @@ class PostInitHook implements ContentObjectPostInitHookInterface
     {
         // Check if content elements can be rendered according to field tx_tweprivacy_consent.
         if ($parentObject->getCurrentTable() == 'tt_content' && !empty($parentObject->data['tx_tweprivacy_consent'])) {
+
             // Get required consent items.
             $consentItems = array_filter(
                 GeneralUtility::trimExplode(
@@ -117,10 +119,23 @@ class PostInitHook implements ContentObjectPostInitHookInterface
 
             // If content element can not be rendered, show a corresponding message instead.
             if (!$this->canRender($parentObject, $consentItems)) {
+                $parentObject->data['CType'] = 'text';
+                $parentObject->data['header_layout'] = 100;
+
+
+                $templatePath = GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Templates/Content/NeedsConsent.html');
+                $view = GeneralUtility::makeInstance(StandaloneView::class);
+                $view->setTemplatePathAndFilename($templatePath);
+                $view->assignMultiple([
+                    'consentItems' => $consentItems,
+                    'data'         => $parentObject->data,
+                ]);
+                $parentObject->data['bodytext'] = $view->render();
+
 
                 // Prevent rendering of content element, render nothing at all. See comments below.
                 // TODO: Find a way for rendering the fluid template '/Templates/Content/NeedsConsent'.
-                $parentObject->data = null;
+                // $parentObject->data = null;
 
                 /*
                  * Until TYPO3 11, this was done inside a hook for

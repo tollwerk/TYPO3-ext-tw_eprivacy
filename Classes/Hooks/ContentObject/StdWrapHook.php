@@ -39,6 +39,7 @@ namespace Tollwerk\TwEprivacy\Hooks\ContentObject;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectStdWrapHookInterface;
@@ -113,7 +114,9 @@ class StdWrapHook implements ContentObjectStdWrapHookInterface
     public function stdWrapPostProcess($content, array $configuration, ContentObjectRenderer &$parentObject): ?string
     {
         // Check if cookie consent for one or more cookies is required. Do not render element if consent is missing.
-        if ($parentObject->getCurrentTable() == 'tt_content' && !empty($parentObject->data['tx_tweprivacy_consent'])) {
+        if ((in_array($parentObject->getCurrentTable(), ['', 'tt_content']))
+            && !empty($parentObject->data['tx_tweprivacy_consent'])
+        ) {
             // Get required consent names from record
             $consentItems = array_filter(
                 GeneralUtility::trimExplode(
