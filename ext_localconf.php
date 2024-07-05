@@ -10,6 +10,7 @@ use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use Tollwerk\TwEprivacy\Controller\SubjectController;
 use Tollwerk\TwEprivacy\Hooks\ContentObject\PostInitHook;
 use Tollwerk\TwEprivacy\Hooks\ContentObject\StdWrapHook;
+use Tollwerk\TwEprivacy\Hooks\Frontend\CreateHashBaseHook;
 
 call_user_func(
     function() {
@@ -40,7 +41,8 @@ call_user_func(
 
         // Add Hooks
         // TODO: Re-enable tt_content check
-        // $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['stdWrap'][] = StdWrapHook::class;
-        // $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['postInit'][] = PostInitHook::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['stdWrap'][] = StdWrapHook::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['postInit'][] = PostInitHook::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['createHashBase'][] = CreateHashBaseHook::class . '->modifyParams';
     }
 );

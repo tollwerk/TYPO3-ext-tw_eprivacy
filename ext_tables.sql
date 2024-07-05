@@ -34,5 +34,5 @@ CREATE TABLE tx_tweprivacy_domain_model_subject
 #
 CREATE TABLE tt_content
 (
-    tx_tweprivacy_consent varchar(255) DEFAULT '' NOT NULL,
+    tx_tweprivacy_consent varchar(255) DEFAULT '' NOT NULL
 );
