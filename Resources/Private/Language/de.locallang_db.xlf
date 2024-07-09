@@ -51,6 +51,8 @@
                 <source>Provider</source> <target state="translated">Anbieter</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.purpose" approved="yes">
                 <source>Purpose</source> <target state="translated">Zweck</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.purpose_short" approved="yes">
+                <source>Purpose Short Description</source> <target>Zweck Kurzsbeschreibung</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.type" approved="yes">
                 <source>Type</source> <target state="translated">Typ</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.mode" approved="yes">

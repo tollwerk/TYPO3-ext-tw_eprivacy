@@ -11,25 +11,26 @@
 --></f:comment>
 <html xmlns:f="https://xsd.helhum.io/ns/typo3/cms-fluid/master/ViewHelpers"
       xmlns:eprivacy="http://typo3.org/ns/Tollwerk/tw_eprivacy/ViewHelpers"
-      data-namespace-typo3-fluid="true">
-
+      data-namespace-typo3-fluid="true"><f:spaceless>
     <aside class="CookieNeedsConsent">
-        <f:comment><!-- Get full subject records --></f:comment>
-        <f:variable name="subjects" value="{eprivacy:findSubjectsByName(names: consentItems)}"/>
-
         <f:comment><!-- Description text --></f:comment>
         <p class="CookieNeedsConsent__text">
             {f:translate(key: 'content.needsConsent.text', arguments: {0: data.header}, extensionName: 'TwEprivacy')}
         </p>
 
         <f:comment><!-- List of required subjects --></f:comment>
-        <ul class="CookieNeedsConsent__subjects">
-            <f:for each="{subjects.byIdentifier}" as="subject">
-                <li class="CookieNeedsConsent__subject">
-                        <strong>{subject.title}</strong>: <f:format.html>{subject.purpose}</f:format.html>
-                </li>
-            </f:for>
-        </ul>
+        <f:if condition="{consentItems}">
+            <f:comment><!-- Get full subject records --></f:comment>
+            <f:variable name="subjects" value="{eprivacy:findSubjectsByName(names: consentItems)}"/>
+
+            <ul class="CookieNeedsConsent__subjects">
+                <f:for each="{subjects.byIdentifier}" as="subject">
+                    <li class="CookieNeedsConsent__subject">
+                        <strong>{subject.title}: </strong>{subject.purposeShort}
+                    </li>
+                </f:for>
+            </ul>
+        </f:if>
 
         <f:comment><!-- Accept cookies --></f:comment>
         <f:comment><!--
@@ -44,16 +45,15 @@
                         arguments: '{pid: data.pid, addIdentifiers: subjects.identifiers}'
                     )}"
         />--></f:comment>
-        <!--
-// https://rws-ammunition.com/de/cookie-einstellungen?tx_tweprivacy_eprivacy%5Baction%5D=addConsent&tx_tweprivacy_eprivacy%5BaddIdentifiers%5D%5B0%5D=youtube&tx_tweprivacy_eprivacy%5Bcontroller%5D=Subject&tx_tweprivacy_eprivacy%5Bpid%5D=1&cHash=f8b930bf78c63e974542a08853073094#c2165
--->
-        <a href="t3://page?uid=4?&tx_tweprivacy_eprivacy[action]=addConsent&tx_tweprivacy_eprivacy[addIdentifiers][]=foo&tx_tweprivacy_eprivacy[controller]=Subject&tx_tweprivacy_eprivacy[pid]=1">Test</a>
 
         <f:comment><!-- <f:variable name="pluginPageUrl" value="{f:uri.page(pageUid: settings.pluginPid)}"/>--></f:comment>
         <p class="CookieNeedsConsent__actions">
-            <f:format.raw>{f:translate(key: 'content.needsConsent.actions', arguments: {0: acceptUrl, 1:
-                pluginPageUrl}, extensionName: 'TwEprivacy')}
-            </f:format.raw>
+            <a href="{eprivacy:content.missingConsent.acceptT3Link(
+            contentUid: data.uid,
+            identifiers: subjects.identifiers
+            )}">Benötigte Cookies akzeptieren und Inhalt anzeigen</a>
+
+            <a href="{eprivacy:content.missingConsent.settingsT3Link()}">Alle Cookie-Einstellungen</a>
         </p>
     </aside>
-</html>
+</f:spaceless></html>

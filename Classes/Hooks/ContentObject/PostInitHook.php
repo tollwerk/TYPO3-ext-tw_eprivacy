@@ -38,6 +38,7 @@ namespace Tollwerk\TwEprivacy\Hooks\ContentObject;
 
 use Tollwerk\TwEprivacy\Controller\SubjectController;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -94,9 +95,6 @@ class PostInitHook implements ContentObjectPostInitHookInterface
 
     /**
      * Manipulate content elements after initialization
-     * TODO: Re-enable tt_content check. Solve issue with caching of regular page content. Any rendering hook is
-     *       actually to late. We have to skip content elements when they are collected from the database instead, like
-     *       it is done when checking frontend user access rights.
      *
      * @param ContentObjectRenderer $parentObject The content object renderer
      *
@@ -119,33 +117,28 @@ class PostInitHook implements ContentObjectPostInitHookInterface
 
             // If content element can not be rendered, show a corresponding message instead.
             if (!$this->canRender($parentObject, $consentItems)) {
+                // Get TypoScript settings for tw_eprivacy.
+                $typoscript = GeneralUtility::makeInstance(
+                    ConfigurationManager::class
+                )->getConfiguration(
+                    ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
+                    'TwEprivacy'
+                );
+                $eprivacySettings = $typoscript['plugin.']['tx_tweprivacy_eprivacy.']['settings.'];
+
+                // Change rendering of content element to show 'consent missing' message instead.
                 $parentObject->data['CType'] = 'text';
                 $parentObject->data['header_layout'] = 100;
-
-
-                $templatePath = GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Templates/Content/NeedsConsent.html');
+                $templatePath = GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Templates/Content/MissingConsent.html');
                 $view = GeneralUtility::makeInstance(StandaloneView::class);
                 $view->setTemplatePathAndFilename($templatePath);
                 $view->assignMultiple([
                     'consentItems' => $consentItems,
                     'data'         => $parentObject->data,
+                    'settings'     => $eprivacySettings,
+                    'pid'          => $GLOBALS['TSFE']->id,
                 ]);
                 $parentObject->data['bodytext'] = $view->render();
-
-
-                // Prevent rendering of content element, render nothing at all. See comments below.
-                // TODO: Find a way for rendering the fluid template '/Templates/Content/NeedsConsent'.
-                // $parentObject->data = null;
-
-                /*
-                 * Until TYPO3 11, this was done inside a hook for
-                 * $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['stdWrap'].
-                 *
-                 * That hook still exists, but for tt_content elements the $parentObject->data array gets lost together
-                 * with $parentObject->getCurrentTable(). So checking for consent and rendering has to be moved into a
-                 * hook for $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['postInit'].
-                 * It's not clear if the behaviour in the stdWrap-Hook is a TYPO3 bug or intended.
-                 */
             }
         }
     }

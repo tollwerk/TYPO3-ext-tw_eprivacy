@@ -100,6 +100,7 @@ A cookie record has the following properties:
 * **Lifetime:** Cookie lifetime in seconds.
 * **Expires with session:** If set, the cookie will expire when the browser session ends. It's up to the browser to decide on what occasions, like closing the Window, closing a tab etc.
 * **Purpose:** A hopefully easy to understand description of the purpose of this cookie.
+* **Purpose Short Description:** The short description of the purpose. Will be used when a content element is not shown due to missing consent. See 'For editors' below.
 
 ## For editors
 

@@ -22,8 +22,8 @@ return [
         ],
     ],
     'types'     => [
-        '0' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, --palette--;;nameidentifier, --palette--;;lifetime, purpose'],
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, purpose'],
+        '0' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, --palette--;;nameidentifier, --palette--;;lifetime, purpose, purpose_short'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, purpose, purpose_short'],
     ],
     'palettes'  => [
         'hiddenpublic'   => ['showitem' => 'hidden, public'],
@@ -149,6 +149,17 @@ return [
                 'required' => true,
             ],
 
+        ],
+        'purpose_short' => [
+            'exclude' => true,
+            'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.purpose_short',
+            'config'  => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 2,
+                'eval' => 'trim',
+                'max'  => 160,
+            ],
         ],
         'type'       => [
             'exclude'   => true,

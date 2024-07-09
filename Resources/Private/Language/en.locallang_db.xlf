@@ -71,6 +71,8 @@
             <trans-unit id="tx_tweprivacy_domain_model_subject.purpose" approved="yes">
                 <source>Purpose</source>
             <target state="translated">Purpose</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.purpose_short" approved="yes">
+                <source>Purpose Short Description</source> <target>Purpose Short Description</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.type" approved="yes">
                 <source>Type</source>
             <target state="translated">Type</target></trans-unit>
