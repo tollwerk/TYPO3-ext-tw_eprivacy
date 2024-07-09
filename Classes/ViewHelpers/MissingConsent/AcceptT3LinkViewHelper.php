@@ -1,10 +1,9 @@
 <?php
 
-namespace Tollwerk\TwEprivacy\ViewHelpers\Content\MissingConsent;
+namespace Tollwerk\TwEprivacy\ViewHelpers\MissingConsent;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 

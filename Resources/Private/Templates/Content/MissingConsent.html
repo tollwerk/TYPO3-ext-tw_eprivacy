@@ -15,7 +15,7 @@
     <aside class="CookieNeedsConsent">
         <f:comment><!-- Description text --></f:comment>
         <p class="CookieNeedsConsent__text">
-            {f:translate(key: 'content.needsConsent.text', arguments: {0: data.header}, extensionName: 'TwEprivacy')}
+            {f:translate(key: 'content.needsConsent.description', arguments: {0: data.header}, extensionName: 'TwEprivacy')}
         </p>
 
         <f:comment><!-- List of required subjects --></f:comment>
@@ -26,34 +26,20 @@
             <ul class="CookieNeedsConsent__subjects">
                 <f:for each="{subjects.byIdentifier}" as="subject">
                     <li class="CookieNeedsConsent__subject">
-                        <strong>{subject.title}: </strong>{subject.purposeShort}
+                        <strong>
+                            <f:translate key="content.needsConsent.cookie.title"
+                                         arguments="{0: subject.title}"
+                                         extensionName="TwEprivacy"/>
+                        </strong> {subject.purposeShort}
                     </li>
                 </f:for>
             </ul>
         </f:if>
 
-        <f:comment><!-- Accept cookies --></f:comment>
-        <f:comment><!--
-        <f:variable name="acceptUrl"
-                    value="{f:uri.action(
-                        pageUid: settings.pluginPid,
-                        action: 'addConsent',
-                        controller: 'Subject',
-                        pluginName: 'Eprivacy',
-                        extensionName: 'TwEprivacy',
-                        section: 'c{data.uid}',
-                        arguments: '{pid: data.pid, addIdentifiers: subjects.identifiers}'
-                    )}"
-        />--></f:comment>
-
         <f:comment><!-- <f:variable name="pluginPageUrl" value="{f:uri.page(pageUid: settings.pluginPid)}"/>--></f:comment>
         <p class="CookieNeedsConsent__actions">
-            <a href="{eprivacy:content.missingConsent.acceptT3Link(
-            contentUid: data.uid,
-            identifiers: subjects.identifiers
-            )}">Benötigte Cookies akzeptieren und Inhalt anzeigen</a>
-
-            <a href="{eprivacy:content.missingConsent.settingsT3Link()}">Alle Cookie-Einstellungen</a>
+            <a href="{eprivacy:missingConsent.acceptT3Link(contentUid: data.uid,identifiers: subjects.identifiers)}">{f:translate(key: 'content.needsConsent.link.accept', extensionName: 'TwEprivacy')}</a>
+            <a href="{eprivacy:missingConsent.settingsT3Link()}">{f:translate(key: 'content.needsConsent.link.settings', extensionName: 'TwEprivacy')}</a>
         </p>
     </aside>
 </f:spaceless></html>
