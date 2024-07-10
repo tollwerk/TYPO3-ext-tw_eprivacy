@@ -107,9 +107,18 @@ A cookie record has the following properties:
 Editors can set the required consent for content elements individually inside the TYPO3 backend.
 The field "Needs cookie consent" can be found on inside the "access"-tab of each content element.
 
-## Fluid ViewHelpers
+## For developers
 
-### eprivacy:consent
+### Overwring Fluid Content Default Layout
+
+For showing or hiding content elements based on cookie consent (see "For editors" above), this Extension overwrites the default Fluid Layout for content elements by setting
+`lib.contentElement.layoutRootPaths.1 = EXT:tw_eprivacy/Resources/Private/Layouts/ContentElements/`. If your own extension needs to overwrite the default layout as well, please use 
+the file _Resources/Private/Layouts/ContentElements/Default.html` of this extension as basis for all further changes. Otherwise content elements will always be shown, even if there
+is missing consent for some of the required cookies!
+
+### Fluid ViewHelpers
+
+#### eprivacy:consent
 
 The `&lt;eprivacy:consent>` viewhelper is a specialized condition viewhelper that enables you to test for the user's consent with particular subject identifiers. Examples:
 
@@ -132,7 +141,7 @@ viewhelper is used in an **uncached environment / template**!~~ With the latest 
 environments as well. If there are any problems, don't hesitate to open an issue.
 
 
-### eprivacy:getCookie
+#### eprivacy:getCookie
 
 Returns a cookie as an array if found by its name.
 
@@ -149,7 +158,7 @@ Returns a cookie as an array if found by its name.
 ```
 
 
-## TypoScript condition
+### TypoScript condition
 
 Similar to the Fluid viewhelper, there's also a custom TypoScript condition (implemented as [Expression Language extension](https://docs.typo3.org/m/typo3/reference-typoscript/master/en-us/Conditions/Index.html)) named `ePrivacy` that you can use to test for the user's consent with particular subject identifiers.
 
@@ -165,7 +174,7 @@ Similar to the Fluid viewhelper, there's also a custom TypoScript condition (imp
 [END]
 ```
 
-## Cookie consent dialog
+### Cookie consent dialog
 
 This extension provides a dialog that is shown when a user visits your page for the first time. This dialog will only
 be shown when the Cookie "eprivacy_consent" is not set. The dialog contains the following buttons and links:
@@ -180,7 +189,7 @@ revokes all others, refreshes the current pages.
 
 You can disable this dialog inside the constant editor, see `plugin.tx_tweprivacy_eprivacy.settings.showDialog`.
 
-### Render the dialog by hand
+#### Render the dialog by hand
 
 When using `plugin.tx_tweprivacy_eprivacy.settings.showDialog` inside the constant editor, the dialog will be
 included by the following TypoScript code:
