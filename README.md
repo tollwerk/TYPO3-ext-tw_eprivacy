@@ -137,7 +137,7 @@ The `&lt;eprivacy:consent>` viewhelper is a specialized condition viewhelper tha
 ```
 
 **ATTENTION:** ~~As the result depends on the users current consent settings, it is essential to ensure that the
-viewhelper is used in an **uncached environment / template**!~~ With the latest update everything should work in cached
+viewhelper is used in an **uncached environment / template**!~~ Starting from version 3.1.0, everything should work in cached
 environments as well. If there are any problems, don't hesitate to open an issue.
 
 
