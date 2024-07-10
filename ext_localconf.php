@@ -8,8 +8,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use Tollwerk\TwEprivacy\Controller\SubjectController;
-use Tollwerk\TwEprivacy\Hooks\ContentObject\PostInitHook;
-use Tollwerk\TwEprivacy\Hooks\ContentObject\StdWrapHook;
 use Tollwerk\TwEprivacy\Hooks\Frontend\CreateHashBaseHook;
 
 call_user_func(
@@ -40,8 +38,6 @@ call_user_func(
         );
 
         // Add Hooks
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['stdWrap'][] = StdWrapHook::class; // TODO: Check if still necessary.
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['postInit'][] = PostInitHook::class; // Needed for plain 'text' elements.
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['createHashBase'][] = CreateHashBaseHook::class . '->modifyParams';
 
         // Exclude some parameters from chash.
