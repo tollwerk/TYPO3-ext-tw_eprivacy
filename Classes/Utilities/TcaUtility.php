@@ -63,9 +63,21 @@ class TcaUtility
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
                                       ->getQueryBuilderForTable('tx_tweprivacy_domain_model_subject');
         $records      = $queryBuilder
-            ->select('uid', 'title', 'name', 'identifier')
-            ->from('tx_tweprivacy_domain_model_subject')
-            ->where($queryBuilder->expr()->in('sys_language_uid', [-1, 0]))
+            ->select('subject.uid', 'subject.title', 'subject.name', 'subject.identifier')
+            ->from('tx_tweprivacy_domain_model_subject', 'subject')
+            ->innerJoin(
+                'subject',
+                'tx_tweprivacy_domain_model_type',
+                'type',
+                $queryBuilder->expr()->eq(
+                    'type.uid',
+                    $queryBuilder->quoteIdentifier('subject.type')
+                )
+
+            )
+            ->where($queryBuilder->expr()->in('subject.sys_language_uid', [-1, 0]))
+            ->andWhere($queryBuilder->expr()->eq('type.needs_consent', 1))
+            ->groupBy('subject.uid')
             ->execute()
             ->fetchAllAssociative();
 
