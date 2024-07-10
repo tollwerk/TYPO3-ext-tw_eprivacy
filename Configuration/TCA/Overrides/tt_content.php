@@ -27,6 +27,4 @@ $newColumns = [
     ],
 ];
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $newColumns);
-
-// TODO: Re-enable tt_content check
-// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content', 'tx_tweprivacy_consent', '', 'after:hidden');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content', 'tx_tweprivacy_consent', '', 'after:hidden');

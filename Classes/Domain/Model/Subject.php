@@ -59,6 +59,13 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $purpose = '';
 
     /**
+     * Purpose short description
+     *
+     * @var string
+     */
+    protected $purposeShort = '';
+
+    /**
      * Lifetime (seconds)
      *
      * @var int
@@ -212,6 +219,26 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setPurpose($purpose)
     {
         $this->purpose = $purpose;
+    }
+
+    /**
+     * Returns the purpose short description
+     *
+     * @return string
+     */
+    public function getPurposeShort(): string
+    {
+        return $this->purposeShort;
+    }
+
+    /**
+     * Sets the purpose short description
+     *
+     * @param string $purposeShort
+     */
+    public function setPurposeShort(string $purposeShort): void
+    {
+        $this->purposeShort = $purposeShort;
     }
 
     /**

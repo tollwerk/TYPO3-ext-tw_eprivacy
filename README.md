@@ -9,8 +9,8 @@ The tollwerk ePrivacy Consent Manager ("ePrivacy") provides a clean way to manag
 * As TYPO3 editor you can register cookies you want to be manageable by the user.
 * Provides a frontend plugin as TYPO3 content element where users can give or revoke consent for registered cookies.
 * Provides TypoScript conditions and Fluid ViewHelpers to check for cookie consent.
-* ~~As TYPO3 editor you can set access options for content elements so that they are only rendered if the user gave
-  consent to the required cookies.~~ Temporarily disabled because of issues with TYPO3 caching and another issue with
+* As TYPO3 editor you can set access options for content elements so that they are only rendered if the user gave
+  consent to the required cookies.
   existing TYPO3 hooks for content rendering.
 
 ## Not included
@@ -100,6 +100,7 @@ A cookie record has the following properties:
 * **Lifetime:** Cookie lifetime in seconds.
 * **Expires with session:** If set, the cookie will expire when the browser session ends. It's up to the browser to decide on what occasions, like closing the Window, closing a tab etc.
 * **Purpose:** A hopefully easy to understand description of the purpose of this cookie.
+* **Purpose Short Description:** The short description of the purpose. Will be used when a content element is not shown due to missing consent. See 'For editors' below.
 
 ## For editors
 
@@ -126,7 +127,9 @@ The `&lt;eprivacy:consent>` viewhelper is a specialized condition viewhelper tha
 </eprivacy:consent>
 ```
 
-**ATTENTION:** As the result depends on the users current consent settings, it is essential to ensure that the viewhelper is used in an **uncached environment / template**!
+**ATTENTION:** ~~As the result depends on the users current consent settings, it is essential to ensure that the
+viewhelper is used in an **uncached environment / template**!~~ With the latest update everything should work in cached
+environments as well. If there are any problems, don't hesitate to open an issue.
 
 
 ### eprivacy:getCookie

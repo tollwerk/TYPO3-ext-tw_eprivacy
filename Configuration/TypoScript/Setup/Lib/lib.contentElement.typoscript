@@ -1,0 +1,3 @@
+lib.contentElement {
+    layoutRootPaths.1 = EXT:tw_eprivacy/Resources/Private/Layouts/ContentElements/
+}

@@ -52,8 +52,14 @@
 			<trans-unit id="content.needsConsent.description">
 				<source>The content "%s" was hidden because you did not agree to all necessary cookies. In order to see the content, you must agree to the following cookies.</source>
 			</trans-unit>
-			<trans-unit id="content.needsConsent.actions">
-				<source>Click <![CDATA[<a href="%s">here</a>]]> to show the content, accepting all required cookies. You can manage all of your settings on <![CDATA[<a href="%s">this page</a>]]>.</source>
+			<trans-unit id="content.needsConsent.link.accept">
+				<source>Show content and accept required cookies</source>
+			</trans-unit>
+			<trans-unit id="content.needsConsent.link.settings">
+				<source>Manage all cookie settings</source>
+			</trans-unit>
+			<trans-unit id="content.needsConsent.cookie.title">
+				<source>%s:</source>
 			</trans-unit>
 		</body>
 	</file>
