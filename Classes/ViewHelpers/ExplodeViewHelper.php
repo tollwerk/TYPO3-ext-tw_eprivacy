@@ -6,7 +6,7 @@
  * @category   Tollwerk
  * @package    Tollwerk\TwEprivacy
  * @subpackage Tollwerk\TwEprivacy\ViewHelpers
- * @author     Joschi Kuphal <joschi@tollwerk.de> / @jkphl
+ * @author     Klaus Fiedler <klaus@tollwerk.de>
  * @copyright  Copyright © 2020 Joschi Kuphal <joschi@tollwerk.de> / @jkphl
  * @license    http://opensource.org/licenses/MIT The MIT License (MIT)
  */
@@ -14,7 +14,7 @@
 /***********************************************************************************
  *  The MIT License (MIT)
  *
- *  Copyright © 2020 Joschi Kuphal <joschi@tollwerk.de>
+ * Copyright © 2020 Joschi Kuphal <joschi@tollwerk.de> / @jkphl
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of
  *  this software and associated documentation files (the "Software"), to deal in
@@ -36,61 +36,51 @@
 
 namespace Tollwerk\TwEprivacy\ViewHelpers;
 
-use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Consent ViewHelper
+ * ExplodeViewHelper
+ *
+ * Explode a string
  *
  * @package    Tollwerk\TwEprivacy
  * @subpackage Tollwerk\TwEprivacy\ViewHelpers
  */
-class ConsentViewHelper extends AbstractConditionViewHelper
+class ExplodeViewHelper extends AbstractViewHelper
 {
     /**
-     * Evaluate subject consent
+     * Initialize all arguments. You need to override this method and call
+     * $this->registerArgument(...) inside this method, to register all your arguments.
      *
-     * @param array $arguments
-     * @param RenderingContextInterface $renderingContext
+     * @return void
      *
-     * @return bool
-     * @throws Exception
+     * @api
      */
-    public static function verdict(array $arguments, RenderingContextInterface $renderingContext)
+    public function initializeArguments(): void
     {
-        // Cast identifiers to array.
-        $identifiers = array_filter((array)($arguments['identifier']));
-
-        // If no identifiers given, element can always be shown.
-        if (count($identifiers) === 0) {
-            return true;
-        }
-
-        // Run through and check all required subject identifiers.
-        $eprivacyShield = GeneralUtility::makeInstance(EprivacyShield::class);
-        foreach ($identifiers as $identifier) {
-            if (!$eprivacyShield->isAllowedIdentifier($identifier)) {
-                return false;
-            }
-        }
-
-        return true;
+        parent::initializeArguments();
+        $this->registerArgument('separator', 'string', 'Separator', false, ',');
+        $this->registerArgument('string', 'string', 'Array', false, '');
     }
 
     /**
-     * Initialize arguments
+     * Default implementation of static rendering; useful API method if your ViewHelper
+     * when compiled is able to render itself statically to increase performance. This
+     * default implementation will simply delegate to the ViewHelperInvoker.
+     *
+     * @param array                     $arguments
+     * @param \Closure                  $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     *
+     * @return mixed
      */
-    public function initializeArguments()
-    {
-        parent::initializeArguments();
-        $this->registerArgument(
-            'identifier',
-            'mixed',
-            'ePrivacy subject identifier(s) that needs to be allowed (single identifier or array of identifiers)',
-            true
-        );
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ): array {
+        return array_filter(GeneralUtility::trimExplode($arguments['separator'], $arguments['string']));
     }
 }

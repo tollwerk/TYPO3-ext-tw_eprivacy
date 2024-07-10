@@ -85,6 +85,7 @@ class StdWrapHook implements ContentObjectStdWrapHookInterface
         return $content;
     }
 
+
     /**
      * Hook for modifying $content after core's stdWrap has processed override, preIfEmptyListNum, ifEmpty, ifBlank,
      * listNum, trim and/or more (nested) stdWraps
@@ -113,50 +114,6 @@ class StdWrapHook implements ContentObjectStdWrapHookInterface
      */
     public function stdWrapPostProcess($content, array $configuration, ContentObjectRenderer &$parentObject): ?string
     {
-        // Check if cookie consent for one or more cookies is required. Do not render element if consent is missing.
-        if ((in_array($parentObject->getCurrentTable(), ['', 'tt_content']))
-            && !empty($parentObject->data['tx_tweprivacy_consent'])
-        ) {
-            // Get required consent names from record
-            $consentItems = array_filter(
-                GeneralUtility::trimExplode(
-                    ',',
-                    $parentObject->data['tx_tweprivacy_consent']
-                )
-            );
-            if (!count($consentItems)) {
-                return $content;
-            }
-
-            // Check if all items are allowed. Return empty string on the first missing consent.
-            $eprivacyShield = GeneralUtility::makeInstance(EprivacyShield::class);
-            foreach ($consentItems as $consentItem) {
-                if (!$eprivacyShield->isAllowedName($consentItem)) {
-
-                    $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
-                    $typoscript           = $configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-                    $settings             = $typoscript['plugin.']['tx_tweprivacy_eprivacy.']['settings.'];
-
-                    /** @var StandaloneView $standaloneView */
-                    $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
-                    $standaloneView->setLayoutRootPaths([GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Layouts')]);
-                    $standaloneView->setPartialRootPaths([GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Partials')]);
-                    $standaloneView->setTemplateRootPaths([GeneralUtility::getFileAbsFileName('EXT:tw_eprivacy/Resources/Private/Templates')]);
-                    $standaloneView->getRequest()
-                                   ->setControllerExtensionName(GeneralUtility::underscoredToUpperCamelCase('tw_eprivacy'));
-                    $standaloneView->setTemplate('Content/NeedsConsent');
-                    $standaloneView->assign('consentItems', $consentItems);
-                    $standaloneView->assignMultiple([
-                        'consentItems' => $consentItems,
-                        'data'         => $parentObject->data,
-                        'settings'     => $settings,
-                    ]);
-
-                    return $standaloneView->render();
-                }
-            }
-        }
-
-        return $content;
+         return $content;
     }
 }

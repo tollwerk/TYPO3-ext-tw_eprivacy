@@ -104,6 +104,8 @@ class PostInitHook implements ContentObjectPostInitHookInterface
      */
     public function postProcessContentObjectInitialization(ContentObjectRenderer &$parentObject)
     {
+        return;
+
         // Check if content elements can be rendered according to field tx_tweprivacy_consent.
         if ($parentObject->getCurrentTable() == 'tt_content' && !empty($parentObject->data['tx_tweprivacy_consent'])) {
 
@@ -114,6 +116,7 @@ class PostInitHook implements ContentObjectPostInitHookInterface
                     $parentObject->data['tx_tweprivacy_consent']
                 )
             );
+
 
             // If content element can not be rendered, show a corresponding message instead.
             if (!$this->canRender($parentObject, $consentItems)) {

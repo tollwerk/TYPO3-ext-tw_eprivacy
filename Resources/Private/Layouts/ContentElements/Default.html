@@ -1,0 +1,105 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:eprivacy="http://typo3.org/ns/Tollwerk/tw_eprivacy/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <f:variable name="eprivacySubjects" value="{eprivacy:explode(string: data.tx_tweprivacy_consent)}" />
+
+    <eprivacy:consent identifier="{eprivacySubjects}">
+        <f:comment><!-- Content can be shown: Use default rendering. No changes from TYPO3 Fluid Styled Content. --></f:comment>
+        <f:then>
+            <f:if condition="{data.frame_class} != none">
+                <f:then>
+                    <div id="c{data.uid}" class="frame frame-{data.frame_class} frame-type-{data.CType} frame-layout-{data.layout}{f:if(condition: data.space_before_class, then: ' frame-space-before-{data.space_before_class}')}{f:if(condition: data.space_after_class, then: ' frame-space-after-{data.space_after_class}')}">
+                        <f:if condition="{data._LOCALIZED_UID}">
+                            <a id="c{data._LOCALIZED_UID}"></a>
+                        </f:if>
+                        <f:render section="Before" optional="true">
+                            <f:render partial="DropIn/Before/All" arguments="{_all}" />
+                        </f:render>
+                        <f:render section="Header" optional="true">
+                            <f:render partial="Header/All" arguments="{_all}" />
+                        </f:render>
+                        <f:render section="Main" optional="true" />
+                        <f:render section="Footer" optional="true">
+                            <f:render partial="Footer/All" arguments="{_all}" />
+                        </f:render>
+                        <f:render section="After" optional="true">
+                            <f:render partial="DropIn/After/All" arguments="{_all}" />
+                        </f:render>
+                    </div>
+
+                </f:then>
+                <f:else>
+
+                    <a id="c{data.uid}"></a>
+                    <f:if condition="{data._LOCALIZED_UID}">
+                        <a id="c{data._LOCALIZED_UID}"></a>
+                    </f:if>
+                    <f:if condition="{data.space_before_class}">
+                        <div class="frame-space-before-{data.space_before_class}"></div>
+                    </f:if>
+                    <f:render section="Before" optional="true">
+                        <f:render partial="DropIn/Before/All" arguments="{_all}" />
+                    </f:render>
+                    <f:render section="Header" optional="true">
+                        <f:render partial="Header/All" arguments="{_all}" />
+                    </f:render>
+                    <f:render section="Main" optional="true" />
+                    <f:render section="Footer" optional="true">
+                        <f:render partial="Footer/All" arguments="{_all}" />
+                    </f:render>
+                    <f:render section="After" optional="true">
+                        <f:render partial="DropIn/After/All" arguments="{_all}" />
+                    </f:render>
+                    <f:if condition="{data.space_after_class}">
+                        <div class="frame-space-after-{data.space_after_class}"></div>
+                    </f:if>
+
+                </f:else>
+            </f:if>
+        </f:then>
+        <f:comment><!-- Content can not be shown. Show Notification and 'accept cookies' link instead.--></f:comment>
+        <f:else>
+            <f:comment><!-- Get TwEprivacy settings and full eprivacy subject records. --></f:comment>
+            <f:variable name="eprivacySettings" value="{eprivacy:settings()}" />
+            <f:variable name="subjects" value="{eprivacy:findSubjectsByName(names: eprivacySubjects)}"/>
+
+            <f:comment><!-- Description text --></f:comment>
+            <p class="CookieNeedsConsent__text">
+                {f:translate(key: 'content.needsConsent.description', arguments: {0: data.header}, extensionName: 'TwEprivacy')}
+            </p>
+
+            <f:comment><!-- List of required subjects --></f:comment>
+            <ul class="CookieNeedsConsent__subjects">
+                <f:for each="{subjects.byIdentifier}" as="subject">
+                    <li class="CookieNeedsConsent__subject">
+                        <strong>
+                            <f:translate key="content.needsConsent.cookie.title"
+                                         arguments="{0: subject.title}"
+                                         extensionName="TwEprivacy"/>
+                        </strong> {subject.purposeShort}
+                    </li>
+                </f:for>
+            </ul>
+
+            <f:comment><!-- Actions --></f:comment>
+            <p class="CookieNeedsConsent__actions">
+                <f:comment><!-- Accept necessary cookies and show content --></f:comment>
+                <f:link.action pageUid="{eprivacySettings.pluginPid}"
+                               action="addConsent"
+                               controller="Subject"
+                               pluginName="Eprivacy"
+                               extensionName="TwEprivacy"
+                               arguments="{pid: data.pid, addIdentifiers: subjects.identifiers}"
+                               section="c{data.uid}">
+                    {f:translate(key: 'content.needsConsent.link.accept', extensionName: 'TwEprivacy')}
+                </f:link.action>
+
+                <f:comment><!-- Go to cookie settings page --></f:comment>
+                <f:link.page pageUid="{eprivacySettings.pluginPid}">
+                    {f:translate(key: 'content.needsConsent.link.settings', extensionName: 'TwEprivacy')}
+                </f:link.page>
+            </p>
+        </f:else>
+    </eprivacy:consent>
+</html>
