@@ -101,6 +101,20 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $parentSet = null;
 
     /**
+     * IsThirdPartyCookie
+     *
+     * @var bool
+     */
+    protected $isThirdPartyCookie = false;
+
+    /**
+     * ThirdPartyHost
+     *
+     * @var string
+     */
+    protected $thirdPartyHost = '';
+
+    /**
      * Mode
      *
      * @var int
@@ -322,6 +336,38 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setSession(bool $session): void
     {
         $this->session = $session;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsThirdPartyCookie(): bool
+    {
+        return $this->isThirdPartyCookie;
+    }
+
+    /**
+     * @param bool $isThirdPartyCookie
+     */
+    public function setIsThirdPartyCookie(bool $isThirdPartyCookie): void
+    {
+        $this->isThirdPartyCookie = $isThirdPartyCookie;
+    }
+
+    /**
+     * @return string
+     */
+    public function getThirdPartyHost(): string
+    {
+        return $this->thirdPartyHost;
+    }
+
+    /**
+     * @param string $thirdPartyHost
+     */
+    public function setThirdPartyHost(string $thirdPartyHost): void
+    {
+        $this->thirdPartyHost = $thirdPartyHost;
     }
 
     /**

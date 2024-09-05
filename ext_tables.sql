@@ -21,6 +21,8 @@ CREATE TABLE tx_tweprivacy_domain_model_subject
     purpose_short text,
     type          int(11) unsigned     DEFAULT '1',
     mode          tinyint(11) unsigned DEFAULT '0',
+    is_third_party_cookie tinyint(11) unsigned DEFAULT '0',
+    third_party_host      text,
     parent_set    int(11) unsigned     DEFAULT '0',
     lifetime      int(11) unsigned     DEFAULT '0',
     public        tinyint(4) unsigned  DEFAULT '1',

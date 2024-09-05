@@ -11,7 +11,6 @@ return [
         'languageField'            => 'sys_language_uid',
         'transOrigPointerField'    => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
-        'delete'                   => 'deleted',
         'enablecolumns'            => [
             'disabled' => 'hidden',
         ],
@@ -22,12 +21,13 @@ return [
         ],
     ],
     'types'     => [
-        '0' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, --palette--;;nameidentifier, --palette--;;lifetime, purpose, purpose_short'],
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic, , --palette--;;titletype, purpose, purpose_short'],
+        '0' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic,--palette--;;mode, --palette--;;titletype, --palette--;;nameidentifier, --palette--;;lifetime, purpose, purpose_short'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, --palette--;;hiddenpublic,--palette--;;mode, --palette--;;titletype, purpose, purpose_short'],
     ],
     'palettes'  => [
         'hiddenpublic'   => ['showitem' => 'hidden, public'],
-        'titletype'      => ['showitem' => 'title, mode, type, identifier'],
+        'mode'           => ['showitem' => 'mode, is_third_party_cookie, third_party_host'],
+        'titletype'      => ['showitem' => 'title, type, identifier'],
         'nameidentifier' => ['showitem' => 'provider, name, parent_set'],
         'lifetime'       => ['showitem' => 'lifetime, session'],
     ],
@@ -158,7 +158,7 @@ return [
                 'cols' => 40,
                 'rows' => 2,
                 'eval' => 'trim',
-                'max'  => 160,
+                'max'  => 255,
             ],
         ],
         'type'       => [
@@ -171,6 +171,32 @@ return [
                 'foreign_table' => 'tx_tweprivacy_domain_model_type',
                 'minitems'      => 0,
                 'maxitems'      => 1,
+            ],
+        ],
+        'is_third_party_cookie'       => [
+            'displayCond' => 'FIELD:mode:=:'. \Tollwerk\TwEprivacy\Domain\Model\Subject::MODE_COOKIE,
+            'exclude'   => true,
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.is_third_party_cookie',
+            'config'    => [
+                'type'       => 'check',
+                'renderType' => 'checkboxToggle',
+                'items'      => [
+                    [
+                        'label' => '',
+                        'value' => '',
+                    ]
+                ],
+                'default'    => 1,
+            ],
+        ],
+        'third_party_host'   => [
+            'exclude'   => true,
+            'l10n_mode' => 'exclude',
+            'label'     => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_subject.third_party_host',
+            'config'    => [
+                'type' => 'input',
+                'eval' => 'trim',
             ],
         ],
         'mode'       => [

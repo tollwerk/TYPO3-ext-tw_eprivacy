@@ -49,8 +49,8 @@
 				<target>Gérer tous les paramètres des cookies</target>
 			</trans-unit>
 			<trans-unit id="content.needsConsent.cookie.title">
-				<source>%s:</source>
-				<target>%s:</target>
+				<source>%s (%s):</source>
+				<target>%s (%s):</target>
 			</trans-unit>
 		</body>
 	</file>

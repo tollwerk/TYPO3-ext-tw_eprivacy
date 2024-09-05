@@ -92,6 +92,12 @@
                                 </dd>
                             </f:else>
                         </f:if>
+
+                        <f:if condition="{subject.isThirdPartyCookie}">
+                            <dt><f:translate key="eprivacy.subject.isThirdPartyCookie" arguments="{0: subject.thirdPartyHost}"/></dt>
+                            <dd><f:translate key="eprivacy.subject.isThirdPartyCookie.description" /></dd>
+                        </f:if>
+
                         <dt class="Eprivacy__subject-purpose-label">
                             <f:translate key="eprivacy.subject.purpose"/>
                         </dt>

@@ -92,7 +92,7 @@ class FindSubjectsByNameViewHelper extends AbstractViewHelper
 
         // Create query
         $query = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_tweprivacy_domain_model_subject');
-        $subjects = $query->select('uid', 'name', 'title', 'identifier', 'purpose', 'purpose_short as purposeShort')
+        $subjects = $query->select('uid', 'name', 'title', 'identifier', 'name', 'purpose', 'purpose_short as purposeShort', 'is_third_party_cookie as isThirdPartyCookie', 'third_party_host as thirdPartyHost')
                               ->from('tx_tweprivacy_domain_model_subject')
                               ->where($query->expr()->eq('sys_language_uid', $sysLanguageUid))
                               ->andWhere($query->expr()->in('name', $subjects))

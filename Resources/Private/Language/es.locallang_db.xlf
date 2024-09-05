@@ -57,6 +57,14 @@
                 <source>Type</source> <target state="translated">Tipo</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.mode" approved="yes">
                 <source>Mode</source> <target state="translated">Modo</target></trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.is_third_party_cookie">
+                <source>Is third-party cookie</source>
+                <target>La cookie es de terceros</target>
+            </trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.third_party_host">
+                <source>Third-party host</source>
+                <target>Third-party host</target>
+            </trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.mode.cookie" approved="yes">
                 <source>Cookie</source> <target state="translated">Cookie</target></trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.mode.set" approved="yes">
