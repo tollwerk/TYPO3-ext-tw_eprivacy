@@ -18,6 +18,15 @@
 			<trans-unit id="eprivacy.subject.lifetime.session">
 				<source>Session</source>
 			</trans-unit>
+			<trans-unit id="eprivacy.subject.isThirdPartyCookie">
+				<source>Third-party cookie from %s</source>
+			</trans-unit>
+			<trans-unit id="eprivacy.subject.isThirdPartyCookie.description">
+				<source>This is a so-called third-party cookie that is set by external content. If you withdraw your consent on this website, the actual cookie will remain. In this case, you must delete the cookie manually inside your browser settings.</source>
+			</trans-unit>
+			<trans-unit id="eprivacy.subject.thirdPartyHost">
+				<source>Third-party host</source>
+			</trans-unit>
 			<trans-unit id="eprivacy.update.update">
 				<source>Update settings</source>
 			</trans-unit>
@@ -59,7 +68,7 @@
 				<source>Manage all cookie settings</source>
 			</trans-unit>
 			<trans-unit id="content.needsConsent.cookie.title">
-				<source>%s:</source>
+				<source>%s (%s):</source>
 			</trans-unit>
 		</body>
 	</file>

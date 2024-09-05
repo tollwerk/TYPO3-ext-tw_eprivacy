@@ -92,6 +92,8 @@ A cookie record has the following properties:
 * **Public:** If not set, will not be shown in the frontend plugin.
 * **Title:** Human readable title.
 * **Mode:** Can be "Cookie" (default) or "Set". Sets can be used to group cookies together so that the user can accept or revoke all of them at once.
+* **Is third-party cookie:** Only available if mode is set to "Cookie". If checked, an additional description will be shown, warning the user that once he has given consent for this cookie, that cookie can not be deleted automatically even if the user revokes the consent.
+* **Third-party host:** If "Is third-party cookie" is checked, you should set the host/domain to inform the user where that external cookie comes from.
 * **Type:** The ePrivacy Subject Type. **Important:** This type must have "Needs consent" disabled, otherwise the user consent can not be saved correctly. See "ePrivacy Subject" above.
 * **Identifier:** Use this to check for consent with the given ViewHelper or TypoScript conditions.
 * **Provider:** Where does this cookie come from? Something like "Google", "TYPO3", "Company XY"..
@@ -112,7 +114,7 @@ The field "Needs cookie consent" can be found on inside the "access"-tab of each
 ### Overwring Fluid Content Default Layout
 
 For showing or hiding content elements based on cookie consent (see "For editors" above), this Extension overwrites the default Fluid Layout for content elements by setting
-`lib.contentElement.layoutRootPaths.1 = EXT:tw_eprivacy/Resources/Private/Layouts/ContentElements/`. If your own extension needs to overwrite the default layout as well, please use 
+`lib.contentElement.layoutRootPaths.1 = EXT:tw_eprivacy/Resources/Private/Layouts/ContentElements/`. If your own extension needs to overwrite the default layout as well, please use
 the file _Resources/Private/Layouts/ContentElements/Default.html` of this extension as basis for all further changes. Otherwise content elements will always be shown, even if there
 is missing consent for some of the required cookies!
 
@@ -205,3 +207,17 @@ If `page.2` is already occupied, or, for some reason, you want to render the dia
 `plugin.tx_tweprivacy_eprivacy.settings.showDialog` and including `lib.ePrivacyDialog` by yourself.
 
 Please note that for accessibility reasons you should place the dialog as first content inside the `<body>`-tag.
+
+## Third-Party cookies
+
+[Third-party cookies](https://developer.mozilla.org/en-US/docs/Web/Privacy/Third-party_cookies) which belong to other
+domains can not be deleted by this extension once they were set! Such cookies could be set by embedding Google Maps or
+some other external service with a `<iframe`>-element.
+
+You can still create Cookie records that belong to a "Needs consent"-Subject for such cases. Check if consent was
+given by the user before rendering the actual code or content element that will trigger the creation of the third-party
+cookie. You can use the TypoScript condition or the access option for content elements to do this.
+
+Don't forget to check `Is third-party cookie` for the Cookie record so the extension can show a corresponding warning
+to the user.
+

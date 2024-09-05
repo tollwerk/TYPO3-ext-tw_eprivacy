@@ -75,9 +75,21 @@
                     <li class="CookieNeedsConsent__subject">
                         <strong>
                             <f:translate key="content.needsConsent.cookie.title"
-                                         arguments="{0: subject.title}"
+                                         arguments="{0: subject.title, 1: subject.name}"
                                          extensionName="TwEprivacy"/>
-                        </strong> {subject.purposeShort}
+                        </strong>
+                        <f:if condition="!{subject.isThirdPartyCookie}">
+                            {subject.purposeShort}
+                        </f:if>
+
+                        <f:comment><!-- Additional description for third-party cookies --> </f:comment>
+                        <f:if condition="{subject.isThirdPartyCookie}">
+                            <ul>
+                                <li>{subject.purposeShort}</li>
+                                <li><f:translate key="LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang.xlf:eprivacy.subject.isThirdPartyCookie" arguments="{0: subject.thirdPartyHost}" /></li>
+                                <li><f:translate key="LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang.xlf:eprivacy.subject.isThirdPartyCookie.description" /></li>
+                            </ul>
+                        </f:if>
                     </li>
                 </f:for>
             </ul>

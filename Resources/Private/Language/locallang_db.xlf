@@ -77,6 +77,12 @@
             <trans-unit id="tx_tweprivacy_domain_model_subject.mode">
                 <source>Mode</source>
             </trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.is_third_party_cookie">
+                <source>Is third-party cookie</source>
+            </trans-unit>
+            <trans-unit id="tx_tweprivacy_domain_model_subject.third_party_host">
+                <source>Third-party host</source>
+            </trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_subject.mode.cookie">
                 <source>Cookie</source>
             </trans-unit>
