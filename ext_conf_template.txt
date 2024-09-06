@@ -1,0 +1,2 @@
+# cat=General; type=string; label=Always allowed Cookies
+alwaysAllowedCookies = be_typo_user, eprivacy_consent

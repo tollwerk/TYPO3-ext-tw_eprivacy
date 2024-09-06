@@ -41,7 +41,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Tollwerk\TwEprivacy\Utilities\CookieUtility;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -57,28 +59,56 @@ class OutgoingMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        // Get extension configuration.
+        $extensionConfiguration = GeneralUtility::makeInstance(
+            ExtensionConfiguration::class
+        )->get('tw_eprivacy');
+        $extensionConfiguration['alwaysAllowedCookies'] = GeneralUtility::trimExplode(
+            ',', $extensionConfiguration['alwaysAllowedCookies']
+        );
+
+        // Initialize EprivacyShield
+        $ePrivacyShield = GeneralUtility::makeInstance(EprivacyShield::class);
+
+        // Check if there are cookie headers inside the current request.
         $response      = $handler->handle($request);
         $cookieHeaders = array_filter(headers_list(), function(string $header) {
             return !strncasecmp('Set-Cookie:', $header, 11);
         });
-
-        // If there are cookie headers
         if (count($cookieHeaders)) {
-            $ePrivacyShield = GeneralUtility::makeInstance(EprivacyShield::class);
-
-            // Parse and run through all cookies
+            // Parse and run through all cookies.
             foreach (array_map([$this, 'parseCookieHeader'], $cookieHeaders) as $cookieParams) {
                 $cookieName = key($cookieParams);
+
+                // Skip cookies that are always allowed.
+                if (in_array($cookieName, $extensionConfiguration['alwaysAllowedCookies'])) {
+                    continue;
+                }
+
+                // Check and delete cookie if necessary.
                 if (!$ePrivacyShield->isAllowedName($cookieName)) {
-                    setcookie(
+                    CookieUtility::deleteCookie(
                         $cookieName,
-                        is_string($cookieParams[$cookieName]) ? $cookieParams[$cookieName] : '',
-                        1,
                         $cookieParams['path'] ?? '',
                         $cookieParams['domain'] ?? '',
                         GeneralUtility::getIndpEnv('TYPO3_SSL') && ($cookieParams['secure'] ?? true),
                         $cookieParams['httponly'] ?? true
                     );
+                }
+            }
+        }
+
+        // Check all other cookies because those could be set by JavaScript or any other means.
+        if (count($_COOKIE)) {
+            foreach($_COOKIE as $cookieName => $cookieValue) {
+                // Skip cookies that are always allowed.
+                if (in_array($cookieName, $extensionConfiguration['alwaysAllowedCookies'])) {
+                    continue;
+                }
+
+                // Check and delete cookie if necessary.
+                if (!$ePrivacyShield->isAllowedName($cookieName)) {
+                    CookieUtility::deleteCookie($cookieName);
                 }
             }
         }
