@@ -3,10 +3,10 @@ lib.ePrivacyDialog {
     vendorName = Tollwerk
     extensionName = TwEprivacy
     pluginName = EprivacyDialog
-    controller = Tollwerk\TwBzmfr\Controller\SubjectController
+    controller = Tollwerk\TwEprivacy\Controller\SubjectController
     action = dialog
     switchableControllerActions {
-        Tollwerk\TwBzmfr\Controller\SubjectController {
+        Tollwerk\TwEprivacy\Controller\SubjectController {
             1 = dialog
         }
     }
