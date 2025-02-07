@@ -181,21 +181,28 @@ class SubjectController extends ActionController
     /**
      * Dialog action
      *
-     * @param int|null $update Update consent state
+     * @param int|null    $update      Update consent state
+     * @param string|null $redirectUrl URL for redirecting after dialog form submit
      *
      * @return ResponseInterface
      *
      * @throws Exception
      * @throws InvalidConfigurationTypeException
      */
-    public function dialogAction(int $update = null): ResponseInterface {
+    public function dialogAction(int $update = null, string $redirectUrl = null): ResponseInterface {
         // Do nothing if update value is not valid.
         if ($update !== self::UPDATE_ACCEPT && $update !== self::UPDATE_DENY) {
+            $this->view->assign('redirectUrl', GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));
             return $this->htmlResponse();
         }
 
-        // Update the consent and perform a redirect to the current page so that updated cookies take effect.
+        // Update the consent.
         $this->consentUtility->update($update);
+
+        // Perform a redirect so that updated cookies take effect.
+        if ($redirectUrl) {
+            return $this->redirectToUri($redirectUrl);
+        }
         return $this->redirect('dialog', 'Subject', 'TwEprivacy');
     }
 }

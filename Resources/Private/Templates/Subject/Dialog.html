@@ -7,7 +7,6 @@
       xmlns:eprivacy="http://typo3.org/ns/Tollwerk/tw_eprivacy/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-
     <!-- Show dialog, but only if eprivacy_consent cookie was not set yet. -->
     <f:if condition="{eprivacy:getCookie(name: 'eprivacy_consent')}">
         <f:else>
@@ -30,6 +29,9 @@
                         pluginName="ePrivacyDialog"
                         extensionName="TwEprivacy"
                         method="POST">
+
+                    <!-- Store the current request URL for redirecting after dialog form submit. -->
+                    <f:form.hidden name="redirectUrl" value="{redirectUrl}" />
 
                     <!-- Accept all cookies. -->
                     <f:form.button type="submit"
