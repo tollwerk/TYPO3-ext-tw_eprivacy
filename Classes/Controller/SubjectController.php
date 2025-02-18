@@ -201,7 +201,8 @@ class SubjectController extends ActionController
 
         // Perform a redirect so that updated cookies take effect.
         if ($redirectUrl) {
-            return $this->redirectToUri($redirectUrl);
+            header('Location: ' . $redirectUrl);
+            die();
         }
         return $this->redirect('dialog', 'Subject', 'TwEprivacy');
     }
