@@ -98,6 +98,7 @@ return [
         ],
         'title'            => [
             'exclude' => true,
+            'l10n_mode' => 'prefixLangTitle',
             'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.title',
             'config'  => [
                 'type' => 'input',
@@ -108,6 +109,7 @@ return [
         ],
         'description'      => [
             'exclude' => true,
+            'l10n_mode' => 'prefixLangTitle',
             'label'   => 'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tweprivacy_domain_model_type.description',
             'config'  => [
                 'type'                  => 'text',
