@@ -1,2 +1,2 @@
-# cat=General; type=string; label=Always allowed Cookies
+# cat=General; type=string; label=Always allowed Cookies.:Default value is be_typo_user, eprivacy_consent. Use * to allow all cookies, effectively disabling everything this extension does. This can be useful for testing purposes.
 alwaysAllowedCookies = be_typo_user, eprivacy_consent

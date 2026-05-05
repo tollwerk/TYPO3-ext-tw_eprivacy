@@ -45,6 +45,7 @@ use Tollwerk\TwEprivacy\Utilities\CookieUtility;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * ePrivacy Outgoing Middleware
@@ -63,11 +64,14 @@ class OutgoingMiddleware implements MiddlewareInterface
         $extensionConfiguration = GeneralUtility::makeInstance(
             ExtensionConfiguration::class
         )->get('tw_eprivacy');
-        $extensionConfiguration['alwaysAllowedCookies'] = GeneralUtility::trimExplode(
-            ',', $extensionConfiguration['alwaysAllowedCookies']
-        );
 
-        // Initialize EprivacyShield
+        // If all cookies are allowed, return the normal request response.
+        if ($extensionConfiguration['alwaysAllowedCookies'] === '*') {
+            return $handler->handle($request);
+        }
+
+        // Get allowed cookies and initialize EprivacyShield
+        $allowedCookies = GeneralUtility::trimExplode(',', $extensionConfiguration['alwaysAllowedCookies']);
         $ePrivacyShield = GeneralUtility::makeInstance(EprivacyShield::class);
 
         // Check if there are cookie headers inside the current request.
@@ -81,7 +85,7 @@ class OutgoingMiddleware implements MiddlewareInterface
                 $cookieName = key($cookieParams);
 
                 // Skip cookies that are always allowed.
-                if (in_array($cookieName, $extensionConfiguration['alwaysAllowedCookies'])) {
+                if (in_array($cookieName, $allowedCookies)) {
                     continue;
                 }
 
@@ -102,7 +106,7 @@ class OutgoingMiddleware implements MiddlewareInterface
         if (count($_COOKIE)) {
             foreach($_COOKIE as $cookieName => $cookieValue) {
                 // Skip cookies that are always allowed.
-                if (in_array($cookieName, $extensionConfiguration['alwaysAllowedCookies'])) {
+                if (in_array($cookieName, $allowedCookies)) {
                     continue;
                 }
 
