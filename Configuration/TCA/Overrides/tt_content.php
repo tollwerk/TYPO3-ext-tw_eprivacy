@@ -22,9 +22,15 @@ $newColumns = [
             'exclude' => true,
             'type' => 'select',
             'renderType' => 'selectMultipleSideBySide',
-            'itemsProcFunc' => \Tollwerk\TwEprivacy\Utilities\TcaUtility::class . '->getConsentItems'
+            'itemsProcFunc' => \Tollwerk\TwEprivacy\Utilities\TcaUtility::class . '->getConsentItems',
+            'width' => 50,
         ],
     ],
 ];
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $newColumns);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content', 'tx_tweprivacy_consent', '', 'after:hidden');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette(
+    'tt_content',
+    'hidden',
+    'tx_tweprivacy_consent',
+    'after:hidden'
+);
