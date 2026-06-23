@@ -5,12 +5,16 @@ defined('TYPO3') || die();
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 // Register plugins.
-ExtensionUtility::registerPlugin(
-    'TwEprivacy',
-    'Eprivacy',
-    'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tw_eprivacy_eprivacy.name',
-    'tw_eprivacy-plugin-eprivacy'
-);
+(static function (): void {
+    $pluginKey = ExtensionUtility::registerPlugin(
+        'TwEprivacy',
+        'Eprivacy',
+        'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tw_eprivacy_eprivacy.name',
+        'tw_eprivacy-plugin-eprivacy',
+        'plugins',
+        'LLL:EXT:tw_eprivacy/Resources/Private/Language/locallang_db.xlf:tx_tw_eprivacy_eprivacy.description'
+    );
+})();
 
 // Add new fields
 $newColumns = [

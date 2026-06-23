@@ -31,13 +31,14 @@ call_user_func(
             [SubjectController::class => 'list, addConsent'],
             ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
         );
-        ExtensionUtility::configurePlugin(
-            'TwEprivacy',
-            'EprivacyDialog',
-            [SubjectController::class => 'dialog'],
-            [SubjectController::class => 'dialog'],
-            ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
-        );
+
+//        ExtensionUtility::configurePlugin(
+//            'TwEprivacy',
+//            'EprivacyDialog',
+//            [SubjectController::class => 'dialog'],
+//            [SubjectController::class => 'dialog'],
+//            ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
+//        );
 
         // Add Hooks
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['createHashBase'][] = CreateHashBaseHook::class . '->modifyParams';
