@@ -95,6 +95,8 @@ class SubjectController extends ActionController
      * @return ResponseInterface
      *
      * @throws InvalidConfigurationTypeException
+     *
+     * TODO: Deprecated: Tollwerk\TwEprivacy\Controller\SubjectController::addConsentAction(): Implicitly marking parameter $pid as nullable is deprecated, the explicit nullable type must be used instead in /var/www/local_packages/tw-eprivacy/Classes/Controller/SubjectController.php on line 99
      */
     public function addConsentAction(int $pid = null, array $addIdentifiers = []): ResponseInterface {
 
@@ -188,6 +190,9 @@ class SubjectController extends ActionController
      *
      * @throws Exception
      * @throws InvalidConfigurationTypeException
+     *
+     * TODO: Deprecated: Tollwerk\TwEprivacy\Controller\SubjectController::dialogAction(): Implicitly marking parameter $update as nullable is deprecated, the explicit nullable type must be used instead in /var/www/local_packages/tw-eprivacy/Classes/Controller/SubjectController.php
+     * TODO: Deprecated: Tollwerk\TwEprivacy\Controller\SubjectController::dialogAction(): Implicitly marking parameter $redirectUrl as nullable is deprecated, the explicit nullable type must be used instead in /var/www/local_packages/tw-eprivacy/Classes/Controller/SubjectController.php
      */
     public function dialogAction(int $update = null, string $redirectUrl = null): ResponseInterface {
         // Do nothing if update value is not valid.
