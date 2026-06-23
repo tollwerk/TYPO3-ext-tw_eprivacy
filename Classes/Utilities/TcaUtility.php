@@ -78,7 +78,7 @@ class TcaUtility
             ->where($queryBuilder->expr()->in('subject.sys_language_uid', [-1, 0]))
             ->andWhere($queryBuilder->expr()->eq('type.needs_consent', 1))
             ->groupBy('subject.uid')
-            ->execute()
+            ->executeQuery()
             ->fetchAllAssociative();
 
         // Set items
