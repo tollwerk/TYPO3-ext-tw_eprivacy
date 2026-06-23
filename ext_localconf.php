@@ -28,13 +28,15 @@ call_user_func(
             'TwEprivacy',
             'Eprivacy',
             [SubjectController::class => 'list, addConsent'],
-            [SubjectController::class => 'list, addConsent']
+            [SubjectController::class => 'list, addConsent'],
+            ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
         );
         ExtensionUtility::configurePlugin(
             'TwEprivacy',
             'EprivacyDialog',
             [SubjectController::class => 'dialog'],
-            [SubjectController::class => 'dialog']
+            [SubjectController::class => 'dialog'],
+            ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
         );
 
         // Add Hooks
