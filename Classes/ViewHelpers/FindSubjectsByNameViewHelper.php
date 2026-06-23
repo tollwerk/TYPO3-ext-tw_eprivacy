@@ -36,8 +36,11 @@
 
 namespace Tollwerk\TwEprivacy\ViewHelpers;
 
+use Doctrine\DBAL\Exception;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -70,24 +73,19 @@ class FindSubjectsByNameViewHelper extends AbstractViewHelper
      * when compiled is able to render itself statically to increase performance. This
      * default implementation will simply delegate to the ViewHelperInvoker.
      *
-     * @param array                     $arguments
-     * @param \Closure                  $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     *
      * @return mixed
+     *
+     * @throws Exception
+     * @throws AspectNotFoundException
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
+    public function render() {
 
         // Get current frontend language for query
         $context = GeneralUtility::makeInstance(Context::class);
         $sysLanguageUid = $context->getPropertyFromAspect('language', 'id');
 
         // Prepare $subjects for query
-        $subjects = $arguments['names'];
+        $subjects = $this->arguments['names'];
         array_walk($subjects, function(&$value){ $value = '"' . $value . '"';});
 
         // Create query
@@ -96,7 +94,7 @@ class FindSubjectsByNameViewHelper extends AbstractViewHelper
                               ->from('tx_tweprivacy_domain_model_subject')
                               ->where($query->expr()->eq('sys_language_uid', $sysLanguageUid))
                               ->andWhere($query->expr()->in('name', $subjects))
-                              ->execute()
+                              ->executeQuery()
                               ->fetchAllAssociative();
 
         $subjectsByIdentifier = [

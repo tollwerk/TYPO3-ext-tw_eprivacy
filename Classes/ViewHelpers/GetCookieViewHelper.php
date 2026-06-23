@@ -33,19 +33,12 @@ class GetCookieViewHelper extends AbstractViewHelper
      * when compiled is able to render itself statically to increase performance. This
      * default implementation will simply delegate to the ViewHelperInvoker.
      *
-     * @param array                     $arguments
-     * @param \Closure                  $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     *
      * @return mixed
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
+    public function render(
     ) {
         if(isset($_COOKIE[$arguments['name']])){
-            return json_decode($_COOKIE[$arguments['name']], true);
+            return json_decode($_COOKIE[$this->arguments['name']], true);
         }
 
         return null;
