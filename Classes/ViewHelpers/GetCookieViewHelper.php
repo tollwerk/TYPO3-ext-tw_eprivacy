@@ -37,7 +37,7 @@ class GetCookieViewHelper extends AbstractViewHelper
      */
     public function render(
     ) {
-        if(isset($_COOKIE[$arguments['name']])){
+        if(isset($_COOKIE[$this->arguments['name']])){
             return json_decode($_COOKIE[$this->arguments['name']], true);
         }
 
