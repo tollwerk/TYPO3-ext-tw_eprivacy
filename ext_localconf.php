@@ -39,9 +39,6 @@ call_user_func(
             ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
         );
 
-        // Add Hooks
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['createHashBase'][] = CreateHashBaseHook::class . '->modifyParams';
-
         // Exclude some parameters from chash.
         $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[action]';
         $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[pid]';
