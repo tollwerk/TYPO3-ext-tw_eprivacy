@@ -56,10 +56,9 @@ class ConsentUtility
      *
      * @return Consent
      *
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     * @throws \TYPO3\CMS\Extbase\Object\Exception
+     * TODO: Deprecated: Tollwerk\TwEprivacy\Utilities\ConsentUtility::update(): Implicitly marking parameter $consent as nullable is deprecated, the explicit nullable type must be used instead in /var/www/local_packages/tw-eprivacy/Classes/Utilities/ConsentUtility.php
      */
-    public function update(int $update = SubjectController::UPDATE_UPDATE, array $subjects = [], Consent $consent = null): Consent {
+    public function update(int $update = SubjectController::UPDATE_UPDATE, array $subjects = [], ?Consent $consent = null): Consent {
         $consent = $consent ?: $this->consentRepository->get();
         $defaultSubjectIdentifiers = array_map(
             function(Subject $subject) {

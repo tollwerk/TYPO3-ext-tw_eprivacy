@@ -93,11 +93,8 @@ class SubjectController extends ActionController
      * @param array $addIdentifiers Add identifiers
      *
      * @return ResponseInterface
-     *
-     * @throws InvalidConfigurationTypeException
      */
-    public function addConsentAction(int $pid = null, array $addIdentifiers = []): ResponseInterface {
-
+    public function addConsentAction(?int $pid = null, array $addIdentifiers = []): ResponseInterface {
         // Get all subjects
         $allSubjects = array_map(
             function(Subject $subject) {
@@ -131,8 +128,6 @@ class SubjectController extends ActionController
      * @param array $subjects Subjects with consent
      *
      * @throws Exception
-     *
-     * @throws InvalidConfigurationTypeException
      */
     public function listAction(int $update = 0, array $subjects = []): ResponseInterface
     {
@@ -187,9 +182,8 @@ class SubjectController extends ActionController
      * @return ResponseInterface
      *
      * @throws Exception
-     * @throws InvalidConfigurationTypeException
      */
-    public function dialogAction(int $update = null, string $redirectUrl = null): ResponseInterface {
+    public function dialogAction(?int $update = null, ?string $redirectUrl = null): ResponseInterface {
         // Do nothing if update value is not valid.
         if ($update !== self::UPDATE_ACCEPT && $update !== self::UPDATE_DENY) {
             $this->view->assign('redirectUrl', GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));

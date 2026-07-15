@@ -70,17 +70,9 @@ class ExplodeViewHelper extends AbstractViewHelper
      * when compiled is able to render itself statically to increase performance. This
      * default implementation will simply delegate to the ViewHelperInvoker.
      *
-     * @param array                     $arguments
-     * @param \Closure                  $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     *
      * @return mixed
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ): array {
-        return array_filter(GeneralUtility::trimExplode($arguments['separator'], $arguments['string']));
+    public function render(): array {
+        return array_filter(GeneralUtility::trimExplode($this->arguments['separator'], $this->arguments['string']));
     }
 }

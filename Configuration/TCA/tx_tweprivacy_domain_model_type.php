@@ -73,11 +73,12 @@ return [
                 'type'       => 'check',
                 'renderType' => 'checkboxToggle',
                 'items'      => [
-                    [
-                        'label'                    => '',
-                        'value'                    => '',
+                    0 => [
+                        'invertStateDisplay' => true,
+                        'label' => '',
                     ]
                 ],
+                'default' => 0,
             ],
         ],
         'needs_consent'    => [

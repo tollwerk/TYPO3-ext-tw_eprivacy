@@ -56,17 +56,9 @@ class SettingsViewHelper extends AbstractViewHelper
      * when compiled is able to render itself statically to increase performance. This
      * default implementation will simply delegate to the ViewHelperInvoker.
      *
-     * @param array                     $arguments
-     * @param \Closure                  $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     *
      * @return mixed
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ): array {
+    public function render(): array {
         // Get TypoScript settings for tw_eprivacy.
         $typoscript = GeneralUtility::makeInstance(
             ConfigurationManager::class

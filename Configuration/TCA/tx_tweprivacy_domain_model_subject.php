@@ -81,11 +81,12 @@ return [
                 'type'       => 'check',
                 'renderType' => 'checkboxToggle',
                 'items'      => [
-                    [
+                    0 => [
+                        'invertStateDisplay' => true,
                         'label' => '',
-                        'value' => '',
                     ]
                 ],
+                'default' => 0,
             ],
         ],
 

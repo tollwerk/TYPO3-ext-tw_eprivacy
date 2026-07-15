@@ -295,6 +295,7 @@ class Subject extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function setLifetime(int $lifetime): void
     {
+        // @extensionScannerIgnoreLine
         $this->lifetime = $lifetime;
     }
 
