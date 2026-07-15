@@ -44,6 +44,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  *
  * @package    Tollwerk\TwEprivacy
  * @subpackage Tollwerk\TwEprivacy\Hooks\ContentObject
+ *
+ * @deprecated TODO: Migrate, see Breaking #102932 and Feature #102932.
  */
 class CreateHashBaseHook
 {
