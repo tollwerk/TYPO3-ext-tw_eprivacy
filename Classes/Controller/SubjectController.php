@@ -14,6 +14,7 @@
 namespace Tollwerk\TwEprivacy\Controller;
 
 use Psr\Http\Message\ResponseInterface;
+use Tollwerk\TwEprivacy\Domain\Model\Consent;
 use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Domain\Model\Type;
 use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
@@ -24,6 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use \Exception;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 
 /**
@@ -122,6 +124,27 @@ class SubjectController extends ActionController
     }
 
     /**
+     * @param string $subjectUids
+     * @return ResponseInterface
+     */
+    public function clearAction(string $subjectUids = ''): ResponseInterface
+    {
+        DebuggerUtility::var_dump([
+            'subjectUids' => $subjectUids,
+        ], 'clearAction');
+
+        $subjectUidsArray = GeneralUtility::trimExplode(',', $subjectUids);
+        die();
+
+        if (count($subjectUidsArray) > 0) {
+
+            // TODO: Call setcookie() for 10 cookies (get their names first..). If there are more cookies after that, redirect to 'clear' again with the rest. If nothing is left, redirect to list action.
+            return $this->redirect('clear', 'Subject', 'TwEprivacy', ['count' => $newCount]);
+        }
+        die("clearAction");
+    }
+
+    /**
      * List action
      *
      * @param int   $update   Update consent state
@@ -135,6 +158,16 @@ class SubjectController extends ActionController
 
         // Process updates
         if ($update) {
+            if ($update == self::UPDATE_DENY) {
+                $allSubjects = array_map(
+                    function(Subject $subject) {
+                        return $subject->getUid();
+                    },
+                    GeneralUtility::makeInstance(SubjectRepository::class)->findByPublic(true)->toArray()
+                );
+                $allSubjectUids = implode(',', $allSubjects);
+                return $this->redirect('clear', 'Subject', 'TwEprivacy', ['subjectUids' => $allSubjectUids]);
+            }
             $this->consentUtility->update($update, $subjects, $consent);
         }
 
