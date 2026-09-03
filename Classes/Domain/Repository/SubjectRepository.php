@@ -13,11 +13,15 @@
 
 namespace Tollwerk\TwEprivacy\Domain\Repository;
 
+use Doctrine\DBAL\ParameterType;
 use Tollwerk\TwEprivacy\Domain\Model\Subject;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * The repository for Subjects
@@ -129,5 +133,28 @@ class SubjectRepository extends Repository
         $query->getQuerySettings()->setRespectStoragePage(false);
 
         return $query;
+    }
+
+    public function getTitleByUid(int $uid): ?string
+    {
+        $queryBuilder = GeneralUtility::makeInstance(
+            ConnectionPool::class
+        )->getQueryBuilderForTable('tx_tweprivacy_domain_model_subject');
+        $title = $queryBuilder
+            ->select('title')
+            ->from('tx_tweprivacy_domain_model_subject')
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'uid',
+                    $queryBuilder->createNamedParameter($uid, ParameterType::INTEGER)
+                )
+            )
+            ->executeQuery()
+            ->fetchOne();
+        if ($title === false) {
+            return null;
+        }
+
+        return $title;
     }
 }

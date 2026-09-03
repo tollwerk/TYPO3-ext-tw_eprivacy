@@ -27,8 +27,8 @@ call_user_func(
         ExtensionUtility::configurePlugin(
             'TwEprivacy',
             'Eprivacy',
-            [SubjectController::class => 'list, addConsent'],
-            [SubjectController::class => 'list, addConsent'],
+            [SubjectController::class => 'list, addConsent, clear'],
+            [SubjectController::class => 'list, addConsent, clear'],
             ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
         );
         ExtensionUtility::configurePlugin(

@@ -103,17 +103,19 @@ class ConsentRepository implements SingletonInterface
         return self::$consent;
     }
 
+
     /**
      * Set the current users consent state
      *
-     * @param Consent $consent Consent
+     * @param Consent $consent              Consent
+     * @param bool    $killUnmachtedCookies Kill all cookies that have no consent
      *
      * @return bool Success
      *
      * @throws InvalidConfigurationTypeException
      * @throws Exception
      */
-    public function update(Consent $consent): bool
+    public function update(Consent $consent, bool $killUnmachtedCookies = true): bool
     {
         // Reset the ePrivacy shield
         EprivacyShield::reset();
@@ -141,23 +143,25 @@ class ConsentRepository implements SingletonInterface
 
         // If the consent could be updated: Kill all unmatched cookies
         if ($consentSuccess) {
-            $allSubjects = array_map(
-                function(Subject $subject) {
-                    return $subject->getIdentifier();
-                },
-                GeneralUtility::makeInstance(SubjectRepository::class)->findByPublic(true)->toArray()
-            );
-            foreach (array_diff($allSubjects, $consent->getSubjects()) as $denySubject) {
-                if (!setcookie(
-                    $denySubject,
-                    '',
-                    1,
-                    trim($cookieSettings['path'] ?? '/'),
-                    trim($cookieSettings['domain'] ?? ''),
-                    $secure && boolval($cookieSettings['secure'] ?? true),
-                    boolval($cookieSettings['httponly'] ?? true)
-                )) {
-                    return false;
+            if ($killUnmachtedCookies) {
+                $allSubjects = array_map(
+                    function(Subject $subject) {
+                        return $subject->getIdentifier();
+                    },
+                    GeneralUtility::makeInstance(SubjectRepository::class)->findByPublic(true)->toArray()
+                );
+                foreach (array_diff($allSubjects, $consent->getSubjects()) as $denySubject) {
+                    if (!setcookie(
+                        $denySubject,
+                        '',
+                        1,
+                        trim($cookieSettings['path'] ?? '/'),
+                        trim($cookieSettings['domain'] ?? ''),
+                        $secure && boolval($cookieSettings['secure'] ?? true),
+                        boolval($cookieSettings['httponly'] ?? true)
+                    )) {
+                        return false;
+                    }
                 }
             }
         }
