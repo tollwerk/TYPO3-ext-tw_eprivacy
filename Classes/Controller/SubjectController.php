@@ -170,7 +170,7 @@ class SubjectController extends ActionController
                 unset($_COOKIE);
             }
         }
-        return $this->redirect('clear', 'Subject', 'TwEprivacy', ['subjectUids' => implode(',', $subjectUids)]);
+        return $this->redirect('clear', 'Subject', 'TwEprivacy', ['subjectUidString' => implode(',', $subjectUids)]);
     }
 
     /**
@@ -201,8 +201,7 @@ class SubjectController extends ActionController
                     },
                     GeneralUtility::makeInstance(SubjectRepository::class)->findByPublic(true)->toArray()
                 );
-                $allSubjectUids = implode(',', $allSubjects);
-                return $this->redirect('clear', 'Subject', 'TwEprivacy', ['subjectUids' => $allSubjectUids]);
+                return $this->redirect('clear', 'Subject', 'TwEprivacy', ['subjectUidString' => implode(',', $allSubjects)]);
             }
 
             // If not UPDATE_DENY, start normal treatment.
