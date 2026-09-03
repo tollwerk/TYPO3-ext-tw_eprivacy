@@ -10,48 +10,53 @@
     <!-- Show dialog, but only if eprivacy_consent cookie was not set yet. -->
     <f:if condition="{eprivacy:getCookie(name: 'eprivacy_consent')}">
         <f:else>
-            <dialog open>
-                <!-- Title and text -->
-                <h2>{f:translate(key: 'eprivacy.dialog.title')}</h2>
-                <p>
-                    <f:format.raw>
-                        <f:translate key="eprivacy.dialog.description"
-                                     arguments="{
-                                0: '{f:uri.page(pageUid: settings.imprint)}',
-                                1: '{f:uri.page(pageUid: settings.privacy)}'
-                             }"/>
-                    </f:format.raw>
-                </p>
+            <dialog open class="Dialog EprivacyDialog">
+                <div class="EprivacyDialog__inner">
+                    <!-- Title and text -->
+                    <h2>{f:translate(key: 'eprivacy.dialog.title')}</h2>
+                    <p>
+                        <f:format.raw>
+                            <f:translate key="eprivacy.dialog.description"
+                                         arguments="{
+                                    0: '{f:uri.page(pageUid: settings.imprint)}',
+                                    1: '{f:uri.page(pageUid: settings.privacy)}'
+                                 }"/>
+                        </f:format.raw>
+                    </p>
 
-                <!-- Form for updating the user consent -->
-                <f:form action="dialog"
-                        controller="Subject"
-                        pluginName="ePrivacyDialog"
-                        extensionName="TwEprivacy"
-                        method="POST">
+                    <!-- Form for updating the user consent -->
+                    <f:form action="dialog"
+                            controller="Subject"
+                            pluginName="ePrivacyDialog"
+                            extensionName="TwEprivacy"
+                            method="POST"
+                            class="EprivacyDialog__form">
 
-                    <!-- Store the current request URL for redirecting after dialog form submit. -->
-                    <f:form.hidden name="redirectUrl" value="{redirectUrl}" />
+                        <!-- Store the current request URL for redirecting after dialog form submit. -->
+                        <f:form.hidden name="redirectUrl" value="{redirectUrl}" />
 
-                    <!-- Accept all cookies. -->
-                    <f:form.button type="submit"
-                                   name="update"
-                                   value="2">
-                        {f:translate(key: 'eprivacy.update.accept')}
-                    </f:form.button>
+                        <div class="EprivacyDialog__form-actions">
+                            <!-- Accept all cookies. -->
+                            <f:form.button type="submit"
+                                           name="update"
+                                           value="2">
+                                {f:translate(key: 'eprivacy.update.accept')}
+                            </f:form.button>
 
-                    <!-- Accept only necessary cookies. -->
-                    <f:form.button type="submit"
-                                   name="update"
-                                   value="3">
-                        {f:translate(key: 'eprivacy.update.deny')}
-                    </f:form.button>
+                            <!-- Accept only necessary cookies. -->
+                            <f:form.button type="submit"
+                                           name="update"
+                                           value="3">
+                                {f:translate(key: 'eprivacy.update.deny')}
+                            </f:form.button>
 
-                    <!-- Open the page with the ePrivacy frontend plugin -->
-                    <f:link.page pageUid="{settings.pluginPid}">
-                        {f:translate(key: 'eprivacy.dialog.learn-more')}
-                    </f:link.page>
-                </f:form>
+                            <!-- Open the page with the ePrivacy frontend plugin -->
+                            <f:link.page pageUid="{settings.pluginPid}">
+                                {f:translate(key: 'eprivacy.dialog.learn-more')}
+                            </f:link.page>
+                        </div>
+                    </f:form>
+                </div>
             </dialog>
         </f:else>
     </f:if>

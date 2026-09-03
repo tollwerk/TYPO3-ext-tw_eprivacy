@@ -141,31 +141,6 @@ class ConsentRepository implements SingletonInterface
             boolval($cookieSettings['httponly'] ?? true)
         );
 
-        // If the consent could be updated: Kill all unmatched cookies
-        if ($consentSuccess) {
-            if ($killUnmachtedCookies) {
-                $allSubjects = array_map(
-                    function(Subject $subject) {
-                        return $subject->getIdentifier();
-                    },
-                    GeneralUtility::makeInstance(SubjectRepository::class)->findByPublic(true)->toArray()
-                );
-                foreach (array_diff($allSubjects, $consent->getSubjects()) as $denySubject) {
-                    if (!setcookie(
-                        $denySubject,
-                        '',
-                        1,
-                        trim($cookieSettings['path'] ?? '/'),
-                        trim($cookieSettings['domain'] ?? ''),
-                        $secure && boolval($cookieSettings['secure'] ?? true),
-                        boolval($cookieSettings['httponly'] ?? true)
-                    )) {
-                        return false;
-                    }
-                }
-            }
-        }
-
         return $consentSuccess;
     }
 }

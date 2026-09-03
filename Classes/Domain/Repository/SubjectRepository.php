@@ -135,13 +135,13 @@ class SubjectRepository extends Repository
         return $query;
     }
 
-    public function getTitleByUid(int $uid): ?string
+    public function getIdentifierByUid(int $uid): ?string
     {
         $queryBuilder = GeneralUtility::makeInstance(
             ConnectionPool::class
         )->getQueryBuilderForTable('tx_tweprivacy_domain_model_subject');
         $title = $queryBuilder
-            ->select('title')
+            ->select('identifier')
             ->from('tx_tweprivacy_domain_model_subject')
             ->where(
                 $queryBuilder->expr()->eq(

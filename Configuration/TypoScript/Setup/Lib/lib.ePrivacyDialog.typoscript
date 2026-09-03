@@ -33,3 +33,4 @@ lib.ePrivacyDialog {
         showDialog = {$plugin.tx_tweprivacy_eprivacy.settings.showDialog}
     }
 }
+
