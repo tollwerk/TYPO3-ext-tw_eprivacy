@@ -53,13 +53,12 @@ class ConsentUtility
      * @param int          $update               See SubjectController::UPDATE_ACCEPT etc.
      * @param array        $subjects             Subjects with consent
      * @param Consent|null $consent              Consent. Will be retrieved from ConsentRepository if not given.
-     * @param bool         $killUnmachtedCookies Kill all cookies that have no consent
      *
      * @return Consent
      *
      * TODO: Deprecated: Tollwerk\TwEprivacy\Utilities\ConsentUtility::update(): Implicitly marking parameter $consent as nullable is deprecated, the explicit nullable type must be used instead in /var/www/local_packages/tw-eprivacy/Classes/Utilities/ConsentUtility.php
      */
-    public function update(int $update = SubjectController::UPDATE_UPDATE, array $subjects = [], ?Consent $consent = null, bool $killUnmachtedCookies = true): Consent {
+    public function update(int $update = SubjectController::UPDATE_UPDATE, array $subjects = [], ?Consent $consent = null): Consent {
         $consent = $consent ?: $this->consentRepository->get();
         $defaultSubjectIdentifiers = array_map(
             function(Subject $subject) {
@@ -88,8 +87,25 @@ class ConsentUtility
 
         // Update the consent
         $consent->setSubjects($subjects);
-        $this->consentRepository->update($consent, $killUnmachtedCookies);
+        $this->consentRepository->update($consent);
 
         return $consent;
+    }
+
+    /**
+     * Get subjects that dont have consent
+     *
+     * @param Consent $consent
+     * @return array
+     */
+    public function getSubjectsWithoutConsent(Consent $consent): array
+    {
+        $subjectRepository =  GeneralUtility::makeInstance(SubjectRepository::class);
+        $allSubjects = [];
+        foreach($subjectRepository->findByPublic(true)->toArray() as $subject) {
+            $allSubjects[$subject->getUid()] = $subject->getIdentifier();
+        }
+        natsort($allSubjects);
+        return array_diff($allSubjects, $consent->getSubjects());
     }
 }
