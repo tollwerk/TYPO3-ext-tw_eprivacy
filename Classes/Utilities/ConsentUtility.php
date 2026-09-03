@@ -68,14 +68,10 @@ class ConsentUtility
         );
 
         // Process updates
+        $allSubjects = $this->subjectRepository->findByPublic(true)->toArray();
         switch ($update) {
             case SubjectController::UPDATE_ACCEPT:
-                $subjects = array_map(
-                    function(Subject $subject) {
-                        return $subject->getIdentifier();
-                    },
-                    $this->subjectRepository->findByPublic(true)->toArray()
-                );
+                $subjects = $allSubjects;
                 break;
             case SubjectController::UPDATE_DENY:
                 $subjects = $defaultSubjectIdentifiers;
@@ -83,6 +79,28 @@ class ConsentUtility
             case SubjectController::UPDATE_UPDATE:
                 $subjects                  = array_unique(array_merge($subjects, $defaultSubjectIdentifiers));
                 break;
+        }
+
+        // For each given subject that is a set, add it's children subjects.
+        if (count($subjects)) {
+            // Get parent sets.
+            $parentSetsByIdentifier = [];
+            foreach($allSubjects as $subject) {
+                if ($subject->getMode() === Subject::MODE_SET) {
+                    $parentSetsByIdentifier[$subject->getIdentifier()] = $subject;
+                }
+            }
+
+            // Get and add children subjects.
+            foreach($subjects as $subject) {
+                if (array_key_exists($subject, $parentSetsByIdentifier)) {
+                  foreach($this->subjectRepository->findByParentSet($parentSetsByIdentifier[$subject]) as $subjectFromSet) {
+                      if (!array_key_exists($subjectFromSet->getIdentifier(), $subjects)) {
+                          $subjects[] = $subjectFromSet->getIdentifier();
+                      }
+                  };
+                }
+            }
         }
 
         // Update the consent

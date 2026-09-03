@@ -160,17 +160,19 @@ class SubjectController extends ActionController
                 break;
             }
 
-            $subjectTitle = $subjectRepository->getTitleByUid($subjectUid);
-            setcookie(
-                $subjectTitle,
-                '',
-                1,
-                trim($cookieSettings['path'] ?? '/'),
-                trim($cookieSettings['domain'] ?? ''),
-                $secure && boolval($cookieSettings['secure'] ?? true),
-                boolval($cookieSettings['httponly'] ?? true)
-            );
-            if (array_key_exists($subjectTitle, $_COOKIE)) {
+            $subjectIdentifier = $subjectRepository->getIdentifierByUid($subjectUid);
+            if ($subjectIdentifier) {
+                setcookie(
+                    $subjectIdentifier,
+                    '',
+                    1,
+                    trim($cookieSettings['path'] ?? '/'),
+                    trim($cookieSettings['domain'] ?? ''),
+                    $secure && boolval($cookieSettings['secure'] ?? true),
+                    boolval($cookieSettings['httponly'] ?? true)
+                );
+            }
+            if (array_key_exists($subjectIdentifier, $_COOKIE)) {
                 unset($_COOKIE);
             }
             $deletedSubjectUids[] = $subjectUid;
