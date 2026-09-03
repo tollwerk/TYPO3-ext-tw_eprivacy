@@ -22,6 +22,7 @@ use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
 use Tollwerk\TwEprivacy\Utilities\ConsentUtility;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use \Exception;
@@ -124,24 +125,52 @@ class SubjectController extends ActionController
     }
 
     /**
-     * @param string $subjectUids
+     * Clear cookies by given subject UIDs
+     *
+     * @param string $subjectUidString The subject UIDs as comma separated string.
+     *                                 The UIDs are a single string to better pass them on when redirecting.
+     *
      * @return ResponseInterface
      */
-    public function clearAction(string $subjectUids = ''): ResponseInterface
+    public function clearAction(string $subjectUidString = ''): ResponseInterface
     {
-        DebuggerUtility::var_dump([
-            'subjectUids' => $subjectUids,
-        ], 'clearAction');
-
-        $subjectUidsArray = GeneralUtility::trimExplode(',', $subjectUids);
-        die();
-
-        if (count($subjectUidsArray) > 0) {
-
-            // TODO: Call setcookie() for 10 cookies (get their names first..). If there are more cookies after that, redirect to 'clear' again with the rest. If nothing is left, redirect to list action.
-            return $this->redirect('clear', 'Subject', 'TwEprivacy', ['count' => $newCount]);
+        // If no UIDs given, just redirect to list action.
+        if (empty($subjectUidString)) {
+            return $this->redirect('list', 'Subject', 'TwEprivacy');
         }
-        die("clearAction");
+
+        // Get Eprivacy TypoScript settings and derived values.
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
+        $settings = $configurationManager->getConfiguration(
+            ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
+            'TwEprivacy'
+        );
+        $cookieSettings = $settings['plugin.']['tx_tweprivacy_eprivacy.']['settings.'] ?? [];
+        $lifetime             = intval($cookieSettings['lifetime'] ?? 2629800);
+        $secure               = GeneralUtility::getIndpEnv('TYPO3_SSL');
+
+        // Delete the first 10 of all given subjects/cookies,
+        // then redirect to clearAction with the remaining subject UIDs.
+        // Continue until no cookies remain.
+        $subjectRepository = GeneralUtility::makeInstance(SubjectRepository::class);
+        $subjectUids = GeneralUtility::trimExplode(',', $subjectUidString);
+        for($i = 0; $i < 10; $i++) {
+            $subjectUid = array_shift($subjectUids);
+            $subjectTitle = $subjectRepository->getTitleByUid($subjectUid);
+            setcookie(
+                $subjectTitle,
+                '',
+                1,
+                trim($cookieSettings['path'] ?? '/'),
+                trim($cookieSettings['domain'] ?? ''),
+                $secure && boolval($cookieSettings['secure'] ?? true),
+                boolval($cookieSettings['httponly'] ?? true)
+            );
+            if (array_key_exists($subjectTitle, $_COOKIE)) {
+                unset($_COOKIE);
+            }
+        }
+        return $this->redirect('clear', 'Subject', 'TwEprivacy', ['subjectUids' => implode(',', $subjectUids)]);
     }
 
     /**
@@ -158,7 +187,14 @@ class SubjectController extends ActionController
 
         // Process updates
         if ($update) {
+            // If UPDATE_DENY, start special treatment for deleting all cookies.
             if ($update == self::UPDATE_DENY) {
+                // Update the consent information, but without modifying the cookies.
+                // We have to do that by redirecting to clearAction because of possible HTTP Header buffer overflows
+                // when there is a high number of cookies involved.
+                $this->consentUtility->update($update, $subjects, $consent, false);
+
+                // Get all registered cookies and redirect them to clearAction.
                 $allSubjects = array_map(
                     function(Subject $subject) {
                         return $subject->getUid();
@@ -168,6 +204,8 @@ class SubjectController extends ActionController
                 $allSubjectUids = implode(',', $allSubjects);
                 return $this->redirect('clear', 'Subject', 'TwEprivacy', ['subjectUids' => $allSubjectUids]);
             }
+
+            // If not UPDATE_DENY, start normal treatment.
             $this->consentUtility->update($update, $subjects, $consent);
         }
 
