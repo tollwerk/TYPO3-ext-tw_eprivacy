@@ -71,7 +71,12 @@ class ConsentUtility
         $allSubjects = $this->subjectRepository->findByPublic(true)->toArray();
         switch ($update) {
             case SubjectController::UPDATE_ACCEPT:
-                $subjects = $allSubjects;
+                $subjects = array_map(
+                    function(Subject $subject) {
+                        return $subject->getIdentifier();
+                    },
+                    $allSubjects
+                );
                 break;
             case SubjectController::UPDATE_DENY:
                 $subjects = $defaultSubjectIdentifiers;
