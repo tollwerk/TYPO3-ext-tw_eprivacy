@@ -55,8 +55,6 @@ class ConsentUtility
      * @param Consent|null $consent              Consent. Will be retrieved from ConsentRepository if not given.
      *
      * @return Consent
-     *
-     * TODO: Deprecated: Tollwerk\TwEprivacy\Utilities\ConsentUtility::update(): Implicitly marking parameter $consent as nullable is deprecated, the explicit nullable type must be used instead in /var/www/local_packages/tw-eprivacy/Classes/Utilities/ConsentUtility.php
      */
     public function update(int $update = SubjectController::UPDATE_UPDATE, array $subjects = [], ?Consent $consent = null): Consent {
         $consent = $consent ?: $this->consentRepository->get();
@@ -110,7 +108,7 @@ class ConsentUtility
 
         // Update the consent
         $consent->setSubjects($subjects);
-        $this->consentRepository->update($consent);
+        $this->consentRepository->update($consent, $GLOBALS['TYPO3_REQUEST']);
 
         return $consent;
     }

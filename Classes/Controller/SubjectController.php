@@ -21,6 +21,7 @@ use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
 use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
 use Tollwerk\TwEprivacy\Utilities\ConsentUtility;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
+use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
@@ -118,7 +119,7 @@ class SubjectController extends ActionController
         $subjects = array_merge($allSubjects, $addIdentifiers);
         $consent = $this->consentRepository->get();
         $consent->setSubjects($subjects);
-        $this->consentRepository->update($consent);
+        $this->consentRepository->update($consent, true, $this->request);
 
         // Remove all subjects currently not allowed by user
         return $this->redirectToUri($this->uriBuilder->setTargetPageUid($pid)->build());
@@ -146,7 +147,17 @@ class SubjectController extends ActionController
             'TwEprivacy'
         );
         $cookieSettings = $settings['plugin.']['tx_tweprivacy_eprivacy.']['settings.'] ?? [];
-        $secure = GeneralUtility::getIndpEnv('TYPO3_SSL');
+
+        // TODO: Remove after migration.
+//        /** @var NormalizedParams $normalizesParameters */
+//        $normalizesParameters = $this->request->getAttribute('normalizedParams');
+////        DebuggerUtility::var_dump(GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));
+//        DebuggerUtility::var_dump($normalizesParameters);
+//        die();
+
+
+        $secure = $this->request->getAttribute('normalizedParams')->isHttps();
+
 
         // Delete the first 10 of all given subjects/cookies,
         // then redirect to clearAction with the remaining subject UIDs.
@@ -259,7 +270,7 @@ class SubjectController extends ActionController
     public function dialogAction(?int $update = null, ?string $redirectUrl = null): ResponseInterface {
         // Do nothing if update value is not valid.
         if ($update !== self::UPDATE_ACCEPT && $update !== self::UPDATE_DENY) {
-            $this->view->assign('redirectUrl', GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));
+            $this->view->assign('redirectUrl',$this->request->getAttribute('normalizedParams')->getHttpReferer());
             return $this->htmlResponse();
         }
 
