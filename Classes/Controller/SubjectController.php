@@ -119,7 +119,7 @@ class SubjectController extends ActionController
         $subjects = array_merge($allSubjects, $addIdentifiers);
         $consent = $this->consentRepository->get();
         $consent->setSubjects($subjects);
-        $this->consentRepository->update($consent, true, $this->request);
+        $this->consentRepository->update($consent, $this->request, true);
 
         // Remove all subjects currently not allowed by user
         return $this->redirectToUri($this->uriBuilder->setTargetPageUid($pid)->build());
