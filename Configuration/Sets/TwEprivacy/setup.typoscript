@@ -1,5 +1,5 @@
 # Include main typoscript file for additional configuration like page types, lib objects etc.
-@import 'EXT:tw_eprivacy/Configuration/TypoScript/Setup/main.typoscript'
+@import './TypoScript/Setup/main.typoscript'
 
 # Plugin setup.
 plugin.tx_tweprivacy_eprivacy {
@@ -18,15 +18,15 @@ plugin.tx_tweprivacy_eprivacy {
     }
 
     settings {
-        lifetime = {$plugin.tx_tweprivacy_eprivacy.settings.lifetime}
-        path = {$plugin.tx_tweprivacy_eprivacy.settings.path}
-        domain = {$plugin.tx_tweprivacy_eprivacy.settings.domain}
-        secure = {$plugin.tx_tweprivacy_eprivacy.settings.secure}
-        httponly = {$plugin.tx_tweprivacy_eprivacy.settings.httponly}
-        imprint = {$plugin.tx_tweprivacy_eprivacy.settings.imprint}
-        privacy = {$plugin.tx_tweprivacy_eprivacy.settings.privacy}
-        pluginPid = {$plugin.tx_tweprivacy_eprivacy.settings.pluginPid}
-        showDialog = {$plugin.tx_tweprivacy_eprivacy.settings.showDialog}
+        imprint = {$TwEprivacy.imprint}
+        privacy = {$TwEprivacy.privacy}
+        pluginPid = {$TwEprivacy.pluginPid}
+        showDialog = {$TwEprivacy.showDialog}
+        lifetime = {$TwEprivacy.lifetime}
+        path = {$TwEprivacy.path}
+        domain = {$TwEprivacy.domain}
+        secure = {$TwEprivacy.secure}
+        httponly = {$TwEprivacy.httponly}
     }
 
     features {
