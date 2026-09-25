@@ -30,7 +30,8 @@
       "docs": "https://github.com/tollwerk/TYPO3-ext-tw_eprivacy"
     },
     "require": {
-        "typo3/cms-core": "^13"
+        "typo3/cms-core": "^14",
+        "php": ">= 8.3 < 8.5"
     },
     "autoload": {
         "psr-4": {
