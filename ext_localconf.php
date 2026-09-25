@@ -12,9 +12,6 @@ use Tollwerk\TwEprivacy\Hooks\Frontend\CreateHashBaseHook;
 
 call_user_func(
     function() {
-        // Register Fluid namespace.
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['eprivacy'] = ['Tollwerk\\TwEprivacy\\ViewHelpers'];
-
         // Register icons.
         $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
         $iconRegistry->registerIcon(
