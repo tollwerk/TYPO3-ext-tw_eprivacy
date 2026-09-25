@@ -10,47 +10,35 @@ use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use Tollwerk\TwEprivacy\Controller\SubjectController;
 use Tollwerk\TwEprivacy\Hooks\Frontend\CreateHashBaseHook;
 
-call_user_func(
-    function() {
-        // Register icons.
-        $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
-        $iconRegistry->registerIcon(
-            'tw_eprivacy-plugin-eprivacy',
-            SvgIconProvider::class,
-            ['source' => 'EXT:tw_eprivacy/Resources/Public/Icons/subject.svg']
-        );
-
-        // Configure plugins.
-        ExtensionUtility::configurePlugin(
-            'TwEprivacy',
-            'Eprivacy',
-            [SubjectController::class => 'list, addConsent, clear'],
-            [SubjectController::class => 'list, addConsent, clear'],
-            ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
-        );
-        ExtensionUtility::configurePlugin(
-            'TwEprivacy',
-            'EprivacyDialog',
-            [SubjectController::class => 'dialog'],
-            [SubjectController::class => 'dialog'],
-            ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
-        );
-
-        // Exclude some parameters from chash.
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[action]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[pid]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[pluginName]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[controller]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[pid]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][0]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][1]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][2]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][3]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][4]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][5]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][6]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][7]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][8]';
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][9]';
-    }
+// Configure plugins.
+ExtensionUtility::configurePlugin(
+    'TwEprivacy',
+    'Eprivacy',
+    [SubjectController::class => 'list, addConsent, clear'],
+    [SubjectController::class => 'list, addConsent, clear'],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
+ExtensionUtility::configurePlugin(
+    'TwEprivacy',
+    'EprivacyDialog',
+    [SubjectController::class => 'dialog'],
+    [SubjectController::class => 'dialog'],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
+);
+
+// Exclude some parameters from chash.
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[action]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[pid]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[pluginName]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[controller]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[pid]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][0]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][1]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][2]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][3]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][4]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][5]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][6]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][7]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][8]';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'tx_tweprivacy_eprivacy[addIdentifiers][9]';
