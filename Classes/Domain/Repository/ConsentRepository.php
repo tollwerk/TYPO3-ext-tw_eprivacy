@@ -37,6 +37,8 @@
 namespace Tollwerk\TwEprivacy\Domain\Repository;
 
 use DateTimeImmutable;
+use MongoDB\Driver\Server;
+use Psr\Http\Message\ServerRequestInterface;
 use Tollwerk\TwEprivacy\Domain\Model\Consent;
 use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
@@ -45,6 +47,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use \Exception;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 
 /**
@@ -107,15 +110,16 @@ class ConsentRepository implements SingletonInterface
     /**
      * Set the current users consent state
      *
-     * @param Consent $consent              Consent
-     * @param bool    $killUnmachtedCookies Kill all cookies that have no consent
+     * @param Consent                $consent              Consent
+     * @param ServerRequestInterface $request              Request
+     * @param bool                   $killUnmatchedCookies Kill all cookies that have no consent
+
      *
      * @return bool Success
      *
-     * @throws InvalidConfigurationTypeException
      * @throws Exception
      */
-    public function update(Consent $consent, bool $killUnmachtedCookies = true): bool
+    public function update(Consent $consent, ServerRequestInterface $request, bool $killUnmatchedCookies = true): bool
     {
         // Reset the ePrivacy shield
         EprivacyShield::reset();
@@ -128,7 +132,7 @@ class ConsentRepository implements SingletonInterface
         );
         $cookieSettings       = $settings['plugin.']['tx_tweprivacy_eprivacy.']['settings.'] ?? [];
         $lifetime             = intval($cookieSettings['lifetime'] ?? 2629800);
-        $secure               = GeneralUtility::getIndpEnv('TYPO3_SSL');
+        $secure               = $request->getAttribute('normalizedParams')->isHttps();
 
         // Set the consent cookie
         $consentSuccess = setcookie(

@@ -1,0 +1,6 @@
+page = PAGE
+
+# Include the cookie consent dialog.
+[{$TwEprivacy.showDialog} && traverse(page, "uid") != {$TwEprivacy.pluginPid}]
+    page.2 < lib.ePrivacyDialog
+[GLOBAL]

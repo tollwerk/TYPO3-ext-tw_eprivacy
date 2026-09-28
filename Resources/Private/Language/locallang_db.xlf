@@ -4,40 +4,6 @@
           product-name="tw_eprivacy">
         <header/>
         <body>
-            <trans-unit id="common">
-                <source>Common Settings</source>
-            </trans-unit>
-            <trans-unit id="common.imprint">
-                <source>Imprint Page (ID)</source>
-            </trans-unit>
-            <trans-unit id="common.privacy">
-                <source>Privacy Policy Page (ID)</source>
-            </trans-unit>
-            <trans-unit id="common.pluginPid">
-                <source>Plugin Page (ID)</source>
-            </trans-unit>
-            <trans-unit id="common.showDialog">
-                <source>Show cookie dialog</source>
-                <target></target>
-            </trans-unit>
-            <trans-unit id="cookie">
-                <source>Consent Cookie</source>
-            </trans-unit>
-            <trans-unit id="cookie.lifetime">
-                <source>Consent Lifetime (seconds)</source>
-            </trans-unit>
-            <trans-unit id="cookie.path">
-                <source>Cookie Path</source>
-            </trans-unit>
-            <trans-unit id="cookie.domain">
-                <source>Cookie Domain</source>
-            </trans-unit>
-            <trans-unit id="cookie.secure">
-                <source>Secure Cookie</source>
-            </trans-unit>
-            <trans-unit id="cookie.httponly">
-                <source>HTTP-Only Cookie</source>
-            </trans-unit>
             <trans-unit id="tx_tweprivacy_domain_model_type">
                 <source>ePrivacy Subject Type</source>
             </trans-unit>

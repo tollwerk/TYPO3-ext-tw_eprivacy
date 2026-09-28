@@ -1,0 +1,46 @@
+categories:
+  TwEprivacy:
+  TwEprivacy.common:
+    parent: TwEprivacy
+  TwEprivacy.cookie:
+    parent: TwEprivacy
+settings:
+  TwEprivacy.imprint:
+    category: TwEprivacy.common
+    type: page
+    default: 0
+  TwEprivacy.privacy:
+    category: TwEprivacy.common
+    type: page
+    default: 0
+  TwEprivacy.pluginPid:
+    category: TwEprivacy.common
+    type: page
+    default: 0
+  TwEprivacy.showDialog:
+    category: TwEprivacy.common
+    type: bool
+    default: true
+
+  TwEprivacy.lifetime:
+    category: TwEprivacy.cookie
+    type: string
+    default: '2629800'
+  TwEprivacy.path:
+    category: TwEprivacy.cookie
+    type: string
+    default: '/'
+  TwEprivacy.domain:
+    category: TwEprivacy.cookie
+    type: string
+    default: ''
+  TwEprivacy.secure:
+    category: TwEprivacy.cookie
+    type: bool
+    default: true
+  TwEprivacy.httponly:
+    category: TwEprivacy.cookie
+    type: bool
+    default: true
+
+

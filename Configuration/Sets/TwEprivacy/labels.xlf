@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-09-25T00:00:00Z"
+          product-name="tw_eprivacy">
+        <header/>
+        <body>
+            <!-- Categories -->
+            <trans-unit id="categories.TwEprivacy">
+                <source>TwEprivacy</source>
+            </trans-unit>
+            <trans-unit id="categories.TwEprivacy.common">
+                <source>Common Settings</source>
+            </trans-unit>
+            <trans-unit id="categories.TwEprivacy.cookie">
+                <source>Consent Cookie</source>
+            </trans-unit>
+
+            <!-- Common settings -->
+            <trans-unit id="settings.TwEprivacy.imprint">
+                <source>Imprint Page (ID)</source>
+            </trans-unit>
+            <trans-unit id="settings.TwEprivacy.privacy">
+                <source>Privacy Policy Page (ID)</source>
+            </trans-unit>
+
+            <trans-unit id="settings.TwEprivacy.pluginPid">
+                <source>Plugin Page (ID)</source>
+            </trans-unit>
+            <trans-unit id="settings.TwEprivacy.showDialog">
+                <source>Show cookie dialog</source>
+            </trans-unit>
+
+            <!-- Cookie settings -->
+            <trans-unit id="settings.TwEprivacy.lifetime">
+                <source>Consent Lifetime (seconds)</source>
+            </trans-unit>
+            <trans-unit id="settings.TwEprivacy.path">
+                <source>Cookie Path</source>
+            </trans-unit>
+            <trans-unit id="settings.TwEprivacy.domain">
+                <source>Cookie Domain</source>
+            </trans-unit>
+            <trans-unit id="settings.TwEprivacy.secure">
+                <source>Secure Cookie</source>
+            </trans-unit>
+            <trans-unit id="settings.TwEprivacy.httponly">
+                <source>HTTP-Only Cookie</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

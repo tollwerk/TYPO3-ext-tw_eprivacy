@@ -59,7 +59,7 @@ class ConsentViewHelper extends AbstractConditionViewHelper
      * @return bool
      * @throws Exception
      */
-    public static function verdict(array $arguments, RenderingContextInterface $renderingContext)
+    public static function verdict(array $arguments, RenderingContextInterface $renderingContext): bool
     {
         // Cast identifiers to array.
         $identifiers = array_filter((array)($arguments['identifier']));
@@ -83,7 +83,7 @@ class ConsentViewHelper extends AbstractConditionViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument(

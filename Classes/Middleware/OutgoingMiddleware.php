@@ -95,7 +95,7 @@ class OutgoingMiddleware implements MiddlewareInterface
                         $cookieName,
                         $cookieParams['path'] ?? '',
                         $cookieParams['domain'] ?? '',
-                        GeneralUtility::getIndpEnv('TYPO3_SSL') && ($cookieParams['secure'] ?? true),
+                        $request->getAttribute('normalizedParams')->isHttps() && ($cookieParams['secure'] ?? true),
                         $cookieParams['httponly'] ?? true
                     );
                 }

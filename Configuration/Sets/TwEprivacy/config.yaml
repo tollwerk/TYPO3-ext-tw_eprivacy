@@ -1,0 +1,4 @@
+name: tollwerk/tw-eprivacy
+label: 'tollwerk ePrivacy'
+dependencies:
+  - typo3/fluid-styled-content

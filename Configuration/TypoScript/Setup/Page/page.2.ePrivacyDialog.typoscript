@@ -1,6 +1,0 @@
-page = PAGE
-
-# Include the cookie consent dialog.
-[{$plugin.tx_tweprivacy_eprivacy.settings.showDialog} && traverse(page, "uid") != {$plugin.tx_tweprivacy_eprivacy.settings.pluginPid}]
-    page.2 < lib.ePrivacyDialog
-[GLOBAL]
