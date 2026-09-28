@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-09-25T00:00:00Z"
+          product-name="tw_eprivacy">
+        <header/>
+        <body>
+            <!-- Categories -->
+            <trans-unit id="categories.TwEprivacy">
+                <source>TwEprivacy</source>
+                <target>TwEprivacy</target>
+            </trans-unit>
+            <trans-unit id="categories.TwEprivacy.common">
+                <source>Common Settings</source>
+                <target>Allemein</target>
+            </trans-unit>
+            <trans-unit id="categories.TwEprivacy.cookie">
+                <source>Consent Cookie</source>
+                <target>Consent Cookie</target>
+            </trans-unit>
+
+            <!-- Common settings -->
+            <trans-unit id="settings.TwEprivacy.imprint">
+                <source>Imprint Page (ID)</source>
+                <target>Impressumsseite (ID)</target>
+            </trans-unit>
+            <trans-unit id="settings.TwEprivacy.privacy">
+                <source>Privacy Policy Page (ID)</source>
+                <target>Datenschutzerklärung (ID)</target>
+            </trans-unit>
+
+            <trans-unit id="settings.TwEprivacy.pluginPid">
+                <source>Plugin Page (ID)</source>
+                <target>Seite mit Plugin (ID)</target>
+            </trans-unit>
+            <trans-unit id="settings.TwEprivacy.showDialog">
+                <source>Show cookie dialog</source>
+                <target>Cookie-Dialog anzeigen</target>
+            </trans-unit>
+
+            <!-- Cookie settings -->
+            <trans-unit id="settings.TwEprivacy.lifetime">
+                <source>Consent Lifetime (seconds)</source>
+                <target>Cookie-Dialog anzeigen</target>
+            </trans-unit>
+            <trans-unit id="settings.TwEprivacy.path">
+                <source>Cookie Path</source>
+                <target>Cookie-Pfad</target>
+            </trans-unit>
+            <trans-unit id="settings.TwEprivacy.domain">
+                <source>Cookie Domain</source>
+                <target>Cookie-Domain</target>
+            </trans-unit>
+            <trans-unit id="settings.TwEprivacy.secure">
+                <source>Secure Cookie</source>
+                <target>Sicherer Cookie</target>
+            </trans-unit>
+            <trans-unit id="settings.TwEprivacy.httponly">
+                <source>HTTP-Only Cookie</source>
+                <target>HTTP-Only Cookie</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
