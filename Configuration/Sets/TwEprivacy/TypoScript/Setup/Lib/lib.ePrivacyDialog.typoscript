@@ -22,15 +22,15 @@ lib.ePrivacyDialog {
         layoutRootPaths.1 = {$plugin.tx_tweprivacy_eprivacy.view.layoutRootPath}
     }
     settings {
-        lifetime = {$plugin.tx_tweprivacy_eprivacy.settings.lifetime}
-        path = {$plugin.tx_tweprivacy_eprivacy.settings.path}
-        domain = {$plugin.tx_tweprivacy_eprivacy.settings.domain}
-        secure = {$plugin.tx_tweprivacy_eprivacy.settings.secure}
-        httponly = {$plugin.tx_tweprivacy_eprivacy.settings.httponly}
-        imprint = {$plugin.tx_tweprivacy_eprivacy.settings.imprint}
-        privacy = {$plugin.tx_tweprivacy_eprivacy.settings.privacy}
-        pluginPid = {$plugin.tx_tweprivacy_eprivacy.settings.pluginPid}
-        showDialog = {$plugin.tx_tweprivacy_eprivacy.settings.showDialog}
+        lifetime = {$TwEprivacy.lifetime}
+        path = {$TwEprivacy.path}
+        domain = {$TwEprivacy.domain}
+        secure = {$TwEprivacy.secure}
+        httponly = {$TwEprivacy.httponly}
+        imprint = {$TwEprivacy.imprint}
+        privacy = {$TwEprivacy.privacy}
+        pluginPid = {$TwEprivacy.pluginPid}
+        showDialog = {$TwEprivacy.showDialog}
     }
 }
 

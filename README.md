@@ -1,5 +1,8 @@
 # tollwerk ePrivacy Consent Manager
 
+[![TYPO3](https://img.shields.io/badge/TYPO3-14.3-green.svg)](https://get.typo3.org/version/14)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 The tollwerk ePrivacy Consent Manager ("ePrivacy") provides a clean way to manage cookies inside the TYPO3 backend.
 
 ## Features
@@ -47,7 +50,7 @@ The extension needs the following pages inside your page tree.
 * A page containing the imprint and other legal information. This page will be linked.
 * A folder for all ePrivacy records. Alternatively, you can use the page with the ePrivacy plugin for storing your records.
 
-### Set TypoScript constants
+### Set TypoScript Constants
 
 Open the TYPO3 module `Web > Template`, select your root page in the page tree, select "Constant Editor" and the ePrivacy extension.
 
@@ -55,11 +58,13 @@ The following options are required for everything to work. All other options hav
 
 * **Default Storage PID** `plugin.tx_tweprivacy_eprivacy.persistence.storagePid` is the page UID where all ePrivacy records are stored.
 
-* **Imprint Page (ID)** `plugin.tx_tweprivacy_eprivacy.settings.imprint` is the UID of the imprint page.
+### Set Site Settings
 
-* **Privacy Policy Page (ID)** `plugin.tx_tweprivacy_eprivacy.settings.privacy` is the UID of the data privacy page.
+* **Imprint Page (ID)** `TwEprivacy.imprint` is the UID of the imprint page.
 
-* **Plugin Page (ID)** `plugin.tx_tweprivacy_eprivacy.settings.pluginPid` is the UID of the page that contains the eprivacy frontend plugin.
+* **Privacy Policy Page (ID)** `TwEprivacy.privacy` is the UID of the data privacy page.
+
+* **Plugin Page (ID)** `TwEprivacy.pluginPid` is the UID of the page that contains the eprivacy frontend plugin.
 
 ### Create cookie records
 
@@ -189,22 +194,22 @@ revokes all others, refreshes the current pages.
 
 ![](/Docs/Installation/Assets/dialog.jpg)
 
-You can disable this dialog inside the constant editor, see `plugin.tx_tweprivacy_eprivacy.settings.showDialog`.
+You can disable this dialog inside the constant editor, see `TwEprivacy.showDialog`.
 
 #### Render the dialog by hand
 
-When using `plugin.tx_tweprivacy_eprivacy.settings.showDialog` inside the constant editor, the dialog will be
+When using `TwEprivacy.showDialog` inside the constant editor, the dialog will be
 included by the following TypoScript code:
 
 ```typoscript
 # Include the cookie consent dialog.
-[{$plugin.tx_tweprivacy_eprivacy.settings.showDialog}]
+[{$TwEprivacy.showDialog}]
     page.2 < lib.ePrivacyDialog
 [GLOBAL]
 ```
 
 If `page.2` is already occupied, or, for some reason, you want to render the dialog anywhere else, you can do this by disabling
-`plugin.tx_tweprivacy_eprivacy.settings.showDialog` and including `lib.ePrivacyDialog` by yourself.
+`$TwEprivacy.showDialog` and including `lib.ePrivacyDialog` by yourself.
 
 Please note that for accessibility reasons you should place the dialog as first content inside the `<body>`-tag.
 

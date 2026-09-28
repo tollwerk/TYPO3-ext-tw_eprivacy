@@ -18,6 +18,7 @@ plugin.tx_tweprivacy_eprivacy {
     }
 
     settings {
+        foo = bar
         imprint = {$TwEprivacy.imprint}
         privacy = {$TwEprivacy.privacy}
         pluginPid = {$TwEprivacy.pluginPid}
