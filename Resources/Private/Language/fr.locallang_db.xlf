@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2020-02-14T09:08:30Z"
-          product-name="tw_eprivacy" target-language="fr">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2020-02-14T09:08:30Z"
+          product-name="tw_eprivacy">
         <header/>
         <body>
             <trans-unit id="tx_tweprivacy_domain_model_type" approved="yes">
