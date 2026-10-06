@@ -38,6 +38,7 @@ return [
             'target' => \Tollwerk\TwEprivacy\Middleware\OutgoingMiddleware::class,
             'after' => [
                 'typo3/cms-frontend/output-compression',
+                'typo3/cms-frontend/prepare-tsfe-rendering',
             ],
         ],
 //        'eprivacy/shield-incoming' => [
