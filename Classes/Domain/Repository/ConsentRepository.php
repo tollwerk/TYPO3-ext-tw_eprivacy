@@ -40,7 +40,6 @@ use DateTimeImmutable;
 use MongoDB\Driver\Server;
 use Psr\Http\Message\ServerRequestInterface;
 use Tollwerk\TwEprivacy\Domain\Model\Consent;
-use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Utilities\EprivacyShield;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -92,14 +91,7 @@ class ConsentRepository implements SingletonInterface
             // If there are no subjects enabled by cookie: Register the default subjects
             if (!count(self::$consent->getSubjects())) {
                 $subjectRepository = GeneralUtility::makeInstance(SubjectRepository::class);
-                self::$consent->setSubjects(
-                    array_map(
-                        function(Subject $subject) {
-                            return $subject->getIdentifier();
-                        },
-                        $subjectRepository->findDefaultSubjects()->toArray()
-                    )
-                );
+                self::$consent->setSubjects($subjectRepository->findDefaultSubjectIdentifiers());
             }
         }
 
