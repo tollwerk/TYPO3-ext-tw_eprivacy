@@ -40,6 +40,9 @@ return [
                 'typo3/cms-frontend/output-compression',
                 'typo3/cms-frontend/prepare-tsfe-rendering',
             ],
+            'before' => [
+                'typo3/cms-frontend/content-length-headers',
+            ],
         ],
 //        'eprivacy/shield-incoming' => [
 //            'target' => \Tollwerk\TwEprivacy\Middleware\IncomingMiddleware::class,
