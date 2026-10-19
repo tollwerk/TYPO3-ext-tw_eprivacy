@@ -35,7 +35,6 @@
 namespace Tollwerk\TwEprivacy\Utilities;
 
 use Exception;
-use Tollwerk\TwEprivacy\Domain\Model\Subject;
 use Tollwerk\TwEprivacy\Domain\Repository\ConsentRepository;
 use Tollwerk\TwEprivacy\Domain\Repository\SubjectRepository;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -106,10 +105,7 @@ class EprivacyShield implements SingletonInterface
             $consent            = $this->getConsentRepository()->get();
             $subjectIdentifiers = $consent->getSubjects();
             if (count($subjectIdentifiers)) {
-                /** @var Subject $subject */
-                foreach ($this->getSubjectRepository()->findBySubjectIdentifiers($subjectIdentifiers) as $subject) {
-                    self::$subjectNames[] = $subject->getName();
-                }
+                self::$subjectNames = $this->getSubjectRepository()->findNamesBySubjectIdentifiers($subjectIdentifiers);
             }
         }
 
